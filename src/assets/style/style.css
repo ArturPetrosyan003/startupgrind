@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.home_container {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(145, 78, 78);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-sizing: border-box;
+    padding-bottom: 100px;
+}
+.home_button_container button {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    transition: 0.5s;
+    outline: none;
+}
+.home_button_container button:nth-child(1) {
+    margin-right: 20px;
+}
+.home_button_container button:hover {
+    background-color: rgb(117, 117, 117);
+    color: white;
+}
+.startups_container {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(145, 78, 78);
+    color: white;
+}
+.about_container {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(145, 78, 78);
+    color: white;
+}
