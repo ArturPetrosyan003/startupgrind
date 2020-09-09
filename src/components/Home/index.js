@@ -6,6 +6,10 @@ class Home extends Component {
     render() {
         return (
             <div className='home_container'>
+                <div className='home_info_container'>
+                    <h1>Welcome</h1>
+                </div>
+                
                 <div className='home_button_container'>
                     <Link to='startups'>
                         <button>Explore</button>
