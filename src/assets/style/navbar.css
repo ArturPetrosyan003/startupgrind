@@ -1,0 +1,192 @@
+.navbar_container {
+    height: 124px;
+    width: 100%;
+    /* box-shadow: none!important; */
+}
+.navbar {
+    width: 100%;
+    height: 100%;
+    background: #dadada;
+    justify-content: space-around;
+}
+.navbar_logo {
+    height: 100px;
+    width: 100px;
+}
+.navbar_buttons_cont {
+    width: 100%;
+    height: 28px;
+    padding-left: 23%;
+    margin-top: 90px;
+    flex-direction: row;
+    display: flex;
+    padding-bottom: 20px;
+}
+.navbar_link {
+    font-family: Arial;
+    font-size: 24px;
+    color: #000000;
+    text-decoration: none;
+    margin-left: 30px;
+}
+.navbar_login_container {
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin-left: 23%;
+}
+.navbar_button {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+/* Burger Menu */
+
+.burger_menu_container {
+    width: 30px;
+    height: 30px;
+    margin-left: 65%;
+}
+.burger_menu_icon {
+    width: 100%;
+    height: 100%;
+}
+.burger_menu_link {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+/* Login Reg */
+
+.loginReg_backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding-top: 100vh;
+    padding-bottom: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.loginReg_container {
+    position: fixed;
+    z-index: 999;
+    background: white;
+    width: 423px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 120px;
+}
+.loginReg_text {
+    font-family: Arial;
+    font-size: 32px;
+    color: #190c70;
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 20px;
+}
+.loginReg_span {
+    font-family: Arial;
+    font-size: 20px;
+    color: #190c70;
+}
+.loginReg_form {
+    width: 100%;
+    padding-left: 17%;
+}
+.loginReg_form input {
+    width: 336px;
+    height: 61px;
+    padding: 0px 8px;
+    border: 1px solid #8c8c8c;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-family: Arial;
+    font-size: 14px;
+    color: #121212;
+    margin-top: 12px;
+    margin-bottom: 16px;
+}
+.submit{
+    width: 176px;
+    height: 48px;
+    border-radius: 20px;
+    background-color: #212596;
+    font-family: Arial;
+    font-size: 20px;
+    color: #fafafa;
+    text-align: center;
+    outline: none;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.loginReg_reset_password {
+    font-family: Arial;
+    font-size: 16px;
+    color: #190c70;
+}
+.reg_backdrop {
+    padding-bottom: 90vh;
+}
+.reg_container {
+    padding-bottom: 20px;
+}
+.loginReg_error_text {
+    color: rgb(201, 0, 0);
+    margin: 0;
+    text-align: center;
+    margin-right: 17%;
+    font-size: 18px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+/* Profile Div */
+
+.navbar_profile_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 17%;
+    margin-top: -20px;
+}
+.navbar_profile_icon_cont {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+.navbar_profile_icon_cont p {
+    font-family: Arial;
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+.navbar_profile_icon {
+    width: 50px;
+    height: 50px;
+}
+.navbar_profile_cont button {
+    background: transparent;
+    border: none;
+    font-family: Arial;
+    font-size: 24px;
+    color: #000000;
+    outline: none;
+    align-self: flex-end;
+}

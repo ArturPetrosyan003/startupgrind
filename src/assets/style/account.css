@@ -1,0 +1,161 @@
+/* Navbar */
+
+.account_navbar_logo {
+    width: 50px;
+    height: 50px;
+}
+.account_navbar_profile {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.account_navbar_profile img {
+    width: 100%;
+    height: 100%;
+}
+.account_navbar_container {
+    height: 55px;
+    padding-right: 40px;
+}
+.account_navbar {
+    justify-content: space-between;
+    min-height: 0!important;
+    padding-top: 5px;
+    padding-bottom: 2px;
+}
+.account_modal {
+    width: 170px;
+    height: auto;
+    padding-top: 30px;
+    padding-bottom: 22px;
+    padding-right: 22px;
+    box-sizing: border-box;
+    background: #dadada;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 5px;
+}
+.account_modal_container .MuiDrawer-paperAnchorTop {
+    left: auto!important;
+    top: auto!important;
+    border: none!important;
+    z-index: -999!important;
+    border-top: 2px solid lightgray!important;
+}
+.account_modal_btn {
+    background: transparent;
+    border: none;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 8px;
+    outline: none;
+}
+
+/* Content */
+
+.account_content {
+    width: 100%;
+    margin-top: 70px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 15px;
+    display: flex;
+}
+.account_burger_menu {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    z-index: 99;
+}
+.account_info_container {
+    width: 600px;
+    margin-left: 25%;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+.account_profile_image {
+    width: 150px;
+    height: 150px;
+    background: #dadada;
+    padding: 40px;
+}
+.account_info_main {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.account_name {
+    font-family: Arial;
+    font-size: 24px;
+    color: #0a0a0a;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 21px;
+    margin-top: 5px;
+}
+.account_summary {
+    width: 271px;
+    height: 106px;
+    padding: 0px 8px;
+    border: 1px solid #8c8c8c;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    color: #121212;
+    resize: none;
+    outline: none;
+    margin-bottom: 21px;
+}
+.account_startup_btn {
+    width: 235px;
+    height: 43px;
+    background-color: #212596;
+    font-family: Arial;
+    font-size: 20px;
+    color: rgba(250, 250, 250, 0.8);
+    text-decoration: none solid rgba(250, 250, 250, 0.8);
+    text-align: center;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.account_loading {
+    margin-top: 80px;
+}
+
+/* Side Menu */
+
+.account_side_menu {
+    z-index: 0;
+}
+.account_side_menu hr {
+    border: 1px solid #dadada;
+    background: #dadada;
+    height: 0.25px;
+}
+.account_side_menu .MuiDrawer-paper {
+    height: calc(100vh - 55px)!important;
+    margin-top: 55px;
+    border: none!important;
+    padding-top: 40px;
+}
+.account_side_menu .MuiListItem-gutters {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+.account_side_menu .MuiListItem-root {
+    padding-bottom: 0!important;
+}

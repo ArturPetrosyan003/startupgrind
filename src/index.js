@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render(
-  <React.StrictMode>
+const App = (props) => {
+  return (
     <BrowserRouter>
-      <Routes />
+      <Routes {...props}/>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  )
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'))
+
+
