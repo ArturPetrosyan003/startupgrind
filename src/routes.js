@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 
 import './assets/style/style.css';
@@ -13,17 +13,20 @@ import PrivateRoute from './components/Hoc/PrivateRoute';
 import Account from './components/Account';
 
 function Routes(props) {
+
+  const [open, setOpen] = useState(false)
+
   return (
     <>
-    <Layout>
-      <Switch>
-        <PrivateRoute exact path='/account/:id' component={Account} />
-        <Route path='/' exact component={Home} />
-        <Route path='/startups' component={Startups} />
-        <Route path='/about' component={About} />
-        <Route component={EmptyPage}/>
-      </Switch>
-    </Layout>
+      <Layout open={open} setOpen={setOpen}>
+        <Switch>
+          <PrivateRoute exact path='/account/:id' component={Account} />
+          <Route path='/' exact render={() => <Home open={open} setOpen={setOpen} />} />
+          <Route path='/startups' component={Startups} />
+          <Route path='/about' component={About} />
+          <Route component={EmptyPage}/>
+        </Switch>
+      </Layout>
     </>
   );
 }

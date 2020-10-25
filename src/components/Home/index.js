@@ -7,6 +7,8 @@ import Slider from "react-slick";
 import HomeContent from '../Hoc/HomeContent';
 import HomeStartup from '../Hoc/HomeStartup';
 
+import Login from '../Hoc/Navbar/Login';
+
 class Home extends Component {
 
     state = {
@@ -58,101 +60,116 @@ class Home extends Component {
 
     render() {
         return (
-            <div className='home_container'>
-                <div className='home_cover_image'>
-                    <div className='home_center_container'>
-                        <h1 className='home_center_text'>FIRST OPEN SOURCE DATABASE FOR ARMENIAN STARTUPS</h1>
+            <>
+                <div className='home_container'>
+                    <div className='home_cover_image'>
+                        <div className='home_center_container'>
+                            <h1 className='home_center_text'>FIRST OPEN SOURCE DATABASE FOR ARMENIAN STARTUPS</h1>
 
-                        <div className='home_buttons_container'>
-                            <Link to={this.state.token ? '/startups' : '/'}>
-                                <button className='home_button'>Explore Startups</button>
-                            </Link>
+                            <div className='home_buttons_container'>
+                                <Link 
+                                    to={
+                                        this.state.token ? '/startups' 
+                                        : '/'
+                                    }
+                                >
+                                    <button onClick={() => this.state.token ? null : this.props.setOpen(true)} className='home_button'>Explore Startups</button>
+                                </Link>
 
-                            <Link to={this.state.token ? '/profile/add-startup' : '/'}>
-                                <button className='home_button'>Add My Startup</button>
-                            </Link>
+                                <Link 
+                                    to={
+                                        this.state.token ? '/profile/add-startup' 
+                                        : '/'
+                                    }
+                                >
+                                    <button onClick={() => this.state.token ? null : this.props.setOpen(true)} className='home_button'>Add My Startup</button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
+                        
+                    <div className='home_content'>
+                        <HomeContent
+                            text='Explore Startups'
+                            fontSize={48}
+                            background='#fff'
+                            id='home_startups_first'
+                            setOpen={this.props.setOpen}
+                        >
+                            <HomeStartup
+                                haveLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                            />
+                            <HomeStartup
+                                haveLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                            />
+                            <HomeStartup
+                                haveLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                            />
+                        </HomeContent>
+
+                        <HomeContent
+                            text='Highlights from Armenian Startup Ecosystem'
+                            fontSize={36}
+                            background='#dadada'
+                            id='home_startups_second'
+                            setOpen={this.props.setOpen}
+                        >
+                            <Slider {...this.state.settings}>
+                                <HomeStartup
+                                    haveLink={false}
+                                    fontSize={20}
+                                    text='Armenian Startup Krisp raises $Mln from Venture fund'
+                                />
+                                <HomeStartup
+                                    haveLink={false}
+                                    fontSize={20}
+                                    text='Armenian Startup Krisp raises $Mln from Venture fund'
+                                />
+                                <HomeStartup
+                                    haveLink={false}
+                                    fontSize={20}
+                                    text='Armenian Startup Krisp raises $Mln from Venture fund'
+                                />
+                                <HomeStartup
+                                    haveLink={false}
+                                    fontSize={20}
+                                    text='Armenian Startup Krisp raises $Mln from Venture fund'
+                                />
+                            </Slider>
+                        </HomeContent>
+
+                        <HomeContent
+                            text='Opportunities for startups'
+                            fontSize={36}
+                            background='#fff'
+                            id='home_startups_third'
+                            setOpen={this.props.setOpen}
+                        >
+                            <HomeStartup
+                                haveLink={false}
+                                fontSize={32}
+                                text='Startup Grind Pitch Battle'
+                            />
+                            <HomeStartup
+                                haveLink={false}
+                                fontSize={32}
+                                text='Startup Grind Pitch Battle'
+                            />
+                            <HomeStartup
+                                haveLink={false}
+                                fontSize={32}
+                                text='Startup Grind Pitch Battle'
+                            />
+                        </HomeContent>
+                    </div>
                 </div>
-
-                <div className='home_content'>
-                    <HomeContent
-                        text='Explore Startups'
-                        fontSize={48}
-                        background='#fff'
-                        id='home_startups_first'
-                    >
-                        <HomeStartup
-                            haveLink={true}
-                            fontSize={32}
-                            text='Startup Name'
-                        />
-                        <HomeStartup
-                            haveLink={true}
-                            fontSize={32}
-                            text='Startup Name'
-                        />
-                        <HomeStartup
-                            haveLink={true}
-                            fontSize={32}
-                            text='Startup Name'
-                        />
-                    </HomeContent>
-
-                    <HomeContent
-                        text='Highlights from Armenian Startup Ecosystem'
-                        fontSize={36}
-                        background='#dadada'
-                        id='home_startups_second'
-                    >
-                        <Slider {...this.state.settings}>
-                            <HomeStartup
-                                haveLink={false}
-                                fontSize={20}
-                                text='Armenian Startup Krisp raises $Mln from Venture fund'
-                            />
-                            <HomeStartup
-                                haveLink={false}
-                                fontSize={20}
-                                text='Armenian Startup Krisp raises $Mln from Venture fund'
-                            />
-                            <HomeStartup
-                                haveLink={false}
-                                fontSize={20}
-                                text='Armenian Startup Krisp raises $Mln from Venture fund'
-                            />
-                            <HomeStartup
-                                haveLink={false}
-                                fontSize={20}
-                                text='Armenian Startup Krisp raises $Mln from Venture fund'
-                            />
-                        </Slider>
-                    </HomeContent>
-
-                    <HomeContent
-                        text='Opportunities for startups'
-                        fontSize={36}
-                        background='#fff'
-                        id='home_startups_third'
-                    >
-                        <HomeStartup
-                            haveLink={false}
-                            fontSize={32}
-                            text='Startup Grind Pitch Battle'
-                        />
-                        <HomeStartup
-                            haveLink={false}
-                            fontSize={32}
-                            text='Startup Grind Pitch Battle'
-                        />
-                        <HomeStartup
-                            haveLink={false}
-                            fontSize={32}
-                            text='Startup Grind Pitch Battle'
-                        />
-                    </HomeContent>
-                </div>
-            </div>
+            </>
         );
     }
 }

@@ -60,8 +60,13 @@ class Navbar extends Component {
                             ref={this.burgerMenu}
                             opened={this.state.menuOpened}
                             menuHandler={this.menuHandler}
+                            loginOpen={this.props.open}
+                            setLoginOpen={this.props.setOpen}
                         />
-                        : <WebMenu/>
+                        : <WebMenu 
+                            loginOpen={this.props.open}
+                            setLoginOpen={this.props.setOpen}
+                        />
                     }
                     
                     <div

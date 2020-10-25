@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -12,12 +12,17 @@ const WebMenu = (props) => {
 
     const history = useHistory();
 
+    useEffect(() => {
+        setLoginCont(props.loginOpen);
+    }, [props]);
+
     const loginContOpen = () => {
-        setLoginCont(!loginCont)
+        setLoginCont(!loginCont);
+        props.setLoginOpen(false);
     }
 
     const regContOpen = () => {
-        setRegCont(!regCont)
+        setRegCont(!regCont);
     }
 
     const SignOut = async () => {

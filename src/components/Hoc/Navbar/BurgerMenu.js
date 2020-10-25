@@ -23,7 +23,8 @@ class BurgerMenu extends Component {
     componentWillReceiveProps(props) {
         this.setState({
             menuHandler: props.menuHandler,
-            menuOpen: props.opened
+            menuOpen: props.opened,
+            loginOpened: props.loginOpen
         })
     }
 
@@ -36,8 +37,9 @@ class BurgerMenu extends Component {
 
     loginContOpen = () => {
         this.setState({
-            loginOpened: !this.state.loginOpened
+            loginOpened: !this.props.loginOpen
         })
+        this.props.setLoginOpen(!this.props.loginOpen)
     }
 
     regContOpen = () => {
