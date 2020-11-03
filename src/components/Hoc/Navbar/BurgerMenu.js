@@ -7,24 +7,20 @@ import { Drawer, List, ListItem } from '@material-ui/core';
 import Login from './Login';
 import Register from './Register';
 
-class BurgerMenu extends Component {
+import { connect } from 'react-redux';
+import { closeLoginMenu, openLoginMenu, openRegMenu, closeRegMenu } from '../../redux/actions';
 
-    constructor(props) {
-        super(props)
-    }
+class BurgerMenu extends Component {
 
     state = {
         menuHandler: null,
         menuOpen: null,
-        loginOpened: false,
-        regOpened: false
     }
 
     componentWillReceiveProps(props) {
         this.setState({
             menuHandler: props.menuHandler,
             menuOpen: props.opened,
-            loginOpened: props.loginOpen
         })
     }
 
@@ -36,26 +32,18 @@ class BurgerMenu extends Component {
     }
 
     loginContOpen = () => {
-        this.setState({
-            loginOpened: !this.props.loginOpen
-        })
-        this.props.setLoginOpen(!this.props.loginOpen)
+        this.props.openLoginMenu()
+        this.menuHandler()
     }
-
+    loginContClose = () => {
+        this.props.closeLoginMenu()
+    }
     regContOpen = () => {
-        this.setState({
-            regOpened: !this.state.regOpened
-        })
-    }
-
-    loginClickEvent = () => {
-        this.loginContOpen()
+        this.props.openRegMenu()
         this.menuHandler()
     }
-
-    regClickEvent = () => {
-        this.regContOpen()
-        this.menuHandler()
+    regContClose = () => {
+        this.props.closeRegMenu()
     }
 
     SignOut = async () => {
@@ -68,10 +56,10 @@ class BurgerMenu extends Component {
         return (
             <>
                 {
-                    this.state.loginOpened == true && this.state.regOpened == false ?
-                        <Login handler={this.loginContOpen} />
-                        : this.state.loginOpened == false && this.state.regOpened == true ?
-                            <Register handler={this.regContOpen} />
+                    this.props.loginMenuState == true ?
+                        <Login handler={this.loginContClose} />
+                        : this.props.regMenuState == true ?
+                            <Register handler={this.regContClose} />
                             : null
                 }
                 <Drawer
@@ -97,13 +85,13 @@ class BurgerMenu extends Component {
                                 :
                                 <div className='burger_menu_login_container'>
                                     <ListItem className='burger_menu_link_cont'>
-                                        <button onClick={() => this.loginClickEvent()} className='burger_menu_link'>
+                                        <button onClick={() => this.loginContOpen()} className='burger_menu_link'>
                                             Login
                                         </button>
                                     </ListItem>
 
                                     <ListItem className='burger_menu_link_cont'>
-                                        <button onClick={() => this.regClickEvent()} className='burger_menu_link'>
+                                        <button onClick={() => this.regContOpen()} className='burger_menu_link'>
                                             Register
                                         </button>
                                     </ListItem>
@@ -148,4 +136,18 @@ class BurgerMenu extends Component {
     }
 };
 
-export default BurgerMenu;
+const mapStateToProps = state => {
+    return {
+        loginMenuState: state.login,
+        regMenuState: state.reg
+    }
+}
+
+const mapDispatchToProps = {
+    closeLoginMenu,
+    openLoginMenu,
+    openRegMenu,
+    closeRegMenu
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerMenu);

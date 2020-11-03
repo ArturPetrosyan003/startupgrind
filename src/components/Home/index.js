@@ -7,7 +7,8 @@ import Slider from "react-slick";
 import HomeContent from '../Hoc/HomeContent';
 import HomeStartup from '../Hoc/HomeStartup';
 
-import Login from '../Hoc/Navbar/Login';
+import { connect } from 'react-redux';
+import { openLoginMenu } from '../redux/actions';
 
 class Home extends Component {
 
@@ -67,34 +68,34 @@ class Home extends Component {
                             <h1 className='home_center_text'>FIRST OPEN SOURCE DATABASE FOR ARMENIAN STARTUPS</h1>
 
                             <div className='home_buttons_container'>
-                                <Link 
+                                <Link
                                     to={
-                                        this.state.token ? '/startups' 
-                                        : '/'
+                                        this.state.token ? '/startups'
+                                            : '/'
                                     }
                                 >
-                                    <button onClick={() => this.state.token ? null : this.props.setOpen(true)} className='home_button'>Explore Startups</button>
+                                    <button onClick={() => this.state.token ? null : this.props.openLoginMenu()} className='home_button'>Explore Startups</button>
                                 </Link>
 
-                                <Link 
+                                <Link
                                     to={
-                                        this.state.token ? '/profile/add-startup' 
-                                        : '/'
+                                        this.state.token ? '/profile/add-startup'
+                                            : '/'
                                     }
                                 >
-                                    <button onClick={() => this.state.token ? null : this.props.setOpen(true)} className='home_button'>Add My Startup</button>
+                                    <button onClick={() => this.state.token ? null : this.props.openLoginMenu()} className='home_button'>Add My Startup</button>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                        
+
                     <div className='home_content'>
                         <HomeContent
                             text='Explore Startups'
                             fontSize={48}
                             background='#fff'
                             id='home_startups_first'
-                            setOpen={this.props.setOpen}
+                            setOpen={this.props.openLoginMenu}
                         >
                             <HomeStartup
                                 haveLink={true}
@@ -118,7 +119,7 @@ class Home extends Component {
                             fontSize={36}
                             background='#dadada'
                             id='home_startups_second'
-                            setOpen={this.props.setOpen}
+                            setOpen={this.props.openLoginMenu}
                         >
                             <Slider {...this.state.settings}>
                                 <HomeStartup
@@ -149,7 +150,7 @@ class Home extends Component {
                             fontSize={36}
                             background='#fff'
                             id='home_startups_third'
-                            setOpen={this.props.setOpen}
+                            setOpen={this.props.openLoginMenu}
                         >
                             <HomeStartup
                                 haveLink={false}
@@ -174,4 +175,8 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapDispatchToProps = {
+    openLoginMenu
+}
+
+export default connect(null, mapDispatchToProps)(Home);

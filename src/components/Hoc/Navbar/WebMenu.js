@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 
 import Login from './Login';
 import Register from './Register';
 
-const WebMenu = (props) => {
+import { connect } from 'react-redux';
+import { closeLoginMenu, openLoginMenu, openRegMenu, closeRegMenu } from '../../redux/actions';
 
-    const [loginCont, setLoginCont] = useState(false);
-    const [regCont, setRegCont] = useState(false);
+const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, openRegMenu, closeRegMenu }) => {
 
     const history = useHistory();
 
-    useEffect(() => {
-        setLoginCont(props.loginOpen);
-    }, [props]);
-
     const loginContOpen = () => {
-        setLoginCont(!loginCont);
-        props.setLoginOpen(false);
+        openLoginMenu()
     }
-
+    const loginContClose = () => {
+        closeLoginMenu()
+    }
     const regContOpen = () => {
-        setRegCont(!regCont);
+        openRegMenu()
+    }
+    const regContClose = () => {
+        closeRegMenu()
     }
 
     const SignOut = async () => {
@@ -34,10 +34,10 @@ const WebMenu = (props) => {
     return (
         <>
             {
-                loginCont == true && regCont == false ?
-                    <Login handler={loginContOpen} />
-                    : loginCont == false && regCont == true ?
-                        <Register handler={regContOpen} />
+                loginMenuState == true ?
+                    <Login handler={loginContClose} />
+                    : regMenuState == true ?
+                        <Register handler={regContClose} />
                         : null
             }
             <div className='navbar_buttons_cont'>
@@ -86,4 +86,18 @@ const WebMenu = (props) => {
     );
 };
 
-export default WebMenu;
+const mapStateToProps = state => {
+    return {
+        loginMenuState: state.login,
+        regMenuState: state.reg
+    }
+}
+
+const mapDispatchToProps = {
+    closeLoginMenu,
+    openLoginMenu,
+    openRegMenu,
+    closeRegMenu
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WebMenu);

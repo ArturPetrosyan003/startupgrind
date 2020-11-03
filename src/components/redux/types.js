@@ -1,0 +1,4 @@
+export const OPEN_LOGIN_MENU = 'OPEN_LOGIN_MENU';
+export const CLOSE_LOGIN_MENU = 'CLOSE_LOGIN_MENU';
+export const OPEN_REG_MENU = 'OPEN_REG_MENU';
+export const CLOSE_REG_MENU = 'CLOSE_REG_MENU';

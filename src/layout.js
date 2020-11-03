@@ -15,7 +15,7 @@ const Layout = (props) => {
             {
                 slicedLocation == '/account' || slicedLocation == '/user' ?
                 null
-                : <Navbar open={props.open} setOpen={props.setOpen} />
+                : <Navbar/>
             }
                 {props.children}
             {
