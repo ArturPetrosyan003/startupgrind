@@ -7,18 +7,19 @@ import { useLocation } from 'react-router';
 
 const Layout = (props) => {
     
-    const location = useLocation();    
+    const location = useLocation();
+    const slicedLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'));
 
     return (
         <>
             {
-                location.pathname.slice(0, location.pathname.lastIndexOf('/')) == '/account' ?
+                slicedLocation == '/account' || slicedLocation == '/user' ?
                 null
                 : <Navbar open={props.open} setOpen={props.setOpen} />
             }
                 {props.children}
             {
-                location.pathname.slice(0, location.pathname.lastIndexOf('/')) == '/account' ?
+                slicedLocation == '/account' || slicedLocation == '/user' ?
                 null
                 : <Footer/>
             }
