@@ -7,12 +7,13 @@ const HomeStartup = (props) => {
     return (
         <Zoom>
             <div className='home_startup_container'>
-                <img className='home_startup_logo' src={require('../../assets/images/homeCover.png')} />
-                <h3 className='home_startup_name' style={{fontSize: props.fontSize}}>{props.text}</h3>
+                <img className='home_startup_logo' src={props.image} />
+                <h3 className='home_startup_name' style={props.textStyle}>{props.text}</h3>
+                <p className='home_startup_description'>{props.desc}</p>
                 {
                     props.haveLink ?
                         <Link to='/single'>
-                            <p className='home_startup_url'>Learn More</p>
+                            <button className='home_startup_button'>More</button>
                         </Link>
                         : null
                 }

@@ -23,6 +23,14 @@ class Navbar extends Component {
         window.addEventListener('resize', () => {
             this.windowResizeHandler(document.documentElement.clientWidth)
         })
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 0) {
+                document.getElementsByClassName('navbar')[0].style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }
+            else if(window.scrollY <= 0) {
+                document.getElementsByClassName('navbar')[0].style.backgroundColor = 'transparent';
+            }
+        })
     }
 
     menuHandler = () => {

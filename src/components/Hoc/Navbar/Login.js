@@ -3,12 +3,28 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
+import { connect } from 'react-redux';
+import { openRegMenu, closeLoginMenu } from '../../redux/actions';
+import { Checkbox } from '@material-ui/core';
+
+import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
+
 const Login = (props) => {
 
     const [errorText, setErrorText] = useState('');
     const [loading, setLoading] = useState(false);
+    const [forgotClick, setForgotClick] = useState(false);
+    const [showALert, setShowAlert] = useState(false);
+    const [checkboxState, setCheckboxState] = useState(false);
 
     const history = useHistory()
+
+    window.onunload = () => {
+        if (!checkboxState) {
+            localStorage.clear()
+        }
+    }
 
     const closeLoginCont = (event) => {
         if (event.target == event.currentTarget) {
@@ -35,7 +51,6 @@ const Login = (props) => {
         });
 
         const fetchedData = await request.json();
-        console.log(fetchedData);
 
         if (fetchedData.errors) {
             if (fetchedData.errors[0].field == 'login_or_password') {
@@ -53,46 +68,162 @@ const Login = (props) => {
 
             props.handler();
             setLoading(true);
-            
-            return(
+
+            return (
                 history.push(`/account/${fetchedData.data.user._id}`)
             )
         }
     }
 
+    const sendResetLink = async (event) => {
+        setLoading(true);
+        setErrorText('');
+
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/passwords?email=${formData.get('email')}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const fetchedData = await request.json();
+
+        console.log(fetchedData);
+
+        if (!fetchedData.data.isSent) {
+            setErrorText('Something went wrong');
+            setLoading(false);
+        }
+        else {
+            setLoading(false);
+            setShowAlert(true);
+        }
+    }
+
+    const regMenuOpen = () => {
+        props.closeLoginMenu()
+        props.openRegMenu()
+    }
+
     return (
-        <>
+        <Fade duration={300}>
             <div className='loginReg_backdrop' onClick={closeLoginCont}>
-                <div className='loginReg_container'>
-                    <h2 className='loginReg_text'>Sign In</h2>
+                <Zoom duration={600}>
+                    <div className='loginReg_container'>
+                        {
+                            !forgotClick ?
+                                <>
+                                    <h2 className='loginReg_text'>Log In</h2>
 
-                    <form className='loginReg_form' method='POST' onSubmit={login}>
-                        <span className='loginReg_span'>Email</span><br></br>
-                        <input type='email' required name='email' placeholder='Email' /><br></br>
+                                    <form className='loginReg_form' method='POST' onSubmit={login}>
+                                        <span className='loginReg_span'>Email</span><br></br>
+                                        <input autoComplete={true} type='email' required name='email' placeholder='Email' /><br></br>
 
-                        <span className='loginReg_span'>Password</span><br></br>
-                        <input type='password' required name='password' placeholder='Password' /><br></br>
+                                        <span className='loginReg_span'>Password</span><br></br>
+                                        <input autoComplete={true} type='password' required name='password' placeholder='Password' /><br></br>
 
-                        <p className='loginReg_error_text'>{errorText}</p>
+                                        <p className='loginReg_error_text'>{errorText}</p>
 
-                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginLeft: '-8%' }}>
-                            <button disabled={loading == true ? true : false} className='submit'>
-                                {
-                                    loading == true ?
-                                        <ReactLoading type={'spin'} color={'white'} height={30} width={30} />
-                                    : "Sign In"
-                                }
-                            </button>
-                        </div>
-                    </form>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                marginLeft: '-20%',
+                                                marginTop: 20
+                                            }}
+                                        >
+                                            <Checkbox
+                                                checked={checkboxState}
+                                                style={{
+                                                    color: "#1976D5"
+                                                }}
+                                                onClick={() => setCheckboxState(!checkboxState)}
+                                            />
+                                            <p style={{ color: 'black' }}>Remember Password</p>
+                                        </div>
 
-                    <Link to='/' className='loginReg_reset_password'>
-                        Forgot password?
-                    </Link>
-                </div>
+                                        <div
+                                            style={{
+                                                width: '100%',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                marginLeft: '-8%'
+                                            }}
+                                        >
+                                            <button disabled={loading == true ? true : false} className='submit'>
+                                                {
+                                                    loading == true ?
+                                                        <ReactLoading type={'bubbles'} color={'white'} height={40} width={40} />
+                                                        : "Log In"
+                                                }
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <button onClick={() => setForgotClick(true)} className='loginReg_reset_password'>
+                                        Forgot password?
+                                </button>
+
+                                    <p className='loginReg_mirror_link'>
+                                        If you don’t have an account please <button onClick={() => regMenuOpen()}><span>sign up</span></button>
+                                    </p>
+                                </>
+                                :
+                                <>
+                                    {
+                                        !showALert ?
+                                            <>
+                                                <h2 className='loginReg_text' style={{ marginBottom: 70 }}>Forgot Password</h2>
+
+                                                <form className='loginReg_form' method='GET' onSubmit={sendResetLink}>
+                                                    <span className='loginReg_span'>Email</span><br></br>
+                                                    <input type='email' required name='email' placeholder='Email' /><br></br>
+
+                                                    <p className='loginReg_error_text'>{errorText}</p>
+
+                                                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginLeft: '-8%' }}>
+                                                        <button disabled={loading == true ? true : false} className='submit' style={{ fontSize: 18, marginTop: 30, marginBottom: 80 }}>
+                                                            {
+                                                                loading == true ?
+                                                                    <ReactLoading type={'bubbles'} color={'white'} height={40} width={40} />
+                                                                    : "Reset Password"
+                                                            }
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </>
+                                            :
+                                            <>
+                                                <h2 className='loginReg_text' style={{ marginBottom: 20, marginTop: 100 }}>Thank you!</h2>
+                                                <h2
+                                                    style={{
+                                                        color: 'black',
+                                                        width: 300,
+                                                        textAlign: 'center',
+                                                        fontWeight: 300,
+                                                        marginBottom: 120
+                                                    }}
+                                                >
+                                                    Please check your inbox for further instructions
+                                            </h2>
+                                            </>
+                                    }
+                                </>
+                        }
+                    </div>
+                </Zoom>
             </div>
-        </>
+        </Fade>
     );
 }
 
-export default Login;
+const mapDispatchToProps = {
+    openRegMenu,
+    closeLoginMenu
+}
+
+export default connect(null, mapDispatchToProps)(Login);

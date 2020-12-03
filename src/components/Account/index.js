@@ -65,8 +65,8 @@ const Account = (props) => {
                             <Loading
                                 height={80}
                                 width={80}
-                                color='#212596'
-                                type='spin'
+                                color='#2998F6'
+                                type='bubbles'
                                 className='account_loading'
                             />
                             :

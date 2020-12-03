@@ -6,10 +6,18 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    font-family: 'Noto Sans', sans-serif;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 button {
     cursor: pointer;
@@ -17,15 +25,69 @@ button {
 .carousel {
     width: 100%;
 }
-.slick-list {
-    height: 350px!important;
-    margin-left: 300px;
-    margin-right: 300px;
+
+#home_startups_first .slick-list {
+    height: 400px!important;
+    width: 100%;
+    margin-left: 100px;
+    margin-right: 100px;
 }
-.slick-initialized .slick-slide {
+#home_startups_first .slick-initialized {
     display: flex;
     justify-content: center;
 }
+#home_startups_first .slick-initialized .slick-slide {
+    margin-right: -130px;
+}
+
+#home_startups_second .slick-list {
+    height: 400px!important;
+    margin-left: 320px;
+    margin-right: 280px;
+}
+#home_startups_third .slick-list {
+    height: 430px!important;
+    margin-left: 320px;
+    margin-right: 270px;
+}
+
+#home_startups_first .slick-prev {
+    left: 3%;
+    top: 25%;
+}
+#home_startups_first .slick-prev::before {
+    content: url('../icons/arrowLeftWhite.png');
+    filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.75));
+}
+
+#home_startups_first .slick-next {
+    left: 95%;
+    top: 25%;
+}
+#home_startups_first .slick-next::before {
+    content: url('../icons/arrowRightWhite.png');
+    filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.75));
+}
+
+
+#home_startups_second .slick-prev, #home_startups_third .slick-prev{
+    left: 12%;
+    top: 25%;
+}
+#home_startups_second .slick-prev::before, #home_startups_third .slick-prev::before {
+    content: url('../icons/arrowLeftBlue.png');
+    filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.5));
+}
+
+#home_startups_second .slick-next, #home_startups_third .slick-next {
+    left: 85%;
+    top: 25%;
+}
+#home_startups_second .slick-next::before, #home_startups_third .slick-next::before {
+    content: url('../icons/arrowRightBlue.png');
+    filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.5));
+}
+
 .text_404 {
     color: #212596;
     font-size: 80px;

@@ -22,7 +22,6 @@
         text-decoration: none;
         font-size: 25px;
         color: black;
-        font-family: Arial;
         margin-top: 10px;
     }
     .burger_menu_login_container {
@@ -99,7 +98,6 @@
         text-decoration: none;
         font-size: 28px;
         color: black;
-        font-family: Arial;
         margin-top: 10px;
     }
     .burger_menu_login_container {
@@ -180,7 +178,6 @@
         text-decoration: none;
         font-size: 28px;
         color: black;
-        font-family: Arial;
         margin-top: 10px;
     }
     .burger_menu_login_container {
@@ -257,7 +254,6 @@
         text-decoration: none;
         font-size: 28px;
         color: black;
-        font-family: Arial;
         margin-top: 10px;
     }
     .burger_menu_login_container {
@@ -315,6 +311,7 @@
 @media only screen and (min-width: 661px) and (max-width: 768px){
     .MuiToolbar-regular {
         padding-left: 5px!important;
+        min-height: 56px!important;
     }
     .navbar_logo {
         width: 60px;
@@ -325,15 +322,15 @@
         padding-bottom: 0;
         justify-content: center;
         padding-left: 17px;
+        zoom: 0.75;
+        padding-right: 28px;
     }
     .navbar_link {
         font-size: 20px;
         margin-left: 15px;
     }
     .navbar_login_container {
-        margin-left: 6%;
         margin-top: 0px;
-        max-width: 220px;
         min-width: 0;
     }
     .navbar_profile_icon {
@@ -354,6 +351,7 @@
         margin-right: 10px;
         margin-top: 10px;
     }
+
     /* ######## */
 
     .account_navbar_container {
@@ -382,15 +380,14 @@
         padding-bottom: 0;
         justify-content: center;
         padding-left: 20px;
+        zoom: 0.8;
     }
     .navbar_link {
         font-size: 22px;
         margin-left: 25px;
     }
     .navbar_login_container {
-        margin-left: 9%;
         margin-top: 0px;
-        max-width: 220px;
         min-width: 0;
     }
     .navbar_profile_icon {
@@ -419,14 +416,13 @@
         padding-bottom: 0;
         justify-content: center;
         padding-left: 20px;
+        zoom: 0.9;
     }
     .navbar_link {
         margin-left: 30px;
     }
     .navbar_login_container {
-        margin-left: 15%;
         margin-top: 0px;
-        max-width: 220px;
         min-width: 0;
     }
     .navbar_profile_icon {
@@ -454,12 +450,12 @@
         padding-bottom: 0;
         justify-content: center;
         padding-left: 20px;
+        zoom: 0.95;
     }
     .navbar_link {
         margin-left: 35px;
     }
     .navbar_login_container {
-        margin-left: 15%;
         margin-top: 0px;
         min-width: 0;
     }
@@ -490,7 +486,6 @@
         margin-left: 35px;
     }
     .navbar_login_container {
-        margin-left: 15%;
         margin-top: 0px;
         min-width: 0;
     }
@@ -516,7 +511,6 @@
         margin-left: 35px;
     }
     .navbar_login_container {
-        margin-left: 15%;
         margin-top: 0px;
         min-width: 0;
     }

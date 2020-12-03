@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Loading from 'react-loading';
+
 import queryString from 'query-string';
 import { useHistory } from 'react-router';
 
@@ -10,14 +11,15 @@ const UserActivation = (props) => {
 
     useEffect(() => {
         activateUser(query.token);
+        console.log(query.token);
     }, []);
 
     const activateUser = async (token) => {
-        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/users/activation?token=${query.token}`)
+        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/users/activation?token=${token}`)
         const response = await request.json();
 
-        if(response.data.userIsActivated){
-            history.push('/');
+        if(response.data.isActivated){
+            history.push(`/account/${localStorage.getItem('_id')}`);
         }
     }
 
@@ -32,8 +34,8 @@ const UserActivation = (props) => {
             <Loading
                 height={80}
                 width={80}
-                color='#212596'
-                type='spin'
+                color='#2998F6'
+                type='bubbles'
             />
         </div>
     );

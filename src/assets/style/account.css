@@ -50,7 +50,6 @@
 .account_modal_btn {
     background: transparent;
     border: none;
-    font-family: Arial;
     font-size: 20px;
     font-weight: 500;
     color: #000000;
@@ -97,7 +96,6 @@
     align-items: flex-start;
 }
 .account_name {
-    font-family: Arial;
     font-size: 24px;
     color: #0a0a0a;
     font-weight: normal;
@@ -112,7 +110,6 @@
     border: 1px solid #8c8c8c;
     border-radius: 4px;
     background-color: #ffffff;
-    font-family: Arial;
     font-size: 20px;
     color: #121212;
     resize: none;
@@ -123,7 +120,6 @@
     width: 235px;
     height: 43px;
     background-color: #212596;
-    font-family: Arial;
     font-size: 20px;
     color: rgba(250, 250, 250, 0.8);
     text-decoration: none solid rgba(250, 250, 250, 0.8);

@@ -12,18 +12,20 @@ import EmptyPage from './components/Hoc/404';
 import PrivateRoute from './components/Hoc/PrivateRoute';
 import Account from './components/Account';
 import UserActivation from './components/Hoc/UserActivation';
+import PasswordReset from './components/Hoc/PasswordReset';
 
 function Routes() {
   return (
     <>
       <Layout>
         <Switch>
-          <PrivateRoute exact path='/account/:id' component={Account} />
-          <Route path='/user/activation' exact component={UserActivation} />
-          <Route path='/' exact component={Home}/>
+          <Route path='/' exact component={Home} />
           <Route path='/startups' component={Startups} />
           <Route path='/about' component={About} />
-          <Route component={EmptyPage}/>
+          <Route path='/user/activation' component={UserActivation} />
+          <Route path='/user/forgot-password' component={PasswordReset} /> 
+          <PrivateRoute path='/account/:id' component={Account} />
+          <Route component={EmptyPage} />
         </Switch>
       </Layout>
     </>
