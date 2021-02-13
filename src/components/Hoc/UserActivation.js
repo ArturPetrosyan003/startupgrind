@@ -11,7 +11,6 @@ const UserActivation = (props) => {
 
     useEffect(() => {
         activateUser(query.token);
-        console.log(query.token);
     }, []);
 
     const activateUser = async (token) => {
@@ -19,7 +18,7 @@ const UserActivation = (props) => {
         const response = await request.json();
 
         if(response.data.isActivated){
-            history.push(`/account/${localStorage.getItem('_id')}`);
+            history.push(`/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`);
         }
     }
 

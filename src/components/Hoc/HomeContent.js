@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const HomeContent = (props) => {
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
     return (
         <div id={props.id} className='home_content_container' style={{ backgroundImage: props.background }}>

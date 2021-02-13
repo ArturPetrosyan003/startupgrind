@@ -25,9 +25,13 @@ const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, 
         closeRegMenu()
     }
 
-    const SignOut = async () => {
-        await localStorage.removeItem('token');
-        await localStorage.removeItem('_id');
+    const SignOut = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('_id');
+
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('_id');
+
         history.go(0);
     }
 
@@ -60,27 +64,32 @@ const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, 
                 <Link to='/contact' className='navbar_link'>
                     Contact Us
                 </Link>
-                {
-                    localStorage.getItem('token') ?
-                        <div className='navbar_profile_cont'>
-                            <Link className='navbar_profile_icon_cont' to={`/account/${localStorage.getItem('_id')}`}>
-                                <img className='navbar_profile_icon' src={require('../../../assets/icons/profile.png')} />
-                                <p>My Profile</p>
-                            </Link>
+                <div className='navbar_login_container'>
+                    {
+                        localStorage.getItem('token') || sessionStorage.getItem('token') ?
+                            <>
+                                <Link to={`/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`}>
+                                    <button className='navbar_link navbar_button'>
+                                        My Profile
+                                    </button>
+                                </Link>
 
-                            <button onClick={SignOut}>Sign Out</button>
-                        </div>
-                        :
-                        <div className='navbar_login_container'>
-                            <button onClick={() => loginContOpen()} className='navbar_link navbar_button'>
-                                Log In
-                            </button>
+                                <button onClick={SignOut} className='navbar_link navbar_button'>
+                                    Sign Out
+                                </button>
+                            </>
+                            :
+                            <>
+                                <button onClick={() => loginContOpen()} className='navbar_link navbar_button'>
+                                    Log In
+                                </button>
 
-                            <button onClick={() => regContOpen()} className='navbar_link navbar_button'>
-                                Sign Up
-                            </button>
-                        </div>
-                }
+                                <button onClick={() => regContOpen()} className='navbar_link navbar_button'>
+                                    Sign Up
+                                </button>
+                            </>
+                    }
+                </div>
             </div>
         </>
     );

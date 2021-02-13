@@ -29,42 +29,59 @@ const Register = (props) => {
         event.preventDefault();
         const formData = new FormData(event.target)
 
-        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: formData.get('name'),
-                surname: formData.get('surname'),
-                password: formData.get('password'),
-                email: formData.get('email')
-            })
-        })
+        if (formData.get('password') == formData.get('password_repeat')) {
+            try {
+                const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: formData.get('name').trim(),
+                        surname: formData.get('surname').trim(),
+                        password: formData.get('password').replace(/\s/g, ''),
+                        email: formData.get('email').trim()
+                    })
+                })
 
-        const fetchedData = await request.json();
-        console.log(fetchedData)
+                const fetchedData = await request.json();
 
-        if (fetchedData.errors) {
-            if (fetchedData.errors[0].field == 'email') {
-                setErrorText('Email already exists');
-                setLoading(false);
+                if (fetchedData.errors) {
+                    if (fetchedData.errors[0].field == 'email') {
+                        if (fetchedData.errors[0].message == "duplicate key") {
+                            setErrorText('Email already exists');
+                            setLoading(false);
+                        }
+                        else {
+                            setErrorText('Invalid email');
+                            setLoading(false);
+                        }
+                    }
+                    else {
+                        setErrorText('Something went wrong');
+                        setLoading(false);
+                    }
+                }
+                else {
+                    await localStorage.setItem('token', fetchedData.data.auth.token)
+                    await localStorage.setItem('_id', fetchedData.data.user._id);
+
+                    props.handler()
+                    setLoading(true);
+
+                    return (
+                        history.push(`/account/${fetchedData.data.user._id}`)
+                    )
+                }
             }
-            else {
+            catch (error) {
                 setErrorText('Something went wrong');
                 setLoading(false);
             }
         }
         else {
-            await localStorage.setItem('token', fetchedData.data.auth.token)
-            await localStorage.setItem('_id', fetchedData.data.user._id);
-
-            props.handler()
-            setLoading(true);
-
-            return (
-                history.push(`/account/${fetchedData.data.user._id}`)
-            )
+            setLoading(false);
+            setErrorText('Please make sure the passwords match');
         }
     }
 
@@ -91,7 +108,10 @@ const Register = (props) => {
                             <input type='email' required name='email' placeholder='Your email' minLength='3' /><br></br>
 
                             <span className='loginReg_span'>Password*</span><br></br>
-                            <input type='password' required name='password' placeholder='Create password' minLength='6' /><br></br>
+                            <input style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} type='password' required name='password' placeholder='Create password' minLength='6' /><br></br>
+
+                            <span className='loginReg_span'>Repeat Password*</span><br></br>
+                            <input style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} type='password' required name='password_repeat' placeholder='Create password' minLength='6' /><br></br>
 
                             <p className='loginReg_error_text'>{errorText}</p>
 

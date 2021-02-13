@@ -5,6 +5,7 @@ import ReactLoading from 'react-loading';
 
 import { connect } from 'react-redux';
 import { openRegMenu, closeLoginMenu } from '../../redux/actions';
+
 import { Checkbox } from '@material-ui/core';
 
 import Zoom from 'react-reveal/Zoom';
@@ -20,12 +21,6 @@ const Login = (props) => {
 
     const history = useHistory()
 
-    window.onunload = () => {
-        if (!checkboxState) {
-            localStorage.clear()
-        }
-    }
-
     const closeLoginCont = (event) => {
         if (event.target == event.currentTarget) {
             props.handler()
@@ -39,39 +34,51 @@ const Login = (props) => {
         event.preventDefault();
         const formData = new FormData(event.target);
 
-        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users/sign-in', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: formData.get('email'),
-                password: formData.get('password')
-            })
-        });
+        try {
+            const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users/sign-in', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: formData.get('email').trim(),
+                    password: formData.get('password')
+                })
+            });
 
-        const fetchedData = await request.json();
+            const fetchedData = await request.json();
 
-        if (fetchedData.errors) {
-            if (fetchedData.errors[0].field == 'login_or_password') {
-                setErrorText('Invalid email or password');
-                setLoading(false);
+            if (fetchedData.errors) {
+                if (fetchedData.errors[0].field == 'login_or_password') {
+                    setErrorText('Invalid email or password');
+                    setLoading(false);
+                }
+                else {
+                    setErrorText('Something went wrong');
+                    setLoading(false);
+                }
             }
             else {
-                setErrorText('Something went wrong');
-                setLoading(false);
+                if (!checkboxState){
+                    sessionStorage.setItem('token', fetchedData.data.auth.token);
+                    sessionStorage.setItem('_id', fetchedData.data.user._id);
+                }
+                else {
+                    localStorage.setItem('token', fetchedData.data.auth.token);
+                    localStorage.setItem('_id', fetchedData.data.user._id);
+                }
+               
+                props.handler();
+                setLoading(true);
+
+                return (
+                    history.push(`/account/${fetchedData.data.user._id}`)
+                )
             }
         }
-        else {
-            await localStorage.setItem('token', fetchedData.data.auth.token);
-            await localStorage.setItem('_id', fetchedData.data.user._id);
-
-            props.handler();
-            setLoading(true);
-
-            return (
-                history.push(`/account/${fetchedData.data.user._id}`)
-            )
+        catch (error) {
+            setErrorText('Something went wrong');
+            setLoading(false);
         }
     }
 
@@ -82,24 +89,30 @@ const Login = (props) => {
         event.preventDefault();
         const formData = new FormData(event.target);
 
-        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/passwords?email=${formData.get('email')}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
+        try {
+            const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/passwords?email=${formData.get('email')}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const fetchedData = await request.json();
+
+            console.log(fetchedData);
+
+            if (!fetchedData.data.isSent) {
+                setErrorText('Something went wrong');
+                setLoading(false);
             }
-        });
-
-        const fetchedData = await request.json();
-
-        console.log(fetchedData);
-
-        if (!fetchedData.data.isSent) {
+            else {
+                setLoading(false);
+                setShowAlert(true);
+            }
+        }
+        catch (error) {
             setErrorText('Something went wrong');
             setLoading(false);
-        }
-        else {
-            setLoading(false);
-            setShowAlert(true);
         }
     }
 
@@ -120,10 +133,10 @@ const Login = (props) => {
 
                                     <form className='loginReg_form' method='POST' onSubmit={login}>
                                         <span className='loginReg_span'>Email</span><br></br>
-                                        <input autoComplete={true} type='email' required name='email' placeholder='Email' /><br></br>
+                                        <input type='email' required name='email' placeholder='Email' /><br></br>
 
                                         <span className='loginReg_span'>Password</span><br></br>
-                                        <input autoComplete={true} type='password' required name='password' placeholder='Password' /><br></br>
+                                        <input type='password' required name='password' placeholder='Password' /><br></br>
 
                                         <p className='loginReg_error_text'>{errorText}</p>
 
@@ -166,7 +179,7 @@ const Login = (props) => {
 
                                     <button onClick={() => setForgotClick(true)} className='loginReg_reset_password'>
                                         Forgot password?
-                                </button>
+                                    </button>
 
                                     <p className='loginReg_mirror_link'>
                                         If you don’t have an account please <button onClick={() => regMenuOpen()}><span>sign up</span></button>
@@ -180,7 +193,7 @@ const Login = (props) => {
                                                 <h2 className='loginReg_text' style={{ marginBottom: 70 }}>Forgot Password</h2>
 
                                                 <form className='loginReg_form' method='GET' onSubmit={sendResetLink}>
-                                                    <span className='loginReg_span'>Email</span><br></br>
+                                                    <span className='loginReg_span'>Please type your email</span><br></br>
                                                     <input type='email' required name='email' placeholder='Email' /><br></br>
 
                                                     <p className='loginReg_error_text'>{errorText}</p>
@@ -199,7 +212,7 @@ const Login = (props) => {
                                             :
                                             <>
                                                 <h2 className='loginReg_text' style={{ marginBottom: 20, marginTop: 100 }}>Thank you!</h2>
-                                                <h2
+                                                <h3
                                                     style={{
                                                         color: 'black',
                                                         width: 300,
@@ -209,7 +222,7 @@ const Login = (props) => {
                                                     }}
                                                 >
                                                     Please check your inbox for further instructions
-                                            </h2>
+                                                </h3>
                                             </>
                                     }
                                 </>

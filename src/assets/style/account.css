@@ -1,31 +1,37 @@
 /* Navbar */
 
+.account_navbar_container {
+    height: 55px;
+    padding-right: 40px;
+}
+
+.account_navbar {
+    background: #dadada!important;
+    justify-content: space-between;
+    align-items: center!important;
+    min-height: 0!important;
+    padding-bottom: 0px;
+}
+
 .account_navbar_logo {
     width: 50px;
     height: 50px;
 }
+
 .account_navbar_profile {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     padding: 0;
     background: transparent;
     border: none;
     outline: none;
 }
+
 .account_navbar_profile img {
     width: 100%;
     height: 100%;
 }
-.account_navbar_container {
-    height: 55px;
-    padding-right: 40px;
-}
-.account_navbar {
-    justify-content: space-between;
-    min-height: 0!important;
-    padding-top: 5px;
-    padding-bottom: 2px;
-}
+
 .account_modal {
     width: 170px;
     height: auto;
@@ -40,13 +46,14 @@
     justify-content: center;
     border-bottom-left-radius: 5px;
 }
+
 .account_modal_container .MuiDrawer-paperAnchorTop {
     left: auto!important;
     top: auto!important;
     border: none!important;
     z-index: -999!important;
-    border-top: 2px solid lightgray!important;
 }
+
 .account_modal_btn {
     background: transparent;
     border: none;
@@ -64,95 +71,273 @@
 
 .account_content {
     width: 100%;
-    margin-top: 70px;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 15px;
+    height: 100vh;
+    overflow: auto;
     display: flex;
-}
-.account_burger_menu {
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    z-index: 99;
-}
-.account_info_container {
-    width: 600px;
-    margin-left: 25%;
-    padding-top: 60px;
+    background: #e2e2e2;
+    padding: 55px 5%;
+    box-sizing: border-box;
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
-.account_profile_image {
-    width: 150px;
-    height: 150px;
-    background: #dadada;
-    padding: 40px;
-}
-.account_info_main {
-    margin-left: 50px;
+
+.account_info_container {
+    width: 95%;
+    height: 250px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    background: white;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 20px;
 }
+
+.account_info_container h2 {
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+}
+
+.account_info_container h4 {
+    font-weight: 300;
+    margin: 0;
+    margin-top: 15px;
+}
+
+.account_profile_image {
+    width: 125px;
+    height: 125px;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
 .account_name {
-    font-size: 24px;
-    color: #0a0a0a;
-    font-weight: normal;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    color: #030303;
     text-align: center;
-    margin-bottom: 21px;
-    margin-top: 5px;
+    margin-left: 25px;
 }
-.account_summary {
-    width: 271px;
-    height: 106px;
-    padding: 0px 8px;
-    border: 1px solid #8c8c8c;
-    border-radius: 4px;
-    background-color: #ffffff;
-    font-size: 20px;
-    color: #121212;
-    resize: none;
-    outline: none;
-    margin-bottom: 21px;
-}
+
 .account_startup_btn {
-    width: 235px;
-    height: 43px;
-    background-color: #212596;
-    font-size: 20px;
-    color: rgba(250, 250, 250, 0.8);
-    text-decoration: none solid rgba(250, 250, 250, 0.8);
+    width: 218px;
+    height: 40px;
+    background: #1976D5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
     text-align: center;
     border: none;
     outline: none;
-    border-radius: 5px;
-}
-.account_loading {
-    margin-top: 120px;
-    margin-left: 60px;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
 }
 
-/* Side Menu */
+.account_info_button_container {
+    display: flex;
+    height: 100%;
+    margin-left: 200px;
+    justify-content: flex-start;
+    padding-top: 55px;
+    box-sizing: border-box;
+}
 
-.account_side_menu {
-    z-index: 0;
+.account_edit_button {
+    height: 35px;
+    width: 100px;
+    zoom: 0.9;
+    background: transparent;
+    border-radius: 20px;
+    border: 2px solid #1976D5;
+    color: #1976D5;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0px 15px;
+    box-sizing: content-box;
+    outline: none;
 }
-.account_side_menu hr {
-    border: 1px solid #dadada;
-    background: #dadada;
-    height: 0.25px;
+
+.account_startups_container {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: white;
+    border-radius: 15px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
 }
-.account_side_menu .MuiDrawer-paper {
-    height: calc(100vh - 55px)!important;
+
+.account_right_container {
+    width: 20%;
+    height: 400px;
+    background: white;
+    border-radius: 15px;
+    margin-left: 0px;
     margin-top: 55px;
-    border: none!important;
-    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: flex-start;
 }
-.account_side_menu .MuiListItem-gutters {
-    padding-left: 0!important;
-    padding-right: 0!important;
+
+.account_info_container_left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 35px;
 }
-.account_side_menu .MuiListItem-root {
-    padding-bottom: 0!important;
+
+.account_info_container_left p {
+    font-weight: bold;
+    margin-left: 2px;
+    font-size: 13px;
+    word-spacing: -2px;
+}
+
+.account_info_container_right {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    height: 100%;
+    padding-top: 45px;
+    box-sizing: border-box;
+}
+
+.account_info_container_right h2 {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.account_warning_container {
+    margin-top: 3px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account_warning_container img {
+    width: 20px;
+    height: 20px;
+}
+
+.account_tooltip {
+    visibility: hidden;
+    width: 170px;
+    font-size: 13px;
+    font-weight: 300;
+    font-style: italic;
+    background: rgba(227, 226, 226, 0.48);
+    color: #D00B0B;
+    text-align: center;
+    border-radius: 15px;
+    padding: 10px 0;
+    margin-left: 10px;
+    z-index: 1;
+}
+
+.account_warning_container:hover .account_tooltip {
+    visibility: visible;
+}
+
+/* Startup Item */
+
+.account_startup_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: transparent;
+    padding-left: 50px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.account_startup_left {
+    width: 10%;
+    align-self: flex-start;
+    margin-top: 20px;
+}
+
+.account_startup_left img {
+    width: 100%;
+}
+
+.account_startup_right {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.account_startup_right h3, .account_startup_right p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.account_startup_right h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.account_startup_right p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.account_startup_button_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.account_startup_button_container button {
+    width: 135px;
+    height: 40px;
+    zoom: 0.75;
+    background: #F8C924;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    outline: none;
+}
+
+.account_startup_right hr {
+    width: 100%;
+    background: #A5A4A4;
+    border: 0.7px solid #A5A4A4;
+    margin-top: 30px;
+}
+
+.account_add_startup_button {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.account_add_startup_button img {
+    width: 100%;
+    height: 100%;
 }

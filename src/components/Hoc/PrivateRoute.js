@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
 const PrivateRoute = ({ component: Comp, ...rest }) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
     return (
         <Route {...rest} component={({match}) => (

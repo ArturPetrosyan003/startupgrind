@@ -22,7 +22,8 @@
 .footer h3 {
     font-weight: 600;
     font-size: 22px;
-    color: #1976D5;
+    color: black;
+    font-weight: bold;
 }
 .footer_contact_h3 {
     margin-top: 80px;
@@ -40,8 +41,8 @@
     margin-bottom: 30px;
 }
 .footer_contact_wrapper img {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
     margin-bottom: 0;
 }
 .footer_contact_wrapper p {
@@ -53,10 +54,11 @@
 }
 .footer_social_icons {
     display: flex;
+    margin-top: 120px;
 }
 .footer_social_icons img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin-right: 20px;
 }
 .footer_right {
@@ -74,17 +76,18 @@
     color: #FFFFFF;
     text-decoration: none;
     margin-bottom: 20px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 .footer_right h3 {
     font-weight: 100;
     font-size: 22px;
-    color: #FFFFFF;
-    margin-left: 50px;
+    color: black;
+    margin-left: 34px;
+    font-weight: bold;
 }
 .footer_right input {
-    width: 381px;
-    height: 77px;
+    width: 320px;
+    height: 50px;
     background: #D9D5D5;
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25);
     border-radius: 50px;
@@ -97,25 +100,28 @@
     box-sizing: border-box;
 }
 .footer_right button {
-    width: 165px;
-    height: 69px;
-    background: #1976D5;
+    width: 140px;
+    height: 40px;
+    background: #D9D5D5;
     border-radius: 40px;
     border: none;
     outline: none;
-    color: white;
+    color: black;
     font-weight: 100;
-    font-size: 23px;
+    font-size: 20px;
     margin-top: 30px;
+    padding-left: 10px;
+    box-sizing: content-box;
 }
 .footer hr {
-    margin-top: 40px;
+    margin-top: 30px;
+    background: white;
 }
-.footer_bottom_info h2 {
+.footer_bottom_info h3 {
     text-align: center;
     color: white;
     font-weight: 600;
-    font-size: 22px;
+    font-size: 20px;
     margin-right: 40px;
 }
 .footer_bottom_info {

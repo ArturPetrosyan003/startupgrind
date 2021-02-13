@@ -81,8 +81,8 @@ const Footer = (props) => {
 
             <hr></hr>
             <div className='footer_bottom_info'>
-                <h2>All Right reserved</h2>
-                <h2>Copyright 2020</h2>
+                <h3>All Right reserved</h3>
+                <h3>Copyright {new Date().getFullYear()}</h3>
             </div>
         </div>
     );

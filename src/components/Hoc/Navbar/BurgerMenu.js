@@ -46,9 +46,13 @@ class BurgerMenu extends Component {
         this.props.closeRegMenu()
     }
 
-    SignOut = async () => {
-        await localStorage.removeItem('token');
-        await localStorage.removeItem('_id');
+    SignOut = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('_id');
+
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('_id');
+
         window.location.reload();
     }
 
@@ -69,10 +73,10 @@ class BurgerMenu extends Component {
                 >
                     <List className='burger_menu'>
                         {
-                            localStorage.getItem('token') ?
+                            localStorage.getItem('token') || sessionStorage.getItem('token') ?
                                 <div className='navbar_profile_cont'>
                                     <ListItem className='burger_menu_link_cont'>
-                                        <Link className='navbar_profile_icon_cont' to={`/account/${localStorage.getItem('_id')}`}>
+                                        <Link className='navbar_profile_icon_cont' to={`/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`}>
                                             <img className='navbar_profile_icon' src={require('../../../assets/icons/profile.png')} />
                                             <p>My Profile</p>
                                         </Link>

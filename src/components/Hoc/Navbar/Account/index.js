@@ -20,9 +20,13 @@ class Navbar extends Component {
         })
     }
 
-    SignOut = async () => {
-        await localStorage.removeItem('token');
-        await localStorage.removeItem('_id');
+    SignOut = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('_id');
+
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('_id');
+
         window.location.reload();
     }
 
@@ -37,8 +41,6 @@ class Navbar extends Component {
                     <button onClick={() => this.modalHandler()} className='account_navbar_profile'>
                         <img src={require('../../../../assets/icons/profile.png')} />
                     </button>
-
-
                 </ToolBar>
 
                 <Drawer

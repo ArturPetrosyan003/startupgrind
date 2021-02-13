@@ -87,11 +87,11 @@
     margin-top: 36px;
     margin-bottom: 35px;
     outline: none;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 .home_startup_container {
     width: 260px;
-    margin-left: 70px;
+    /* margin-left: 70px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -101,8 +101,8 @@
     margin-left: 0px;
 }
 .home_startup_logo {
-    width: 100%;
-    height: 246px;
+    width: 85%;
+    /* height: 246px; */
 }
 .home_startup_name {
     font-weight: normal;
@@ -129,8 +129,18 @@
     font-weight: 600;
     font-size: 18px;
 }
+.home_content_startup_container {
+    padding-left: 35px;
+    padding-right: 35px;
+    box-sizing: border-box;
+}
 #home_startups_second .home_content_startup_container {
     padding-right: 0;
+    padding-left: 0;
+}
+#home_startups_second {
+    padding-left: 35px;
+    padding-right: 35px;
 }
 #home_startups_second .home_startup_container {
     margin-left: 0;
