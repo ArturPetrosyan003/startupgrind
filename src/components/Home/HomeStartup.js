@@ -11,7 +11,7 @@ const HomeStartup = (props) => {
                 <h3 className='home_startup_name' style={props.textStyle}>{props.text}</h3>
                 <p className='home_startup_description'>{props.desc}</p>
                 {
-                    props.haveLink ?
+                    props.hasLink ?
                         <Link to='/single'>
                             <button className='home_startup_button'>More</button>
                         </Link>

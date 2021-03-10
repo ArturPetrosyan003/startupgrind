@@ -13,16 +13,16 @@ const PopupSecondPage = (props) => {
             <h3>You can edit anytime later from your profile</h3>
             <button
                 className='add_startup_close_popup_button'
+                onClick={() => {
+                    props.fetchData();
+                    props.closeStartupPopup();
+                    props.closeStartupMenu();
+                }}
                 style={{
                     width: 80,
                     height: 40,
                     background: '#1976D5',
                     marginTop: 25
-                }}
-                onClick={() => {
-                    props.fetchStartups();
-                    props.closeStartupPopup();
-                    props.closeStartupMenu();
                 }}
             >
                 OK

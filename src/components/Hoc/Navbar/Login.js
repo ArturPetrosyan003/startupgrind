@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { Link, useHistory } from 'react-router-dom';
-import ReactLoading from 'react-loading';
+import { useHistory } from 'react-router-dom';
+import Loading from 'react-loading';
 
 import { connect } from 'react-redux';
 import { openRegMenu, closeLoginMenu } from '../../redux/actions';
@@ -19,11 +19,11 @@ const Login = (props) => {
     const [showALert, setShowAlert] = useState(false);
     const [checkboxState, setCheckboxState] = useState(false);
 
-    const history = useHistory()
+    const history = useHistory();
 
     const closeLoginCont = (event) => {
         if (event.target == event.currentTarget) {
-            props.handler()
+            props.handler();
         }
     }
 
@@ -34,51 +34,45 @@ const Login = (props) => {
         event.preventDefault();
         const formData = new FormData(event.target);
 
-        try {
-            const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users/sign-in', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: formData.get('email').trim(),
-                    password: formData.get('password')
-                })
-            });
+        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users/sign-in', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: formData.get('email').trim(),
+                password: formData.get('password')
+            })
+        });
 
-            const fetchedData = await request.json();
+        const fetchedData = await request.json();
 
-            if (fetchedData.errors) {
-                if (fetchedData.errors[0].field == 'login_or_password') {
-                    setErrorText('Invalid email or password');
-                    setLoading(false);
-                }
-                else {
-                    setErrorText('Something went wrong');
-                    setLoading(false);
-                }
+        if (!fetchedData.errors) {
+            if (!checkboxState) {
+                sessionStorage.setItem('token', fetchedData.data.auth.token);
+                sessionStorage.setItem('_id', fetchedData.data.user._id);
             }
             else {
-                if (!checkboxState){
-                    sessionStorage.setItem('token', fetchedData.data.auth.token);
-                    sessionStorage.setItem('_id', fetchedData.data.user._id);
-                }
-                else {
-                    localStorage.setItem('token', fetchedData.data.auth.token);
-                    localStorage.setItem('_id', fetchedData.data.user._id);
-                }
-               
-                props.handler();
-                setLoading(true);
-
-                return (
-                    history.push(`/account/${fetchedData.data.user._id}`)
-                )
+                localStorage.setItem('token', fetchedData.data.auth.token);
+                localStorage.setItem('_id', fetchedData.data.user._id);
             }
+
+            props.handler();
+            setLoading(true);
+
+            return (
+                history.push(`/account/${fetchedData.data.user._id}`)
+            );
         }
-        catch (error) {
-            setErrorText('Something went wrong');
-            setLoading(false);
+        else {
+            if (fetchedData.errors[0].field == 'login_or_password') {
+                setErrorText('Invalid email or password');
+                setLoading(false);
+            }
+            else {
+                setErrorText('Something went wrong');
+                setLoading(false);
+            }
         }
     }
 
@@ -89,36 +83,28 @@ const Login = (props) => {
         event.preventDefault();
         const formData = new FormData(event.target);
 
-        try {
-            const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/passwords?email=${formData.get('email')}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            const fetchedData = await request.json();
-
-            console.log(fetchedData);
-
-            if (!fetchedData.data.isSent) {
-                setErrorText('Something went wrong');
-                setLoading(false);
+        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/passwords?email=${formData.get('email')}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             }
-            else {
-                setLoading(false);
-                setShowAlert(true);
-            }
-        }
-        catch (error) {
+        });
+
+        const fetchedData = await request.json();
+
+        if (!fetchedData.data.isSent) {
             setErrorText('Something went wrong');
             setLoading(false);
+        }
+        else {
+            setLoading(false);
+            setShowAlert(true);
         }
     }
 
     const regMenuOpen = () => {
-        props.closeLoginMenu()
-        props.openRegMenu()
+        props.closeLoginMenu();
+        props.openRegMenu();
     }
 
     return (
@@ -146,31 +132,33 @@ const Login = (props) => {
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                                 marginLeft: '-20%',
-                                                marginTop: 20
+                                                marginTop: 20,
+                                                color: 'black'
                                             }}
                                         >
                                             <Checkbox
                                                 checked={checkboxState}
+                                                onClick={() => setCheckboxState(!checkboxState)}
                                                 style={{
                                                     color: "#1976D5"
                                                 }}
-                                                onClick={() => setCheckboxState(!checkboxState)}
                                             />
-                                            <p style={{ color: 'black' }}>Remember Password</p>
+                                            <p>Remember Password</p>
                                         </div>
 
-                                        <div
-                                            style={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                marginLeft: '-8%'
-                                            }}
-                                        >
-                                            <button disabled={loading == true ? true : false} className='submit'>
+                                        <div className='loginReg_button_container'>
+                                            <button
+                                                className='submit'
+                                                disabled={loading == true ? true : false}
+                                            >
                                                 {
                                                     loading == true ?
-                                                        <ReactLoading type={'bubbles'} color={'white'} height={40} width={40} />
+                                                        <Loading
+                                                            height={40}
+                                                            width={40}
+                                                            color={'white'}
+                                                            type={'bubbles'}
+                                                        />
                                                         : "Log In"
                                                 }
                                             </button>
@@ -182,7 +170,10 @@ const Login = (props) => {
                                     </button>
 
                                     <p className='loginReg_mirror_link'>
-                                        If you don’t have an account please <button onClick={() => regMenuOpen()}><span>sign up</span></button>
+                                        If you don’t have an account please {' '}
+                                        <button onClick={() => regMenuOpen()}>
+                                            <span>sign up</span>
+                                        </button>
                                     </p>
                                 </>
                                 :
@@ -198,11 +189,22 @@ const Login = (props) => {
 
                                                     <p className='loginReg_error_text'>{errorText}</p>
 
-                                                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginLeft: '-8%' }}>
-                                                        <button disabled={loading == true ? true : false} className='submit' style={{ fontSize: 18, marginTop: 30, marginBottom: 80 }}>
+                                                    <div className='loginReg_button_container'>
+                                                        <button
+                                                            className='submit'
+                                                            disabled={loading == true ? true : false}
+                                                            style={{
+                                                                marginBottom: 80
+                                                            }}
+                                                        >
                                                             {
                                                                 loading == true ?
-                                                                    <ReactLoading type={'bubbles'} color={'white'} height={40} width={40} />
+                                                                    <Loading
+                                                                        height={40}
+                                                                        width={40}
+                                                                        color={'white'}
+                                                                        type={'bubbles'}
+                                                                    />
                                                                     : "Reset Password"
                                                             }
                                                         </button>

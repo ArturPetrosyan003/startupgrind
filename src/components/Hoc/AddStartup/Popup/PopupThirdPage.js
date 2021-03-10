@@ -13,14 +13,14 @@ const PopupThirdPage = (props) => {
             <h3 style={{ maxWidth: 500 }}>Your startup is successfully saved and published</h3>
             <button
                 className='add_startup_close_popup_button'
+                onClick={() => {
+                    props.fetchData();
+                    props.closeStartupPopup();
+                    props.closeStartupMenu();
+                }}
                 style={{
                     width: 130,
                     height: 40
-                }}
-                onClick={() => {
-                    props.fetchStartups();
-                    props.closeStartupPopup();
-                    props.closeStartupMenu();
                 }}
             >
                 View Page

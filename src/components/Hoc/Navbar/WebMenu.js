@@ -8,22 +8,9 @@ import Register from './Register';
 import { connect } from 'react-redux';
 import { closeLoginMenu, openLoginMenu, openRegMenu, closeRegMenu } from '../../redux/actions';
 
-const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, openRegMenu, closeRegMenu }) => {
+const WebMenu = (props) => {
 
     const history = useHistory();
-
-    const loginContOpen = () => {
-        openLoginMenu()
-    }
-    const loginContClose = () => {
-        closeLoginMenu()
-    }
-    const regContOpen = () => {
-        openRegMenu()
-    }
-    const regContClose = () => {
-        closeRegMenu()
-    }
 
     const SignOut = () => {
         localStorage.removeItem('token');
@@ -38,12 +25,13 @@ const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, 
     return (
         <>
             {
-                loginMenuState == true ?
-                    <Login handler={loginContClose} />
-                    : regMenuState == true ?
-                        <Register handler={regContClose} />
+                props.loginMenuState == true ?
+                    <Login handler={props.closeLoginMenu} />
+                    : props.regMenuState == true ?
+                        <Register handler={props.closeRegMenu} />
                         : null
             }
+
             <div className='navbar_buttons_cont'>
                 <Link to='/' className='navbar_link'>
                     Home
@@ -64,6 +52,7 @@ const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, 
                 <Link to='/contact' className='navbar_link'>
                     Contact Us
                 </Link>
+
                 <div className='navbar_login_container'>
                     {
                         localStorage.getItem('token') || sessionStorage.getItem('token') ?
@@ -74,17 +63,26 @@ const WebMenu = ({ loginMenuState, regMenuState, closeLoginMenu, openLoginMenu, 
                                     </button>
                                 </Link>
 
-                                <button onClick={SignOut} className='navbar_link navbar_button'>
+                                <button
+                                    className='navbar_link navbar_button'
+                                    onClick={SignOut}
+                                >
                                     Sign Out
                                 </button>
                             </>
                             :
                             <>
-                                <button onClick={() => loginContOpen()} className='navbar_link navbar_button'>
+                                <button
+                                    className='navbar_link navbar_button'
+                                    onClick={() => props.openLoginMenu()}
+                                >
                                     Log In
                                 </button>
 
-                                <button onClick={() => regContOpen()} className='navbar_link navbar_button'>
+                                <button
+                                    className='navbar_link navbar_button'
+                                    onClick={() => props.openRegMenu()}
+                                >
                                     Sign Up
                                 </button>
                             </>

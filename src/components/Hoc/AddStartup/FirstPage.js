@@ -23,13 +23,13 @@ const FirstPage = (props) => {
         props.setData({
             ...props.data,
             startupName: formData.get('startup_name'),
-            founderName: formData.get('founder_name'),
+            founder: formData.get('founder_name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             country: formData.get('country'),
             city: formData.get('city'),
-            shortDesc: formData.get('short_desc'),
-            longDesc: formData.get('long_desc'),
+            headline: formData.get('short_desc'),
+            description: formData.get('long_desc'),
             logo: logo,
             pitchDeck: pitchDeck
         });
@@ -85,8 +85,8 @@ const FirstPage = (props) => {
                                 required
                                 type='text'
                                 name='founder_name'
-                                value={data.founderName}
-                                onChange={(event) => setData({ ...data, founderName: event.target.value })}
+                                value={data.founder}
+                                onChange={(event) => setData({ ...data, founder: event.target.value })}
                             />
                             <br></br>
 
@@ -143,8 +143,8 @@ const FirstPage = (props) => {
                             name='short_desc'
                             maxLength='150'
                             placeholder='Maximum 150 characters'
-                            value={data.shortDesc}
-                            onChange={(event) => setData({ ...data, shortDesc: event.target.value })}
+                            value={data.headline}
+                            onChange={(event) => setData({ ...data, headline: event.target.value })}
                         />
                         <br></br>
 
@@ -155,8 +155,8 @@ const FirstPage = (props) => {
                             name='long_desc'
                             maxLength='800'
                             placeholder='Maximum 800 characters'
-                            value={data.longDesc}
-                            onChange={(event) => setData({ ...data, longDesc: event.target.value })}
+                            value={data.description}
+                            onChange={(event) => setData({ ...data, description: event.target.value })}
                             style={{
                                 height: 192
                             }}
@@ -238,6 +238,7 @@ const FirstPage = (props) => {
                             </div>
                         </div>
                     </div>
+                    
                     <button className='add_startup_next_button'>Next</button>
                 </form>
             </div>

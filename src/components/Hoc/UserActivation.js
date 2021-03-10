@@ -14,7 +14,7 @@ const UserActivation = (props) => {
     }, []);
 
     const activateUser = async (token) => {
-        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/users/activation?token=${token}`)
+        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/users/activation?token=${token}`);
         const response = await request.json();
 
         if(response.data.isActivated){

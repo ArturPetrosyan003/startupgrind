@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
-import ReactLoading from 'react-loading';
+import Loading from 'react-loading';
 
 import { connect } from 'react-redux';
 import { openLoginMenu, closeRegMenu } from '../../redux/actions';
@@ -14,11 +14,11 @@ const Register = (props) => {
     const [errorText, setErrorText] = useState('')
     const [loading, setLoading] = useState(false);
 
-    const history = useHistory()
+    const history = useHistory();
 
     const closeRegisterCont = (event) => {
         if (event.target == event.currentTarget) {
-            props.handler()
+            props.handler();
         }
     }
 
@@ -27,56 +27,50 @@ const Register = (props) => {
         setErrorText('');
 
         event.preventDefault();
-        const formData = new FormData(event.target)
+        const formData = new FormData(event.target);
 
         if (formData.get('password') == formData.get('password_repeat')) {
-            try {
-                const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: formData.get('name').trim(),
-                        surname: formData.get('surname').trim(),
-                        password: formData.get('password').replace(/\s/g, ''),
-                        email: formData.get('email').trim()
-                    })
+            const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.get('name').trim(),
+                    surname: formData.get('surname').trim(),
+                    password: formData.get('password').replace(/\s/g, ''),
+                    email: formData.get('email').trim()
                 })
+            });
 
-                const fetchedData = await request.json();
+            const fetchedData = await request.json();
 
-                if (fetchedData.errors) {
-                    if (fetchedData.errors[0].field == 'email') {
-                        if (fetchedData.errors[0].message == "duplicate key") {
-                            setErrorText('Email already exists');
-                            setLoading(false);
-                        }
-                        else {
-                            setErrorText('Invalid email');
-                            setLoading(false);
-                        }
+            if (!fetchedData.errors) {
+                await localStorage.setItem('token', fetchedData.data.auth.token);
+                await localStorage.setItem('_id', fetchedData.data.user._id);
+
+                props.handler()
+                setLoading(true);
+
+                return (
+                    history.push(`/account/${fetchedData.data.user._id}`)
+                );
+            }
+            else {
+                if (fetchedData.errors[0].field == 'email') {
+                    if (fetchedData.errors[0].message == "duplicate key") {
+                        setErrorText('Email already exists');
+                        setLoading(false);
                     }
                     else {
-                        setErrorText('Something went wrong');
+                        setErrorText('Invalid email');
                         setLoading(false);
                     }
                 }
                 else {
-                    await localStorage.setItem('token', fetchedData.data.auth.token)
-                    await localStorage.setItem('_id', fetchedData.data.user._id);
-
-                    props.handler()
-                    setLoading(true);
-
-                    return (
-                        history.push(`/account/${fetchedData.data.user._id}`)
-                    )
+                    setErrorText('Something went wrong');
+                    setLoading(false);
                 }
-            }
-            catch (error) {
-                setErrorText('Something went wrong');
-                setLoading(false);
             }
         }
         else {
@@ -86,8 +80,8 @@ const Register = (props) => {
     }
 
     const loginMenuOpen = () => {
-        props.closeRegMenu()
-        props.openLoginMenu()
+        props.closeRegMenu();
+        props.openLoginMenu();
     }
 
     return (
@@ -99,34 +93,43 @@ const Register = (props) => {
 
                         <form className='loginReg_form' method='POST' onSubmit={register}>
                             <span className='loginReg_span'>First Name*</span><br></br>
-                            <input type='text' required name='name' placeholder='Your name' minLength='3' /><br></br>
+                            <input required type='text' name='name' placeholder='Your name' minLength='3' /><br></br>
 
                             <span className='loginReg_span'>Surname*</span><br></br>
-                            <input type='text' required name='surname' placeholder='Your surname' minLength='3' /><br></br>
+                            <input required type='text' name='surname' placeholder='Your surname' minLength='3' /><br></br>
 
                             <span className='loginReg_span'>Email*</span><br></br>
-                            <input type='email' required name='email' placeholder='Your email' minLength='3' /><br></br>
+                            <input required type='email' name='email' placeholder='Your email' minLength='3' /><br></br>
 
                             <span className='loginReg_span'>Password*</span><br></br>
-                            <input style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} type='password' required name='password' placeholder='Create password' minLength='6' /><br></br>
+                            <input required type='password' name='password' placeholder='Create password' minLength='6' style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} /><br></br>
 
                             <span className='loginReg_span'>Repeat Password*</span><br></br>
-                            <input style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} type='password' required name='password_repeat' placeholder='Create password' minLength='6' /><br></br>
+                            <input required type='password' name='password_repeat' placeholder='Create password' minLength='6' style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} /><br></br>
 
                             <p className='loginReg_error_text'>{errorText}</p>
 
-                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginLeft: '-8%' }}>
+                            <div className='loginReg_button_container'>
                                 <button className='submit'>
                                     {
                                         loading == true ?
-                                            <ReactLoading type={'bubbles'} color={'white'} height={30} width={30} />
+                                            <Loading
+                                                height={30}
+                                                width={30}
+                                                color={'white'}
+                                                type={'bubbles'}
+                                            />
                                             : "Sign Up"
                                     }
                                 </button>
                             </div>
                         </form>
+
                         <p className='loginReg_mirror_link'>
-                            Already have an account? <button onClick={() => loginMenuOpen()}><span>sign in</span></button>
+                            Already have an account? {' '}
+                            <button onClick={() => loginMenuOpen()}>
+                                <span>sign in</span>
+                            </button>
                         </p>
                     </div>
                 </Zoom>

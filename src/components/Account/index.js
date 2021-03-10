@@ -12,10 +12,9 @@ import { connect } from 'react-redux';
 import { openStartupMenu, closeStartupMenu } from '../redux/actions';
 
 import AddStartup from '../Hoc/AddStartup/AddStartup';
-import AccountStartupItem from '../Hoc/AccountStartupItem';
+import AccountStartupItem from './AccountStartupItem';
 
 import Slide from 'react-reveal/Slide';
-import Fade from 'react-reveal/Fade';
 
 const Account = (props) => {
 
@@ -25,49 +24,50 @@ const Account = (props) => {
     const [startupsLoading, setStartupsLoading] = useState(true);
 
     useEffect(() => {
+        props.closeStartupMenu();
         fetchUser();
         fetchStartups();
     }, []);
 
     const fetchUser = async () => {
-        try {
-            const data = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/users/${props.match.params.id}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'token': localStorage.getItem('token') || sessionStorage.getItem('token')
-                }
-            });
-            const fetchedData = await data.json();
-
-            if (!fetchedData.errors) {
-                setUserInfo(fetchedData.data);
-                setLoading(false);
+        const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/users/${props.match.params.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'token': localStorage.getItem('token') || sessionStorage.getItem('token')
             }
+        });
+
+        const fetchedData = await request.json();
+
+        if (!fetchedData.errors) {
+            setUserInfo(fetchedData.data);
+            setLoading(false);
         }
-        catch (error) {
-            setLoading(true);
+        else {
+            console.log(fetchedData.errors);
+            setLoading(false);
         }
     }
 
     const fetchStartups = async () => {
-        try {
-            setStartupsLoading(true);
+        setStartupsLoading(true);
 
-            const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/startups/mine', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'token': localStorage.getItem('token') || sessionStorage.getItem('token')
-                }
-            });
-            const fetchedData = await request.json();
-
-            if (!fetchedData.errors) {
-                setStartups(fetchedData.data);
-                setStartupsLoading(false);
+        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/startups/mine', {
+            headers: {
+                'Content-Type': 'application/json',
+                'token': localStorage.getItem('token') || sessionStorage.getItem('token')
             }
+        });
+
+        const fetchedData = await request.json();
+
+        if (!fetchedData.errors) {
+            setStartups(fetchedData.data);
+            setStartupsLoading(false);
         }
-        catch (error) {
-            console.error(error);
+        else {
+            console.log(fetchedData.errors);
+            setStartupsLoading(false);
         }
     }
 
@@ -79,7 +79,7 @@ const Account = (props) => {
                 props.startupMenuState.open == true ?
                     <AddStartup
                         data={props.startupMenuState.data}
-                        fetchStartups={fetchStartups}
+                        fetchData={fetchStartups}
                     />
                     : null
             }
@@ -92,19 +92,10 @@ const Account = (props) => {
                             width={80}
                             color='#2998F6'
                             type='bubbles'
-                            className='account_loading'
                         />
                         :
                         <>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    width: '60%',
-                                    alignSelf: 'flex-start',
-                                    marginTop: '55px'
-                                }}
-                            >
+                            <div className='account_content_left'>
                                 <Slide left duration={1000}>
                                     <div className='account_info_container'>
                                         <div className='account_info_container_left'>
@@ -112,38 +103,15 @@ const Account = (props) => {
                                                 className='account_profile_image'
                                                 src={ProfileImage}
                                             />
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center'
-                                                }}
-                                            >
-                                                <img
-                                                    src={Location}
-                                                    style={{
-                                                        width: 15,
-                                                        height: 15
-                                                    }}
-                                                />
+                                            <div className='account_info_container_left_bottom'>
+                                                <img src={Location} />
                                                 <p>Gyumri, Armenia</p>
                                             </div>
                                         </div>
 
-                                        <div
-                                            style={{
-                                                height: '100%',
-                                                display: 'flex'
-                                            }}
-                                        >
-                                            <div className='account_info_container_right'>
-                                                <div
-                                                    style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        width: '100%'
-                                                    }}
-                                                >
+                                        <div className='account_info_container_right'>
+                                            <div className='account_info_container_right_left'>
+                                                <div className='account_info_container_right_info'>
                                                     <h2>
                                                         {userInfo.name + ' ' + userInfo.surname}
                                                     </h2>
@@ -156,33 +124,20 @@ const Account = (props) => {
                                                             : null
                                                     }
                                                 </div>
-
                                                 <h4>Chapter Director at Startup Grind</h4>
                                             </div>
-                                            <div className='account_info_button_container'>
-                                                <button className='account_edit_button'>
-                                                    Edit Profile
-                                                </button>
-                                            </div>
+
+                                            <button className='account_edit_button'>
+                                                Edit Profile
+                                            </button>
                                         </div>
                                     </div>
                                 </Slide>
 
                                 <Slide left delay={100} duration={1000}>
                                     <div className='account_startups_container'>
-                                        <div
-                                            style={{
-                                                width: '100%',
-                                                paddingLeft: 40,
-                                                paddingRight: 40,
-                                                boxSizing: 'border-box',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'space-between'
-                                            }}
-                                        >
+                                        <div className='account_startups_container_top'>
                                             <h2>My startups</h2>
-
                                             {
                                                 startups.length != 0 ?
                                                     <button
@@ -193,17 +148,12 @@ const Account = (props) => {
                                                     </button>
                                                     : null
                                             }
-
                                         </div>
 
                                         <div
+                                            className='account_startups_container_bottom'
                                             style={{
-                                                width: '100%',
-                                                height: 'auto',
-                                                display: 'flex',
-                                                flexDirection: 'column',
                                                 justifyContent: startups.length == 0 ? 'center' : 'flex-start',
-                                                alignItems: 'center'
                                             }}
                                         >
                                             {
@@ -213,20 +163,13 @@ const Account = (props) => {
                                                         width={60}
                                                         color='#2998F6'
                                                         type='bubbles'
-                                                        className='account_loading'
                                                     />
                                                     :
                                                     startups.length == 0 ?
                                                         <>
-                                                            <p
-                                                                style={{
-                                                                    color: '#AEAEAE',
-                                                                    fontWeight: 500,
-                                                                    marginBottom: 30
-                                                                }}
-                                                            >
+                                                            <p className='account_startups_container_empty_text'>
                                                                 You don’t have any startup yet
-                                            </p>
+                                                            </p>
                                                             <button
                                                                 className='account_startup_btn'
                                                                 disabled={userInfo.isActivated ? false : true}
@@ -237,7 +180,7 @@ const Account = (props) => {
                                                                 }}
                                                             >
                                                                 Add Startup
-                                            </button>
+                                                            </button>
                                                         </>
                                                         :
                                                         startups.map((i, index) => (

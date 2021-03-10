@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import Loading from 'react-loading';
 
 const ThirdPage = (props) => {
@@ -49,7 +50,6 @@ const ThirdPage = (props) => {
     const [fetchUrl, setFetchUrl] = useState('');
     const [loadings, setLoadings] = useState([false, false]);
 
-
     useEffect(() => {
         setData(props.data);
         setFetchUrl(
@@ -71,7 +71,7 @@ const ThirdPage = (props) => {
         else {
             setIsUrlsEmpty(true);
         }
-    }, [])
+    }, []);
 
     const getData = (event) => {
         event.preventDefault();
@@ -94,60 +94,64 @@ const ThirdPage = (props) => {
     }
 
     const addStartup = async (isPublished) => {
-        try {
-            const request = await fetch(fetchUrl, {
-                method: props.data.id != undefined ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'token': localStorage.getItem('token') || sessionStorage.getItem('token')
+        setLoadings([
+            pressedButton == 'draft' ? true : false,
+            pressedButton == 'publish' ? true : false
+        ]);
+
+        const request = await fetch(fetchUrl, {
+            method: props.data.id != undefined ? 'PUT' : 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'token': localStorage.getItem('token') || sessionStorage.getItem('token')
+            },
+            body: JSON.stringify({
+                isPublished: isPublished,
+                startupName: data.startupName,
+                buildType: data.buildType,
+                city: data.city,
+                country: data.country,
+                description: data.description,
+                email: data.email,
+                founder: data.founder,
+                fundingExists: data.fundingExists,
+                fundingSource: data.fundingSource,
+                fundingStage: data.fundingStage,
+                headline: data.headline,
+                industry: data.industry,
+                isIncorporated: data.isIncorporated,
+                isLaunched: data.isLaunched,
+                launchDate: data.launchDate,
+                legalStatus: data.legalStatus,
+                phone: data.phone,
+                logo: data.logo.split(',')[1],
+                pitchDeck: data.pitchDeck.split(',')[1],
+                stage: data.stage,
+                employeesNumber: {
+                    min: parseInt(data.employeeNumber.split('-')[0]),
+                    max: parseInt(data.employeeNumber.split('-')[1])
                 },
-                body: JSON.stringify({
-                    isPublished: isPublished,
-                    startupName: data.startupName,
-                    buildType: data.buildType,
-                    city: data.city,
-                    country: data.country,
-                    description: data.longDesc,
-                    email: data.email,
-                    founder: data.founderName,
-                    fundingExists: data.funding,
-                    fundingSource: data.fundingSource,
-                    fundingStage: data.fundingStage,
-                    headline: data.shortDesc,
-                    industry: data.industry,
-                    isIncorporated: data.isIncorporated,
-                    isLaunched: data.isLaunched,
-                    launchDate: data.launchDate,
-                    legalStatus: data.legalStatus,
-                    phone: data.phone,
-                    logo: data.logo.split(',')[1],
-                    pitchDeck: data.pitchDeck.split(',')[1],
-                    stage: data.stage,
-                    employeesNumber: {
-                        min: parseInt(data.employeeNumber.split('-')[0]),
-                        max: parseInt(data.employeeNumber.split('-')[1])
-                    },
-                    urls: data.urls
-                })
-            });
+                urls: data.urls
+            })
+        });
 
-            const fetchedData = await request.json();
+        const fetchedData = await request.json();
 
-            if (!fetchedData.errors) {
-                if (isPublished == true) {
-                    setLoadings([false, false]);
-                    props.setPopupScreen(2);
-                    props.openStartupPopup();
-                }
-                else {
-                    setLoadings([false, false]);
-                    props.setPopupScreen(1);
-                    props.openStartupPopup();
-                }
+        if (!fetchedData.errors) {
+            if (isPublished == true) {
+                setLoadings([false, false]);
+                props.setPopupScreen(2);
+                props.openStartupPopup();
+            }
+            else {
+                setLoadings([false, false]);
+                props.setPopupScreen(1);
+                props.openStartupPopup();
             }
         }
-        catch (error) {
-            console.error(error);
+        else {
+            console.log(fetchedData.errors);
+            setLoadings([false, false]);
         }
     }
 
@@ -176,103 +180,117 @@ const ThirdPage = (props) => {
     }
 
     return (
-        <div className='add_startup_content' style={{ marginTop: -100 }}>
-            <form method='POST' onSubmit={getData} noValidate={pressedButton == 'back' ? true : false}>
-                <div className='add_startup_left'>
-                    <div className='add_startup_radio_section'>
-                        <span className='add_startup_span'>Industry*</span><br></br>
+        <div
+            className='add_startup_content'
+            style={{
+                marginTop: -100,
+                opacity: loadings[0] == true || loadings[1] == true ? 0.5 : 1
+            }}
+        >
+            <form
+                method='POST'
+                onSubmit={getData}
+                noValidate={pressedButton == 'back' ? true : false}
+            >
+                <fieldset disabled={loadings[0] == true || loadings[1] == true}>
+                    <div className='add_startup_left'>
+                        <div className='add_startup_radio_section'>
+                            <span className='add_startup_span'>Industry*</span><br></br>
 
-                        {
-                            industryCheckboxes.map((i, index) => (
-                                data.industry != undefined ?
+                            {
+                                industryCheckboxes.map((i, index) => (
+                                    data.industry != undefined ?
+                                        <div key={index} className='add_startup_radio_container'>
+                                            <input
+                                                required={data.industry.length == 0 ? true : false}
+                                                type='checkbox'
+                                                name='industry'
+                                                value={i}
+                                                checked={data.industry.filter(j => j == i).length != 0}
+                                                onChange={(event) => addIndustry(event.target)}
+                                                onInvalid={(event) => validateFields(event, 'Please select one of these options.')}
+                                            />
+                                            <br></br>
+                                            <span>{i}</span>
+                                        </div>
+                                        : null
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <div className='add_startup_right'>
+                        <div className='add_startup_radio_section'>
+                            <span className='add_startup_span'>Number of full time or part time employees*</span><br></br>
+
+                            {
+                                employeeNumber.map((i, index) => (
                                     <div key={index} className='add_startup_radio_container'>
                                         <input
-                                            required={data.industry.length == 0 ? true : false}
-                                            type='checkbox'
-                                            name='industry'
+                                            required
+                                            type='radio'
+                                            name='employee_number'
                                             value={i}
-                                            checked={data.industry.filter(j => j == i).length != 0}
-                                            onChange={(event) => addIndustry(event.target)}
-                                            onInvalid={(event) => validateFields(event, 'Please select one of these options.')}
+                                            checked={data.employeeNumber == i}
+                                            onChange={(event) => setData({ ...data, employeeNumber: event.target.value })}
                                         />
                                         <br></br>
                                         <span>{i}</span>
                                     </div>
-                                    : null
-                            ))
-                        }
-                    </div>
-                </div>
-
-                <div className='add_startup_right'>
-                    <div className='add_startup_radio_section'>
-                        <span className='add_startup_span'>Number of full time or part time employees*</span><br></br>
-                        {
-                            employeeNumber.map((i, index) => (
-                                <div key={index} className='add_startup_radio_container'>
-                                    <input
-                                        required
-                                        type='radio'
-                                        name='employee_number'
-                                        value={i}
-                                        checked={data.employeeNumber == i}
-                                        onChange={(event) => setData({ ...data, employeeNumber: event.target.value })}
-                                    />
-                                    <br></br>
-                                    <span>{i}</span>
-                                </div>
-                            ))
-                        }
-                    </div>
-
-                    <div className='add_startup_radio_section'>
-                        <span className='add_startup_span'>URLs*</span><br></br>
-
-                        {
-                            data.urls != undefined ?
-                                socialPlatforms.map((i, index) => (
-                                    <div key={index} className='add_startup_url_container'>
-                                        <span>{i}</span><br></br>
-                                        <input
-                                            required={isUrlsEmpty}
-                                            type='text'
-                                            name='urls'
-                                            placeholder={index == 1 || index == 3 ? '@username' : 'URL'}
-                                            value={data.urls ? data.urls[i.toLowerCase()] : ''}
-                                            onChange={(event) => {
-                                                setData({
-                                                    ...data,
-                                                    urls: { ...data.urls, [i.toLowerCase()]: event.target.value }
-                                                })
-                                                event.target.setCustomValidity('');
-                                                setIsUrlsEmpty(event.target.value != '' ? false : true);
-                                            }}
-                                            onInvalid={(event) => validateFields(event, 'Please fill one of these fields.')}
-                                        />
-                                    </div>
                                 ))
-                                : null
-                        }
-                    </div>
+                            }
+                        </div>
 
-                </div>
+                        <div className='add_startup_radio_section'>
+                            <span className='add_startup_span'>URLs*</span><br></br>
+
+                            {
+                                data.urls != undefined ?
+                                    socialPlatforms.map((i, index) => (
+                                        <div key={index} className='add_startup_url_container'>
+                                            <span>{i}</span><br></br>
+                                            <input
+                                                required={isUrlsEmpty}
+                                                type='text'
+                                                name='urls'
+                                                placeholder={index == 1 || index == 3 ? '@username' : 'URL'}
+                                                value={data.urls ? data.urls[i.toLowerCase()] : ''}
+                                                onChange={(event) => {
+                                                    setData({
+                                                        ...data,
+                                                        urls: { ...data.urls, [i.toLowerCase()]: event.target.value }
+                                                    })
+                                                    event.target.setCustomValidity('');
+                                                    setIsUrlsEmpty(event.target.value != '' ? false : true);
+                                                }}
+                                                onInvalid={(event) => validateFields(event, 'Please fill one of these fields.')}
+                                            />
+                                        </div>
+                                    ))
+                                    : null
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+
                 <button
                     className='add_startup_back_button'
+                    disabled={loadings[0] == true || loadings[1] == true}
                     onClick={() => setPressedButton('back')}
                     style={{
-                        left: '30%'
+                        left: '30%',
+                        cursor: loadings[0] == true || loadings[1] == true ? 'default' : 'pointer'
                     }}
                 >
                     Back
                 </button>
                 <button
                     className='add_startup_save_button'
-                    onClick={() => {
-                        setLoadings([true, loadings[1]]);
-                        setPressedButton('draft');
-                    }}
+                    disabled={loadings[0] == true || loadings[1] == true}
+                    onClick={() => setPressedButton('draft')}
                     style={{
-                        left: '40%'
+                        left: '40%',
+                        cursor: loadings[0] == true || loadings[1] == true ? 'default' : 'pointer'
                     }}
                 >
                     {
@@ -282,19 +300,17 @@ const ThirdPage = (props) => {
                                 width={60}
                                 color='white'
                                 type='bubbles'
-                                className='account_loading'
                             />
                             : 'Save As Draft'
                     }
                 </button>
                 <button
                     className='add_startup_save_button'
-                    onClick={() => {
-                        setLoadings([loadings[0], true]);
-                        setPressedButton('publish');
-                    }}
+                    disabled={loadings[0] == true || loadings[1] == true}
+                    onClick={() => setPressedButton('publish')}
                     style={{
-                        left: '57%'
+                        left: '57%',
+                        cursor: loadings[0] == true || loadings[1] == true ? 'default' : 'pointer'
                     }}
                 >
                     {
@@ -304,7 +320,6 @@ const ThirdPage = (props) => {
                                 width={60}
                                 color='white'
                                 type='bubbles'
-                                className='account_loading'
                             />
                             : 'Save and Publish'
                     }

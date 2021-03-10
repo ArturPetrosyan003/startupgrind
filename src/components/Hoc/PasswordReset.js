@@ -49,7 +49,10 @@ const PasswordReset = (props) => {
     }
 
     return (
-        <div className='loginReg_backdrop' style={{ backgroundColor: '#D1CCCC', padding: 0, paddingTop: '20vh', height: 'calc(100% - 20vh)' }}>
+        <div 
+            className='loginReg_backdrop' 
+            style={{ backgroundColor: '#D1CCCC', padding: 0, paddingTop: '20vh', height: 'calc(100% - 20vh)' }}
+        >
             <div className='loginReg_container' style={{ paddingBottom: 50 }}>
                 <h2 className='loginReg_text'>Reset Password</h2>
 

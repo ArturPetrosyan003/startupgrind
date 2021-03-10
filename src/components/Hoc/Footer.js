@@ -3,6 +3,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = (props) => {
+
+    const subscribe = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/mailchimp/members', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email_address: formData.get('email'),
+                status: 'subscribed',
+                tags: [
+                    'subscription_form'
+                ]
+            })
+        });
+
+        const fetchedData = await request.json();
+    }
+
     return (
         <div className='footer'>
             <div className='footer_content'>
@@ -68,14 +91,18 @@ const Footer = (props) => {
                 <div className='footer_right'>
                     <h3>Subscribe for Updates</h3>
 
-                    <form>
-                        <input type='email' placeholder='Enter your Email' /><br></br>
+                    <form onSubmit={subscribe}>
+                        <input required type='email' name='email' placeholder='Enter your Email' />
+                        <br></br>
                         <button>Subscribe</button>
                     </form>
                 </div>
             </div>
-            
-            <button className='footer_goTop' onClick={() => window.scrollTo(0, 0)}>
+
+            <button
+                className='footer_goTop'
+                onClick={() => window.scrollTo(0, 0)}
+            >
                 <img src={require('../../assets/icons/arrowTopWhite.png')} />
             </button>
 

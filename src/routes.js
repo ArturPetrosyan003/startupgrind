@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Switch, Route, Redirect } from 'react-router';
+import React from 'react';
+import { Switch, Route } from 'react-router';
 
 import './assets/style/style.css';
 import './assets/style/media.css';
@@ -13,22 +13,22 @@ import PrivateRoute from './components/Hoc/PrivateRoute';
 import Account from './components/Account';
 import UserActivation from './components/Hoc/UserActivation';
 import PasswordReset from './components/Hoc/PasswordReset';
+import SingleStartup from './components/Startups/Single';
 
 function Routes() {
   return (
-    <>
-      <Layout>
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/startups' component={Startups} />
-          <Route path='/about' component={About} />
-          <Route path='/user/activation' component={UserActivation} />
-          <Route path='/user/forgot-password' component={PasswordReset} /> 
-          <PrivateRoute path='/account/:id' component={Account} />
-          <Route component={EmptyPage} />
-        </Switch>
-      </Layout>
-    </>
+    <Layout>
+      <Switch>
+        <Route path='/' exact component={Home} />
+        <Route path='/startups' exact component={Startups} />
+        <Route path='/about' exact component={About} />
+        <Route path='/user/activation' exact component={UserActivation} />
+        <Route path='/user/forgot-password' exact component={PasswordReset} />
+        <PrivateRoute path='/account/:id' exact component={Account} />
+        <PrivateRoute path='/account/startups/:name' exact component={SingleStartup} />
+        <Route component={EmptyPage} />
+      </Switch>
+    </Layout>
   );
 }
 

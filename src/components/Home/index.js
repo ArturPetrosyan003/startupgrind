@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import HomeContent from '../Hoc/HomeContent';
-import HomeStartup from '../Hoc/HomeStartup';
+import HomeContent from './HomeContent';
+import HomeStartup from './HomeStartup';
 
 import { connect } from 'react-redux';
 import { openLoginMenu } from '../redux/actions';
@@ -38,15 +38,17 @@ class Home extends Component {
     componentDidMount() {
         this.setState({
             token: localStorage.getItem('token') || sessionStorage.getItem('token')
-        })
-        this.windowResizeHandler(window.innerWidth)
+        });
+
+        this.windowResizeHandler(window.innerWidth);
+
         window.addEventListener('resize', () => {
-            this.windowResizeHandler(document.documentElement.clientWidth)
-        })
+            this.windowResizeHandler(document.documentElement.clientWidth);
+        });
     }
 
     windowResizeHandler = (value) => {
-        const settings = this.state.settings
+        const settings = this.state.settings;
 
         if (value < 480) {
             settings.slidesPerPage = 1;
@@ -55,7 +57,7 @@ class Home extends Component {
 
             this.setState({
                 ...settings,
-            })
+            });
         }
         else {
             settings.slidesPerPage = 4;
@@ -64,7 +66,7 @@ class Home extends Component {
 
             this.setState({
                 ...settings,
-            })
+            });
         }
     }
 
@@ -73,280 +75,289 @@ class Home extends Component {
             if (value >= min && value <= max) {
                 let iterations = this.state.sliderIterations;
                 iterations[id] = value;
-                this.setState({ ...iterations })
+                this.setState({ ...iterations });
             }
         }
         else {
             let iterations = this.state.sliderIterations;
             iterations[id] = value;
-            this.setState({ ...iterations })
+            this.setState({ ...iterations });
         }
     }
 
     render() {
         return (
-            <>
-                <div id='home' className='home_container'>
-                    <div className='home_wrapper'>
-                        <div className='home_center_container'>
-                            <div className='home_buttons_container'>
-                                <Slide left duration={500}>
-                                    <h1 className='home_center_text'>First Open Source Database For Armenian Startups</h1>
-                                </Slide>
+            <div className='home_container'>
+                <div className='home_wrapper'>
+                    <div className='home_center_container'>
+                        <div className='home_buttons_container'>
+                            <Slide left duration={500}>
+                                <h1 className='home_center_text'>First Open Source Database For Armenian Startups</h1>
+                            </Slide>
 
-                                <Slide left duration={500} delay={100}>
-                                    <Link
-                                        to={
-                                            this.state.token ? '/startups'
-                                                : '/'
-                                        }
+                            <Slide left duration={500} delay={100}>
+                                <Link
+                                    to={
+                                        this.state.token ? '/startups'
+                                            : '/'
+                                    }
+                                >
+                                    <button
+                                        className='home_button'
+                                        onClick={() => this.state.token ? null : this.props.openLoginMenu()}
                                     >
-                                        <button onClick={() => this.state.token ? null : this.props.openLoginMenu()} className='home_button'>Explore Startups</button>
-                                    </Link>
-                                </Slide>
-                                <br></br>
-                                <Slide left duration={500} delay={200}>
-                                    <Link
-                                        to={
-                                            this.state.token ? `/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`
-                                                : '/'
-                                        }
+                                        Explore Startups
+                                        </button>
+                                </Link>
+                            </Slide>
+                            <br></br>
+                            <Slide left duration={500} delay={200}>
+                                <Link
+                                    to={
+                                        this.state.token ? `/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`
+                                            : '/'
+                                    }
+                                >
+                                    <button
+                                        className='home_button'
+                                        onClick={() => this.state.token ? null : this.props.openLoginMenu()}
                                     >
-                                        <button onClick={() => this.state.token ? null : this.props.openLoginMenu()} className='home_button'>Add My Startup</button>
-                                    </Link>
-                                </Slide>
-                            </div>
-                            <Fade duration={1500}>
-                                <img className='home_cover_image' src={CoverImage} />
-                            </Fade>
+                                        Add My Startup
+                                    </button>
+                                </Link>
+                            </Slide>
                         </div>
-                    </div>
-
-                    <div className='home_content'>
-                        <HomeContent
-                            text='Explore Startups'
-                            textStyle={{
-                                fontWeight: 600,
-                                fontSize: 30,
-                                color: '#FFFFFF',
-                            }}
-                            background='linear-gradient(0deg, #D1CCCC, #2998F6)'
-                            buttonText='More Startups'
-                            id='home_startups_first'
-                            setOpen={this.props.openLoginMenu}
-                        >
-                            <Carousel
-                                {...this.state.settings}
-                                onChange={(value) => this.changeSlider(value, 1, 3, 0)}
-                                value={this.state.sliderIterations[0]}
-                            >
-                                <HomeStartup
-                                    haveLink={true}
-                                    fontSize={32}
-                                    text='Startup Name'
-                                    desc='Lorem ipsum'
-                                    image={startupImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#FFFFFF',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    fontSize={32}
-                                    text='Startup Name'
-                                    desc='Lorem ipsum'
-                                    image={startupImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#FFFFFF',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    fontSize={32}
-                                    text='Startup Name'
-                                    desc='Lorem ipsum'
-                                    image={startupImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#FFFFFF',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    fontSize={32}
-                                    text='Startup Name'
-                                    desc='Lorem ipsum'
-                                    image={startupImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#FFFFFF',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    fontSize={32}
-                                    text='Startup Name'
-                                    desc='Lorem ipsum'
-                                    image={startupImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#FFFFFF',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    fontSize={32}
-                                    text='Startup Name'
-                                    desc='Lorem ipsum'
-                                    image={startupImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#FFFFFF',
-                                    }}
-                                />
-                            </Carousel>
-                        </HomeContent>
-
-                        <HomeContent
-                            text='Highlights from Armenian Startup Ecosystem'
-                            textStyle={{
-                                fontWeight: 600,
-                                fontSize: 30,
-                                color: '#364A89',
-                            }}
-                            background='linear-gradient(0deg, #D1CCCC, #D1CCCC)'
-                            buttonText='More Highlights'
-                            id='home_startups_second'
-                            setOpen={this.props.openLoginMenu}
-                        >
-                            <Carousel
-                                {...this.state.settings}
-                                value={this.state.sliderIterations[1]}
-                                onChange={(value) => this.changeSlider(value, 1, 2, 1)}
-                                slidesPerPage={this.state.settings.slidesPerPage == 4 ? 3 : 1}
-                            >
-                                <HomeStartup
-                                    haveLink={true}
-                                    text='Highlights Name'
-                                    desc='Lorem ipsum'
-                                    image={highlightImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    text='Highlights Name'
-                                    desc='Lorem ipsum'
-                                    image={highlightImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    text='Highlights Name'
-                                    desc='Lorem ipsum'
-                                    image={highlightImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    text='Highlights Name'
-                                    desc='Lorem ipsum'
-                                    image={highlightImage}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                />
-                            </Carousel>
-                        </HomeContent>
-
-                        <HomeContent
-                            text='Opportunities for startups'
-                            textStyle={{
-                                fontWeight: 600,
-                                fontSize: 30,
-                                color: '#364A89',
-                            }}
-                            background='linear-gradient(0deg, #D1CCCC, #D1CCCC)'
-                            id='home_startups_third'
-                            setOpen={this.props.openLoginMenu}
-                            buttonText='More Opportunities'
-                        >
-                            <Carousel
-                                {...this.state.settings}
-                                value={this.state.sliderIterations[2]}
-                                onChange={(value) => this.changeSlider(value, 1, 2, 2)}
-                                slidesPerPage={this.state.settings.slidesPerPage == 4 ? 3 : 1}
-                            >
-                                <HomeStartup
-                                    haveLink={true}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                    text='Startup Grind Pitch Battle'
-                                    desc='Lorem ipsum'
-                                    image={opportunitiesImage}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                    text='Startup Grind Pitch Battle'
-                                    desc='Lorem ipsum'
-                                    image={opportunitiesImage}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                    text='Startup Grind Pitch Battle'
-                                    desc='Lorem ipsum'
-                                    image={opportunitiesImage}
-                                />
-                                <HomeStartup
-                                    haveLink={true}
-                                    textStyle={{
-                                        fontWeight: 600,
-                                        fontSize: 22,
-                                        color: '#364A89',
-                                    }}
-                                    text='Startup Grind Pitch Battle'
-                                    desc='Lorem ipsum'
-                                    image={opportunitiesImage}
-                                />
-                            </Carousel>
-                        </HomeContent>
+                        
+                        <Fade duration={1500}>
+                            <img className='home_cover_image' src={CoverImage} />
+                        </Fade>
                     </div>
                 </div>
-            </>
+
+                <div className='home_content'>
+                    <HomeContent
+                        id='home_startups_first'
+                        text='Explore Startups'
+                        background='linear-gradient(0deg, #D1CCCC, #2998F6)'
+                        buttonText='More Startups'
+                        setOpen={this.props.openLoginMenu}
+                        textStyle={{
+                            fontWeight: 600,
+                            fontSize: 30,
+                            color: '#FFFFFF',
+                        }}
+                    >
+                        <Carousel
+                            {...this.state.settings}
+                            onChange={(value) => this.changeSlider(value, 1, 3, 0)}
+                            value={this.state.sliderIterations[0]}
+                        >
+                            <HomeStartup
+                                hasLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                                desc='Lorem ipsum'
+                                image={startupImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#FFFFFF',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                                desc='Lorem ipsum'
+                                image={startupImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#FFFFFF',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                                desc='Lorem ipsum'
+                                image={startupImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#FFFFFF',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                                desc='Lorem ipsum'
+                                image={startupImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#FFFFFF',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                                desc='Lorem ipsum'
+                                image={startupImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#FFFFFF',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                fontSize={32}
+                                text='Startup Name'
+                                desc='Lorem ipsum'
+                                image={startupImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#FFFFFF',
+                                }}
+                            />
+                        </Carousel>
+                    </HomeContent>
+
+                    <HomeContent
+                        id='home_startups_second'
+                        text='Highlights from Armenian Startup Ecosystem'
+                        background='linear-gradient(0deg, #D1CCCC, #D1CCCC)'
+                        buttonText='More Highlights'
+                        setOpen={this.props.openLoginMenu}
+                        textStyle={{
+                            fontWeight: 600,
+                            fontSize: 30,
+                            color: '#364A89',
+                        }}
+                    >
+                        <Carousel
+                            {...this.state.settings}
+                            value={this.state.sliderIterations[1]}
+                            onChange={(value) => this.changeSlider(value, 1, 2, 1)}
+                            slidesPerPage={this.state.settings.slidesPerPage == 4 ? 3 : 1}
+                        >
+                            <HomeStartup
+                                hasLink={true}
+                                text='Highlights Name'
+                                desc='Lorem ipsum'
+                                image={highlightImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                text='Highlights Name'
+                                desc='Lorem ipsum'
+                                image={highlightImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                text='Highlights Name'
+                                desc='Lorem ipsum'
+                                image={highlightImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                text='Highlights Name'
+                                desc='Lorem ipsum'
+                                image={highlightImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                        </Carousel>
+                    </HomeContent>
+
+                    <HomeContent
+                        id='home_startups_third'
+                        text='Opportunities for startups'
+                        background='linear-gradient(0deg, #D1CCCC, #D1CCCC)'
+                        setOpen={this.props.openLoginMenu}
+                        buttonText='More Opportunities'
+                        textStyle={{
+                            fontWeight: 600,
+                            fontSize: 30,
+                            color: '#364A89',
+                        }}
+                    >
+                        <Carousel
+                            {...this.state.settings}
+                            value={this.state.sliderIterations[2]}
+                            onChange={(value) => this.changeSlider(value, 1, 2, 2)}
+                            slidesPerPage={this.state.settings.slidesPerPage == 4 ? 3 : 1}
+                        >
+                            <HomeStartup
+                                hasLink={true}
+                                text='Startup Grind Pitch Battle'
+                                desc='Lorem ipsum'
+                                image={opportunitiesImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                text='Startup Grind Pitch Battle'
+                                desc='Lorem ipsum'
+                                image={opportunitiesImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                text='Startup Grind Pitch Battle'
+                                desc='Lorem ipsum'
+                                image={opportunitiesImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                            <HomeStartup
+                                hasLink={true}
+                                text='Startup Grind Pitch Battle'
+                                desc='Lorem ipsum'
+                                image={opportunitiesImage}
+                                textStyle={{
+                                    fontWeight: 600,
+                                    fontSize: 22,
+                                    color: '#364A89',
+                                }}
+                            />
+                        </Carousel>
+                    </HomeContent>
+                </div>
+            </div>
         );
     }
 }

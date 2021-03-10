@@ -17,7 +17,7 @@ const App = (props) => {
         <Routes {...props} />
       </BrowserRouter>
     </Provider>
-  )
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

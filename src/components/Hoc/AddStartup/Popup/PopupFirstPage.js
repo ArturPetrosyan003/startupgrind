@@ -1,79 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import Loading from 'react-loading';
 
 import { connect } from 'react-redux';
-import { closeStartupMenu, closeStartupPopup } from '../../../redux/actions';
+import { closeStartupMenu, closeStartupPopup, openStartupMenu } from '../../../redux/actions';
 
 const PopupFirstPage = (props) => {
 
-    const [fetchUrl, setFetchUrl] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({});
 
     useEffect(() => {
-        setFetchUrl(
-            props.data.id != undefined ?
-                `https://tranquil-thicket-27487.herokuapp.com/v1/startups/${props.data.id}`
-                : 'https://tranquil-thicket-27487.herokuapp.com/v1/startups'
-        );
-    }, [])
-
-    const addStartup = async (data) => {
-        try {
-            const request = await fetch(fetchUrl, {
-                method: props.data.id != undefined ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'token': localStorage.getItem('token') || sessionStorage.getItem('token')
-                },
-                body: JSON.stringify({
-                    isPublished: false,
-                    startupName: data.startupName,
-                    buildType: data.buildType,
-                    city: data.city,
-                    country: data.country,
-                    description: data.longDesc,
-                    email: data.email,
-                    founder: data.founderName,
-                    fundingExists: data.funding,
-                    fundingSource: data.fundingSource,
-                    fundingStage: data.fundingStage,
-                    headline: data.shortDesc,
-                    industry: data.industry,
-                    isIncorporated: data.isIncorporated,
-                    isLaunched: data.isLaunched,
-                    launchDate: data.launchDate,
-                    legalStatus: data.legalStatus,
-                    phone: data.phone,
-                    logo: data.logo ? data.logo.split(',')[1] : null,
-                    pitchDeck: data.pitchDeck ? data.pitchDeck.split(',')[1] : null,
-                    stage: data.stage,
-                    employeesNumber: {
-                        min: data.employeeNumber ? parseInt(data.employeeNumber.split('-')[0]) : null,
-                        max: data.employeeNumber ? parseInt(data.employeeNumber.split('-')[1]) : null
-                    },
-                    urls: data.urls
-                })
+        if (props.data.logo != null) {
+            setData({
+                ...props.data,
+                logo: props.data.logo.split(',')[1],
+                pitchDeck: props.data.pitchDeck.split(',')[1]
             });
-
-            const fetchedData = await request.json();
-
-            if (!fetchedData.errors) {
-                setLoading(false);
-                props.setPopupScreen(1);
-            }
         }
-        catch (error) {
-            console.error(error);
-        }
-    }
+    }, []);
 
     return (
         <>
-            <h3>
-                Are you sure you want to quit? All your changes made will be discarded.
-                <br /><br />
-                <span>You can save as draft and edit later</span>
-            </h3>
+            <h3>Are you sure you want to quit? All your changes made will be discarded</h3>
 
             <div
                 style={{
@@ -86,21 +32,11 @@ const PopupFirstPage = (props) => {
                 <button
                     className='add_startup_close_popup_button'
                     onClick={() => {
-                        setLoading(true);
-                        addStartup(props.data);
+                        props.closeStartupPopup();
+                        props.closeStartupMenu();
                     }}
                 >
-                    {
-                        loading == true ?
-                            <Loading
-                                height={60}
-                                width={60}
-                                color='white'
-                                type='bubbles'
-                                className='account_loading'
-                            />
-                            : 'Save as Draft'
-                    }
+                    Close
                 </button>
 
                 <button
@@ -110,11 +46,11 @@ const PopupFirstPage = (props) => {
                         marginLeft: 50
                     }}
                     onClick={() => {
+                        props.openStartupMenu(data);
                         props.closeStartupPopup();
-                        props.closeStartupMenu();
                     }}
                 >
-                    Discard
+                    Back to editing
                 </button>
             </div>
         </>
@@ -123,7 +59,8 @@ const PopupFirstPage = (props) => {
 
 const mapDispatchToProps = {
     closeStartupMenu,
-    closeStartupPopup
+    closeStartupPopup,
+    openStartupMenu
 }
 
 export default connect(null, mapDispatchToProps)(PopupFirstPage);

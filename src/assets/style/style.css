@@ -3,6 +3,7 @@
 @import "./footer.css";
 @import "./account.css";
 @import "./startupPopup.css";
+@import "./singleStartup.css";
 
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";

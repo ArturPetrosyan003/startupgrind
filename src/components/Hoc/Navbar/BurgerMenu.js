@@ -9,7 +9,6 @@ import Register from './Register';
 
 import { connect } from 'react-redux';
 import { closeLoginMenu, openLoginMenu, openRegMenu, closeRegMenu } from '../../redux/actions';
-
 class BurgerMenu extends Component {
 
     state = {
@@ -21,32 +20,36 @@ class BurgerMenu extends Component {
         this.setState({
             menuHandler: props.menuHandler,
             menuOpen: props.opened,
-        })
+        });
     }
 
     menuHandler = () => {
         this.setState({
             menuOpen: !this.state.menuOpen
-        })
-        this.state.menuHandler()
+        });
+
+        this.state.menuHandler();
     }
 
     loginContOpen = () => {
-        this.props.openLoginMenu()
-        this.menuHandler()
-    }
-    loginContClose = () => {
-        this.props.closeLoginMenu()
-    }
-    regContOpen = () => {
-        this.props.openRegMenu()
-        this.menuHandler()
-    }
-    regContClose = () => {
-        this.props.closeRegMenu()
+        this.props.openLoginMenu();
+        this.menuHandler();
     }
 
-    SignOut = () => {
+    loginContClose = () => {
+        this.props.closeLoginMenu();
+    }
+
+    regContOpen = () => {
+        this.props.openRegMenu();
+        this.menuHandler();
+    }
+
+    regContClose = () => {
+        this.props.closeRegMenu();
+    }
+
+    signOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('_id');
 
@@ -67,8 +70,8 @@ class BurgerMenu extends Component {
                             : null
                 }
                 <Drawer
-                    open={this.state.menuOpen}
                     anchor='right'
+                    open={this.state.menuOpen}
                     onClose={() => this.menuHandler()}
                 >
                     <List className='burger_menu'>
@@ -76,60 +79,90 @@ class BurgerMenu extends Component {
                             localStorage.getItem('token') || sessionStorage.getItem('token') ?
                                 <div className='navbar_profile_cont'>
                                     <ListItem className='burger_menu_link_cont'>
-                                        <Link className='navbar_profile_icon_cont' to={`/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`}>
-                                            <img className='navbar_profile_icon' src={require('../../../assets/icons/profile.png')} />
+                                        <Link
+                                            className='navbar_profile_icon_cont'
+                                            to={`/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`}
+                                        >
+                                            <img
+                                                className='navbar_profile_icon'
+                                                src={require('../../../assets/icons/profile.png')}
+                                            />
                                             <p>My Profile</p>
                                         </Link>
                                     </ListItem>
 
                                     <ListItem className='burger_menu_link_cont'>
-                                        <button onClick={this.SignOut}>Sign Out</button>
+                                        <button onClick={this.signOut}>Sign Out</button>
                                     </ListItem>
                                 </div>
                                 :
                                 <div className='burger_menu_login_container'>
                                     <ListItem className='burger_menu_link_cont'>
-                                        <button onClick={() => this.loginContOpen()} className='burger_menu_link'>
+                                        <button
+                                            className='burger_menu_link'
+                                            onClick={() => this.loginContOpen()}
+                                        >
                                             Login
                                         </button>
                                     </ListItem>
 
                                     <ListItem className='burger_menu_link_cont'>
-                                        <button onClick={() => this.regContOpen()} className='burger_menu_link'>
+                                        <button
+                                            className='burger_menu_link'
+                                            onClick={() => this.regContOpen()}
+                                        >
                                             Register
                                         </button>
                                     </ListItem>
                                 </div>
                         }
 
-
-
                         <ListItem className='burger_menu_link_cont'>
-                            <Link onClick={() => this.menuHandler()} to='/' className='burger_menu_link'>
+                            <Link
+                                to='/'
+                                className='burger_menu_link'
+                                onClick={() => this.menuHandler()}
+                            >
                                 Home
                             </Link>
                         </ListItem>
 
                         <ListItem className='burger_menu_link_cont'>
-                            <Link onClick={() => this.menuHandler()} to='/about' className='burger_menu_link'>
+                            <Link
+                                to='/about'
+                                className='burger_menu_link'
+                                onClick={() => this.menuHandler()}
+                            >
                                 About
                             </Link>
                         </ListItem>
 
                         <ListItem className='burger_menu_link_cont'>
-                            <Link onClick={() => this.menuHandler()} to='/startups' className='burger_menu_link'>
+                            <Link
+                                to='/startups'
+                                className='burger_menu_link'
+                                onClick={() => this.menuHandler()}
+                            >
                                 Startups
                             </Link>
                         </ListItem>
 
                         <ListItem className='burger_menu_link_cont'>
-                            <Link onClick={() => this.menuHandler()} to='/blog' className='burger_menu_link'>
+                            <Link
+                                to='/blog'
+                                onClick={() => this.menuHandler()}
+                                className='burger_menu_link'
+                            >
                                 Blog
                             </Link>
                         </ListItem>
 
                         <ListItem className='burger_menu_link_cont'>
-                            <Link onClick={() => this.menuHandler()} to='/contact' className='burger_menu_link'>
+                            <Link
+                                to='/contact'
+                                className='burger_menu_link'
+                                onClick={() => this.menuHandler()}
+                            >
                                 Contact Us
                             </Link>
                         </ListItem>

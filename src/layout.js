@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Navbar from './components/Hoc/Navbar/Navbar';
 import Footer from './components/Hoc/Footer';
@@ -13,13 +13,17 @@ const Layout = (props) => {
     return (
         <>
             {
-                slicedLocation == '/account' || slicedLocation == '/user' ?
+                slicedLocation == '/account' || 
+                slicedLocation == '/account/startups' ||
+                slicedLocation == '/user' ?
                 null
                 : <Navbar/>
             }
                 {props.children}
             {
-                slicedLocation == '/account' || slicedLocation == '/user' ?
+                slicedLocation == '/account' || 
+                slicedLocation == '/account/startups' ||
+                slicedLocation == '/user' ?
                 null
                 : <Footer/>
             }

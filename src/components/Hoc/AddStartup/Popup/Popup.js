@@ -13,10 +13,10 @@ const ClosePopup = (props) => {
             return <PopupFirstPage data={props.data} setPopupScreen={setPopupScreen} />
         }
         else if (popupScreen == 1) {
-            return <PopupSecondPage fetchStartups={props.fetchStartups} />
+            return <PopupSecondPage fetchData={props.fetchData} />
         }
         else if (popupScreen == 2) {
-            return <PopupThirdPage fetchStartups={props.fetchStartups} />
+            return <PopupThirdPage fetchData={props.fetchData} />
         }
     }
 

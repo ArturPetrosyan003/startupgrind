@@ -19,13 +19,13 @@ const AddStartup = (props) => {
 
     const [data, setData] = useState({
         startupName: '',
-        founderName: '',
+        founder: '',
         email: '',
         phone: '',
         country: '',
         city: '',
-        shortDesc: '',
-        longDesc: '',
+        headline: '',
+        description: '',
         logo: null,
         pitchDeck: null,
         buildType: '',
@@ -34,7 +34,7 @@ const AddStartup = (props) => {
         isIncorporated: null,
         legalStatus: '',
         stage: '',
-        funding: null,
+        fundingExists: null,
         fundingStage: '',
         fundingSource: '',
         urls: {
@@ -53,46 +53,24 @@ const AddStartup = (props) => {
         if (props.data != undefined) {
             setData({
                 ...data,
-                id: props.data._id,
+                ...props.data,
+                id: props.data._id || props.data.id,
                 isPublished: props.data.isPublished,
-                startupName: props.data.startupName,
-                founderName: props.data.founder,
-                email: props.data.email,
-                phone: props.data.phone,
-                country: props.data.country,
-                city: props.data.city,
-                shortDesc: props.data.headline,
-                longDesc: props.data.description,
-                logo: `data:image/png;base64, ${props.data.logo}`,
-                pitchDeck: `data:application/pdf;base64, ${props.data.pitchDeck}`,
-                buildType: props.data.buildType,
-                isLaunched: props.data.isLaunched,
-                launchDate: props.data.launchDate,
-                isIncorporated: props.data.isIncorporated,
-                legalStatus: props.data.legalStatus,
-                stage: props.data.stage,
-                funding: props.data.fundingExists,
-                fundingStage: props.data.fundingStage,
-                fundingSource: props.data.fundingSource,
-                urls: {
-                    website: props.data.urls.website,
-                    instagram: props.data.urls.instagram,
-                    facebook: props.data.urls.facebook,
-                    twitter: props.data.urls.twitter,
-                    youtube: props.data.urls.youtube,
-                    linkedin: props.data.urls.linkedin
-                },
-                industry: props.data.industry,
-                employeeNumber: props.data.employeesNumber.min == 0 ? '0-4' :
-                    props.data.employeesNumber.min == 5 ? '5-10' :
-                        props.data.employeesNumber.min == 11 ? '11-30' :
-                            props.data.employeesNumber.min == 31 ? '31-50' :
-                                props.data.employeesNumber.min == 51 ? '51 and more' : null
-            })
+                logo: props.data.logo ? `data:image/png;base64, ${props.data.logo}` : null,
+                pitchDeck: props.data.pitchDeck ? `data:application/pdf;base64, ${props.data.pitchDeck}` : null,
+                employeeNumber: props.data.employeesNumber ?
+                    props.data.employeesNumber.min == 0 ? '0-4' :
+                        props.data.employeesNumber.min == 5 ? '5-10' :
+                            props.data.employeesNumber.min == 11 ? '11-30' :
+                                props.data.employeesNumber.min == 31 ? '31-50' :
+                                    props.data.employeesNumber.min == 51 ? '51 and more' :
+                                        props.data.employeeNumber
+                    : props.data.employeeNumber
+            });
 
             setLoading(false);
         }
-    }, [])
+    }, [props.data]);
 
     const closeStartupMenu = (event) => {
         if (event.target == event.currentTarget) {
@@ -103,12 +81,21 @@ const AddStartup = (props) => {
     const setPage = () => {
         if (pageNumber == 0) {
             return (
-                <FirstPage next={changePageNext} data={data} setData={setData} />
+                <FirstPage
+                    next={changePageNext}
+                    data={data}
+                    setData={setData}
+                />
             );
         }
         else if (pageNumber == 1) {
             return (
-                <SecondPage next={changePageNext} prev={changePagePrev} data={data} setData={setData} />
+                <SecondPage
+                    next={changePageNext}
+                    prev={changePagePrev}
+                    data={data}
+                    setData={setData}
+                />
             );
         }
         else if (pageNumber == 2) {
@@ -141,7 +128,7 @@ const AddStartup = (props) => {
                             <Popup
                                 data={data}
                                 popupScreen={popupScreen}
-                                fetchStartups={props.fetchStartups}
+                                fetchData={props.fetchData}
                             />
                             :
                             <div className='add_startup_container'>

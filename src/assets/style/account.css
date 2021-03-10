@@ -6,11 +6,12 @@
 }
 
 .account_navbar {
-    background: #dadada!important;
+    background: white!important;
     justify-content: space-between;
     align-items: center!important;
     min-height: 0!important;
-    padding-bottom: 0px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .account_navbar_logo {
@@ -35,16 +36,16 @@
 .account_modal {
     width: 170px;
     height: auto;
-    padding-top: 30px;
-    padding-bottom: 22px;
+    padding-top: 10px;
+    padding-bottom: 15px;
     padding-right: 22px;
     box-sizing: border-box;
-    background: #dadada;
+    background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 15px;
 }
 
 .account_modal_container .MuiDrawer-paperAnchorTop {
@@ -57,13 +58,12 @@
 .account_modal_btn {
     background: transparent;
     border: none;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: bold;
     color: #000000;
     text-decoration: none;
     text-align: right;
     width: 100%;
-    margin-bottom: 8px;
     outline: none;
 }
 
@@ -71,16 +71,25 @@
 
 .account_content {
     width: 100%;
-    height: 100vh;
-    overflow: auto;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
-    background: #e2e2e2;
-    padding: 55px 5%;
+    background: #f3f2ef;
+    padding: 20px 5%;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.account_content_left {
+    width: 60%;
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
 }
 
 .account_info_container {
@@ -139,19 +148,12 @@
     color: white;
 }
 
-.account_info_button_container {
-    display: flex;
-    height: 100%;
-    margin-left: 200px;
-    justify-content: flex-start;
-    padding-top: 55px;
-    box-sizing: border-box;
-}
-
 .account_edit_button {
     height: 35px;
     width: 100px;
     zoom: 0.9;
+    margin-left: 200px;
+    align-self: flex-start;
     background: transparent;
     border-radius: 20px;
     border: 2px solid #1976D5;
@@ -180,7 +182,6 @@
     background: white;
     border-radius: 15px;
     margin-left: 0px;
-    margin-top: 55px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -195,6 +196,17 @@
     margin-right: 35px;
 }
 
+.account_info_container_left_bottom {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+.account_info_container_left_bottom img {
+    width: 15px;
+    height: 15px;
+}
+
 .account_info_container_left p {
     font-weight: bold;
     margin-left: 2px;
@@ -204,7 +216,6 @@
 
 .account_info_container_right {
     display: flex;
-    flex-direction: column;
     align-items: start;
     justify-content: flex-start;
     height: 100%;
@@ -212,9 +223,15 @@
     box-sizing: border-box;
 }
 
-.account_info_container_right h2 {
-    font-style: normal;
-    font-weight: bold;
+.account_info_container_right_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.account_info_container_right_info {
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .account_warning_container {
@@ -262,6 +279,30 @@
     margin-bottom: 20px;
 }
 
+.account_startups_container_top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.account_startups_container_bottom {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account_startups_container_empty_text {
+    color: #AEAEAE;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
 .account_startup_left {
     width: 10%;
     align-self: flex-start;
@@ -292,10 +333,30 @@
     font-size: 18px;
 }
 
+.account_startup_right h3 span {
+    margin-left: 5px;
+    color: #706E6E;
+    font-size: 15px;
+    font-style: italic;
+}
+
 .account_startup_right p {
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
     font-size: 15px;
+}
+
+.account_startup_right_location_span {
+    color: #706E6E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.account_startup_right_location_span p {
+    margin-left: 2px;
+    margin-bottom: 0;
 }
 
 .account_startup_button_container {

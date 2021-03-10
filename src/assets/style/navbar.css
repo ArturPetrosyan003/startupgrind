@@ -27,7 +27,6 @@
     text-decoration: none;
     margin-left: 40px;
     align-self: center;
-    /* text-transform: uppercase; */
 }
 .navbar_link:hover {
     color: #1976D5;
@@ -137,6 +136,14 @@
 .PrivateSwitchBase-input-4, .jss4 {
     height: auto!important;
 }
+
+.loginReg_button_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: -8%;
+}
+
 .submit{
     zoom: 0.9;
     width: 176px;

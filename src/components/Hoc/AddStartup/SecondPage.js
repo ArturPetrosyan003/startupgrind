@@ -15,7 +15,7 @@ const SecondPage = (props) => {
     ]
 
     const fundingStages = [
-        'Seed funding',
+        'Seed fundingExists',
         'Series A',
         'Series B',
         'Series C'
@@ -28,7 +28,7 @@ const SecondPage = (props) => {
     const [secondaryFields, setSecondaryFields] = useState({
         launched: false,
         incorporated: false,
-        funding: false
+        fundingExists: false
     });
 
     const [pressedButton, setPressedButton] = useState('');
@@ -42,9 +42,9 @@ const SecondPage = (props) => {
         setSecondaryFields({
             launched: props.data.isLaunched == true,
             incorporated: props.data.isIncorporated == true,
-            funding: props.data.funding == true
+            fundingExists: props.data.fundingExists == true
         });
-    }, [props.data])
+    }, []);
 
     const setOtherCheckboxState = async () => {
         if (props.data.buildType != '' &&
@@ -59,7 +59,7 @@ const SecondPage = (props) => {
 
         if (props.data.fundingStage != null &&
             props.data.fundingStage != '' &&
-            props.data.fundingStage != 'Seed funding' &&
+            props.data.fundingStage != 'Seed fundingExists' &&
             props.data.fundingStage != 'Series A' &&
             props.data.fundingStage != 'Series B' &&
             props.data.fundingStage != 'Series C'
@@ -81,7 +81,7 @@ const SecondPage = (props) => {
             isIncorporated: data.isIncorporated,
             legalStatus: formData.get('legal_status'),
             stage: formData.get('stage'),
-            funding: data.funding,
+            fundingExists: data.fundingExists,
             fundingStage: formData.get('stage_of_funding'),
             fundingSource: formData.get('funding_source')
         });
@@ -385,17 +385,17 @@ const SecondPage = (props) => {
                     </div>
 
                     <div className='add_startup_radio_section'>
-                        <span className='add_startup_span'>Have you raised any funding so far?*</span><br></br>
+                        <span className='add_startup_span'>Have you raised any fundingExists so far?*</span><br></br>
 
                         <div className='add_startup_radio_container'>
                             <input
                                 required
                                 type='radio'
-                                name='funding'
-                                checked={data.funding == true}
+                                name='fundingExists'
+                                checked={data.fundingExists == true}
                                 onChange={() => {
-                                    setData({ ...data, funding: true })
-                                    setSecondaryFields({ ...secondaryFields, funding: true })
+                                    setData({ ...data, fundingExists: true })
+                                    setSecondaryFields({ ...secondaryFields, fundingExists: true })
                                 }}
                             />
                             <br></br>
@@ -406,11 +406,11 @@ const SecondPage = (props) => {
                             <input
                                 required
                                 type='radio'
-                                name='funding'
-                                checked={data.funding == false}
+                                name='fundingExists'
+                                checked={data.fundingExists == false}
                                 onChange={() => {
-                                    setData({ ...data, funding: false })
-                                    setSecondaryFields({ ...secondaryFields, funding: false })
+                                    setData({ ...data, fundingExists: false })
+                                    setSecondaryFields({ ...secondaryFields, fundingExists: false })
                                 }}
                             />
                             <br></br>
@@ -421,21 +421,21 @@ const SecondPage = (props) => {
                     <div
                         className='add_startup_radio_section'
                         style={{
-                            opacity: secondaryFields.funding == true ? 1 : 0.5
+                            opacity: secondaryFields.fundingExists == true ? 1 : 0.5
                         }}
                     >
-                        <span className='add_startup_span'>If yes, what stage of funding have you received</span><br></br>
+                        <span className='add_startup_span'>If yes, what stage of fundingExists have you received</span><br></br>
 
                         {
                             fundingStages.map((i, index) => (
                                 <div key={index} className='add_startup_radio_container'>
                                     <input
                                         required
-                                        disabled={!secondaryFields.funding}
+                                        disabled={!secondaryFields.fundingExists}
                                         type='radio'
                                         name='stage_of_funding'
                                         value={i}
-                                        checked={data.fundingStage == i && secondaryFields.funding == true}
+                                        checked={data.fundingStage == i && secondaryFields.fundingExists == true}
                                         onChange={(event) => checkboxState(otherCheckboxFirst, false, data.buildType, event.target.value)}
                                     />
                                     <br></br>
@@ -448,11 +448,11 @@ const SecondPage = (props) => {
                         <div className='add_startup_radio_container'>
                             <input
                                 required
-                                disabled={!secondaryFields.funding}
+                                disabled={!secondaryFields.fundingExists}
                                 type='radio'
                                 name='stage_of_funding'
                                 value={otherValues[1]}
-                                checked={otherCheckboxSecond == true && secondaryFields.funding == true}
+                                checked={otherCheckboxSecond == true && secondaryFields.fundingExists == true}
                                 onChange={(event) => checkboxState(otherCheckboxFirst, true, data.buildType, event.target.value)}
                             />
                             <br></br>
@@ -463,13 +463,13 @@ const SecondPage = (props) => {
                             className='add_startup_other_input'
                             placeholder='Please specify'
                             required={otherCheckboxSecond == true ? true : false}
-                            disabled={!secondaryFields.funding}
+                            disabled={!secondaryFields.fundingExists}
                             type='text'
                             name='stage_of_funding'
                             value={
-                                secondaryFields.funding == true &&
+                                secondaryFields.fundingExists == true &&
                                     data.fundingStage != '' &&
-                                    data.fundingStage != 'Seed funding' &&
+                                    data.fundingStage != 'Seed fundingExists' &&
                                     data.fundingStage != 'Series A' &&
                                     data.fundingStage != 'Series B' &&
                                     data.fundingStage != 'Series C' ? data.fundingStage : ''
@@ -479,12 +479,18 @@ const SecondPage = (props) => {
                         />
                     </div>
 
-                    <div className='add_startup_radio_section'>
+                    <div
+                        className='add_startup_radio_section'
+                        style={{
+                            opacity: secondaryFields.fundingExists == true ? 1 : 0.5
+                        }}
+                    >
                         <div className='add_startup_inputs'>
                             <span className='add_startup_span'>Please specify the source</span><br></br>
 
                             <input
                                 required
+                                disabled={!secondaryFields.fundingExists}
                                 type='text'
                                 name='funding_source'
                                 style={{ marginLeft: -30 }}
@@ -493,8 +499,8 @@ const SecondPage = (props) => {
                             />
                         </div>
                     </div>
-
                 </div>
+
                 <button
                     className='add_startup_back_button'
                     onClick={() => setPressedButton('back')}
