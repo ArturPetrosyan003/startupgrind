@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Location from '../../assets/icons/location.png';
 
 const AccountStartupItem = (props) => {
-
     return (
         <div className='account_startup_container'>
             <div className='account_startup_left'>

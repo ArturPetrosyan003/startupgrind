@@ -15,7 +15,8 @@ const Layout = (props) => {
             {
                 slicedLocation == '/account' || 
                 slicedLocation == '/account/startups' ||
-                slicedLocation == '/user' ?
+                slicedLocation == '/user' || 
+                slicedLocation == '/single' ?
                 null
                 : <Navbar/>
             }
@@ -23,7 +24,8 @@ const Layout = (props) => {
             {
                 slicedLocation == '/account' || 
                 slicedLocation == '/account/startups' ||
-                slicedLocation == '/user' ?
+                slicedLocation == '/user' || 
+                slicedLocation == '/single' ?
                 null
                 : <Footer/>
             }

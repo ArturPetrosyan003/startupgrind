@@ -59,11 +59,11 @@
     top: -50px;
     left: 35px;
     align-self: flex-end;
-    background: #1976D5;
-    border: 0.5px solid #1976D5;
+    background: var(--main-blue);
+    border: 0.5px solid var(--main-blue);
     border-bottom-left-radius: 10px;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: 300;
     text-transform: uppercase;
     outline: none;
@@ -75,14 +75,14 @@
 }
 
 .startup_info_container_left_top h2 {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: normal;
     font-size: 28px;
     margin-bottom: 10px;
 }
 
 .startup_info_container_left_top p {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: 300;
     font-size: 14px;
     margin: 0;
@@ -105,7 +105,7 @@
 }
 
 .startup_info_row p {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: normal;
     font-size: 14px;
     margin-bottom: 10px;
@@ -131,11 +131,11 @@
     width: 170px;
     height: 40px;
     zoom: 0.75;
-    background: #1976D5;
+    background: var(--main-blue);
     border: none;
     border-radius: 20px;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: 300;
     font-size: 18px;
     text-transform: uppercase;
@@ -154,13 +154,13 @@
 }
 
 .startup_info_container_right_top h3 {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: normal;
     margin-bottom: 10px;
 }
 
 .startup_info_container_right_top p {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: 300;
     max-width: 600px;
 }
@@ -181,7 +181,7 @@
 }
 
 .startup_info_container_right_bottom h3 {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-weight: normal;
     margin-bottom: 10px;
 }

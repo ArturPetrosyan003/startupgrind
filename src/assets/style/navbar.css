@@ -29,7 +29,7 @@
     align-self: center;
 }
 .navbar_link:hover {
-    color: #1976D5;
+    color: var(--main-blue);
 }
 .navbar_button {
     border: none;
@@ -38,14 +38,14 @@
     height: 30px;
     background: #FFFFFF;
     border-radius: 50px;
-    color: #383A73;
+    color: var(--gradient-purple);
     font-size: 20px;
     padding: 5px 20px 5px 20px;
     box-sizing: content-box;
     margin-left: 29px;
 }
 .navbar_button:hover {
-    background: #1976D5;
+    background: var(--main-blue);
     color: white;
 }
 .navbar_button:nth-child(1){
@@ -100,16 +100,16 @@
 }
 .loginReg_text {
     font-size: 20px;
-    color: #1976D5;
+    color: var(--main-blue);
     font-weight: 900;
     margin: 0;
     margin-bottom: 20px;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
 }
 .loginReg_span {
     font-size: 18px;
     color: #000000;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     margin-left: 10px;
     font-weight: 500;
 }
@@ -149,7 +149,7 @@
     width: 176px;
     height: 48px;
     border-radius: 30px;
-    background-color: #1976D5;
+    background-color: var(--main-blue);
     font-weight: 600;
     font-size: 16px;
     color: #fafafa;
@@ -187,7 +187,7 @@
     margin-right: 17%;
     font-size: 15px;
     font-weight: 300;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
 }
 .loginReg_mirror_link {
     font-size: 16px;

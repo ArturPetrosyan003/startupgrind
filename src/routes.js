@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 
+import './assets/style/theme.css';
 import './assets/style/style.css';
 import './assets/style/media.css';
 
@@ -21,6 +22,7 @@ function Routes() {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/startups' exact component={Startups} />
+        <Route path='/single/:name' exact component={SingleStartup} />
         <Route path='/about' exact component={About} />
         <Route path='/user/activation' exact component={UserActivation} />
         <Route path='/user/forgot-password' exact component={PasswordReset} />

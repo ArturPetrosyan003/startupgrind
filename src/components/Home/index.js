@@ -19,6 +19,7 @@ import CoverImage from '../../assets/images/homeCover.png';
 
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import Loading from 'react-loading';
 
 class Home extends Component {
 
@@ -32,10 +33,14 @@ class Home extends Component {
             dots: false,
             arrows: true,
             centered: true
-        }
+        },
+        loading: true,
+        startups: []
     }
 
     componentDidMount() {
+        this.fetchStartups();
+
         this.setState({
             token: localStorage.getItem('token') || sessionStorage.getItem('token')
         });
@@ -45,6 +50,25 @@ class Home extends Component {
         window.addEventListener('resize', () => {
             this.windowResizeHandler(document.documentElement.clientWidth);
         });
+    }
+
+    fetchStartups = async () => {
+        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/startups');
+        const fetchedData = await request.json();
+
+        if (!fetchedData.errors) {
+            this.setState({
+                startups: fetchedData.data,
+                loading: false
+            });
+            console.log(fetchedData);
+        }
+        else {
+            this.setState({
+                loading: false
+            });
+            console.log(fetchedData.errors);
+        }
     }
 
     windowResizeHandler = (value) => {
@@ -84,6 +108,7 @@ class Home extends Component {
             this.setState({ ...iterations });
         }
     }
+
 
     render() {
         return (
@@ -127,7 +152,7 @@ class Home extends Component {
                                 </Link>
                             </Slide>
                         </div>
-                        
+
                         <Fade duration={1500}>
                             <img className='home_cover_image' src={CoverImage} />
                         </Fade>
@@ -147,86 +172,41 @@ class Home extends Component {
                             color: '#FFFFFF',
                         }}
                     >
-                        <Carousel
-                            {...this.state.settings}
-                            onChange={(value) => this.changeSlider(value, 1, 3, 0)}
-                            value={this.state.sliderIterations[0]}
-                        >
-                            <HomeStartup
-                                hasLink={true}
-                                fontSize={32}
-                                text='Startup Name'
-                                desc='Lorem ipsum'
-                                image={startupImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#FFFFFF',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                fontSize={32}
-                                text='Startup Name'
-                                desc='Lorem ipsum'
-                                image={startupImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#FFFFFF',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                fontSize={32}
-                                text='Startup Name'
-                                desc='Lorem ipsum'
-                                image={startupImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#FFFFFF',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                fontSize={32}
-                                text='Startup Name'
-                                desc='Lorem ipsum'
-                                image={startupImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#FFFFFF',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                fontSize={32}
-                                text='Startup Name'
-                                desc='Lorem ipsum'
-                                image={startupImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#FFFFFF',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                fontSize={32}
-                                text='Startup Name'
-                                desc='Lorem ipsum'
-                                image={startupImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#FFFFFF',
-                                }}
-                            />
-                        </Carousel>
+                        {
+                            this.state.loading == false ?
+                                <Carousel
+                                    {...this.state.settings}
+                                    onChange={(value) => this.changeSlider(value, 1, 3, 0)}
+                                    value={this.state.sliderIterations[0]}
+                                >
+                                    {/* {
+                                        this.state.startups.map((i, index) => (
+                                            <HomeStartup
+                                                key={index}
+                                                hasLink={true}
+                                                fontSize={32}
+                                                text={i.startupName}
+                                                desc={i.headline}
+                                                image={`data:image/png;base64, ${i.logo}`}
+                                                textStyle={{
+                                                    fontWeight: 600,
+                                                    fontSize: 22,
+                                                    color: '#FFFFFF',
+                                                }}
+                                            />
+                                        ))
+                                    } */}
+                                </Carousel>
+                                :
+                                <Loading
+                                    height={80}
+                                    width={80}
+                                    color='white'
+                                    type='bubbles'
+                                />
+                        }
                     </HomeContent>
-
+                    {/* 
                     <HomeContent
                         id='home_startups_second'
                         text='Highlights from Armenian Startup Ecosystem'
@@ -355,7 +335,7 @@ class Home extends Component {
                                 }}
                             />
                         </Carousel>
-                    </HomeContent>
+                    </HomeContent> */}
                 </div>
             </div>
         );

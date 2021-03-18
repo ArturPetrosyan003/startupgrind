@@ -1,0 +1,15 @@
+:root {
+    /* Colors */
+    --main-blue: #1976D5;
+    --main-yellow: #FFCB14;
+    --gradient-blue: #2998F6;
+    --gradient-purple: #383A73;
+    --account-grey: #f3f2ef;
+
+    /* Fonts */
+    --roboto: 'Roboto', sans-serif;
+
+    /* Sizes */
+    --popup-width: 680px;
+    --popup-height: 400px;
+}

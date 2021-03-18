@@ -25,6 +25,7 @@ const Account = (props) => {
 
     useEffect(() => {
         props.closeStartupMenu();
+        
         fetchUser();
         fetchStartups();
     }, []);

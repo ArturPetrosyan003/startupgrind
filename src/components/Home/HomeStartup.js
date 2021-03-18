@@ -12,7 +12,7 @@ const HomeStartup = (props) => {
                 <p className='home_startup_description'>{props.desc}</p>
                 {
                     props.hasLink ?
-                        <Link to='/single'>
+                        <Link to={`/single/${props.text.split(' ').join('-')}`}>
                             <button className='home_startup_button'>More</button>
                         </Link>
                         : null

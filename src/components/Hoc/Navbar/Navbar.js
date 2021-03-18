@@ -16,7 +16,8 @@ class Navbar extends Component {
 
     state = {
         menuOpened: null,
-        device: null
+        device: null,
+        scrolled: false
     }
 
     componentDidMount() {
@@ -29,10 +30,14 @@ class Navbar extends Component {
         window.addEventListener('scroll', () => {
             if (document.location.pathname == '/' && document.getElementsByClassName('navbar') != undefined) {
                 if (window.scrollY > 0) {
-                    document.getElementsByClassName('navbar')[0].style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                    this.setState({
+                        scrolled: true
+                    });
                 }
                 else if (window.scrollY <= 0) {
-                    document.getElementsByClassName('navbar')[0].style.backgroundColor = 'transparent';
+                    this.setState({
+                        scrolled: false
+                    })
                 }
             }
         });
@@ -62,7 +67,7 @@ class Navbar extends Component {
     render() {
         return (
             <AppBar className='navbar_container'>
-                <ToolBar className='navbar'>
+                <ToolBar className='navbar' style={{ background: this.state.scrolled ? 'rgba(0, 0, 0, 0.8)' : 'transparent' }}>
                     <Link to='/'>
                         <img
                             className='navbar_logo'

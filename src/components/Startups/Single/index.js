@@ -83,7 +83,7 @@ const SingleStartup = (props) => {
                     />
                     : null
             }
-            
+
             <div className='startup_container'>
                 {
                     loading || data == null ?
@@ -105,12 +105,16 @@ const SingleStartup = (props) => {
                             <div className='startup_info_container'>
                                 <Slide bottom duration={1000}>
                                     <div className='startup_info_container_left'>
-                                        <div className='startup_info_container_left_top'>
-                                            <button onClick={() => props.openStartupMenu()}>Edit</button>
-                                            <img src={`data:image/png;base64, ${data.logo}`} />
-                                            <h2>{data.startupName}</h2>
-                                            <p>{data.headline}</p>
-                                        </div>
+                                        {
+                                            data.userId == userData._id ?
+                                                <div className='startup_info_container_left_top'>
+                                                    <button onClick={() => props.openStartupMenu()}>Edit</button>
+                                                    <img src={`data:image/png;base64, ${data.logo}`} />
+                                                    <h2>{data.startupName}</h2>
+                                                    <p>{data.headline}</p>
+                                                </div>
+                                                : null
+                                        }
 
                                         <div className='startup_info_container_left_bottom'>
                                             <StartupInfoRow label='Published by' value={userData.name + ' ' + userData.surname} />

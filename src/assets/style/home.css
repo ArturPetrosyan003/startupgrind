@@ -11,7 +11,7 @@
 .home_wrapper {
     width: 100%;
     height: calc(100vh);
-    background: linear-gradient(0deg, #2998F6, #383A73);
+    background: linear-gradient(0deg, var(--gradient-blue), var(--gradient-purple));
 }
 .home_center_container {
     width: 100%;
@@ -41,7 +41,7 @@
     border-radius: 35px;
     font-weight: 600;
     font-size: 22px;
-    color: #383A73;
+    color: var(--gradient-purple);
     text-align: center;
     outline: none;
     border: none;
@@ -76,7 +76,8 @@
 .home_content_button {
     width: 218px;
     height: 52px;
-    background: #1976D5;
+    zoom: 0.8;
+    background: var(--main-blue);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     font-weight: 600;
@@ -101,8 +102,7 @@
     margin-left: 0px;
 }
 .home_startup_logo {
-    width: 85%;
-    /* height: 246px; */
+   zoom: 0.06;
 }
 .home_startup_name {
     font-weight: normal;
@@ -113,19 +113,20 @@
 }
 .home_startup_description {
     font-weight: 600;
-    font-size: 22px;
-    color: #383A73;
+    font-size: 18px;
+    color: var(--gradient-purple);
     text-align: center;
     text-decoration: none;
 }
 .home_startup_button {
     width: 168px;
     height: 40px;
+    zoom: 0.8;
     background: #FFFFFF;
     border-radius: 35px;
     border: none;
     align-self: center;
-    color: #383A73;
+    color: var(--gradient-purple);
     font-weight: 600;
     font-size: 18px;
 }
