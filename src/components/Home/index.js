@@ -8,18 +8,16 @@ import HomeStartup from './HomeStartup';
 import { connect } from 'react-redux';
 import { openLoginMenu } from '../redux/actions';
 
-import startupImage from '../../assets/images/startupImage.png';
-import highlightImage from '../../assets/images/highlightImage.png'
-import opportunitiesImage from '../../assets/images/opportunitiesImage.png';
-
 import Slide from 'react-reveal/Slide';
 import Fade from 'react-reveal/Fade';
 
 import CoverImage from '../../assets/images/homeCover.png';
 
-import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import Carousel from '@brainhubeu/react-carousel';
 import Loading from 'react-loading';
+
+import Footer from '../Hoc/Footer';
 
 class Home extends Component {
 
@@ -61,7 +59,6 @@ class Home extends Component {
                 startups: fetchedData.data,
                 loading: false
             });
-            console.log(fetchedData);
         }
         else {
             this.setState({
@@ -109,104 +106,104 @@ class Home extends Component {
         }
     }
 
-
     render() {
         return (
-            <div className='home_container'>
-                <div className='home_wrapper'>
-                    <div className='home_center_container'>
-                        <div className='home_buttons_container'>
-                            <Slide left duration={500}>
-                                <h1 className='home_center_text'>First Open Source Database For Armenian Startups</h1>
-                            </Slide>
+            <>
+                <div className='home_container'>
+                    <div className='home_wrapper'>
+                        <div className='home_center_container'>
+                            <div className='home_buttons_container'>
+                                <Slide left duration={500}>
+                                    <h1 className='home_center_text'>First Open Source Database For Armenian Startups</h1>
+                                </Slide>
 
-                            <Slide left duration={500} delay={100}>
-                                <Link
-                                    to={
-                                        this.state.token ? '/startups'
-                                            : '/'
-                                    }
-                                >
-                                    <button
-                                        className='home_button'
-                                        onClick={() => this.state.token ? null : this.props.openLoginMenu()}
+                                <Slide left duration={500} delay={100}>
+                                    <Link
+                                        to={
+                                            this.state.token ? '/startups'
+                                                : '/'
+                                        }
                                     >
-                                        Explore Startups
+                                        <button
+                                            className='home_button'
+                                            onClick={() => this.state.token ? null : this.props.openLoginMenu()}
+                                        >
+                                            Explore Startups
                                         </button>
-                                </Link>
-                            </Slide>
-                            <br></br>
-                            <Slide left duration={500} delay={200}>
-                                <Link
-                                    to={
-                                        this.state.token ? `/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`
-                                            : '/'
-                                    }
-                                >
-                                    <button
-                                        className='home_button'
-                                        onClick={() => this.state.token ? null : this.props.openLoginMenu()}
+                                    </Link>
+                                </Slide>
+                                <br></br>
+                                <Slide left duration={500} delay={200}>
+                                    <Link
+                                        to={
+                                            this.state.token ? `/account/${localStorage.getItem('_id') || sessionStorage.getItem('_id')}`
+                                                : '/'
+                                        }
                                     >
-                                        Add My Startup
-                                    </button>
-                                </Link>
-                            </Slide>
+                                        <button
+                                            className='home_button'
+                                            onClick={() => this.state.token ? null : this.props.openLoginMenu()}
+                                        >
+                                            Add My Startup
+                                        </button>
+                                    </Link>
+                                </Slide>
+                            </div>
+
+                            <Fade duration={1500}>
+                                <img className='home_cover_image' src={CoverImage} />
+                            </Fade>
                         </div>
-
-                        <Fade duration={1500}>
-                            <img className='home_cover_image' src={CoverImage} />
-                        </Fade>
                     </div>
-                </div>
 
-                <div className='home_content'>
-                    <HomeContent
-                        id='home_startups_first'
-                        text='Explore Startups'
-                        background='linear-gradient(0deg, #D1CCCC, #2998F6)'
-                        buttonText='More Startups'
-                        setOpen={this.props.openLoginMenu}
-                        textStyle={{
-                            fontWeight: 600,
-                            fontSize: 30,
-                            color: '#FFFFFF',
-                        }}
-                    >
-                        {
-                            this.state.loading == false ?
-                                <Carousel
-                                    {...this.state.settings}
-                                    onChange={(value) => this.changeSlider(value, 1, 3, 0)}
-                                    value={this.state.sliderIterations[0]}
-                                >
-                                    {/* {
-                                        this.state.startups.map((i, index) => (
-                                            <HomeStartup
-                                                key={index}
-                                                hasLink={true}
-                                                fontSize={32}
-                                                text={i.startupName}
-                                                desc={i.headline}
-                                                image={`data:image/png;base64, ${i.logo}`}
-                                                textStyle={{
-                                                    fontWeight: 600,
-                                                    fontSize: 22,
-                                                    color: '#FFFFFF',
-                                                }}
-                                            />
-                                        ))
-                                    } */}
-                                </Carousel>
-                                :
-                                <Loading
-                                    height={80}
-                                    width={80}
-                                    color='white'
-                                    type='bubbles'
-                                />
-                        }
-                    </HomeContent>
-                    {/* 
+                    <div className='home_content'>
+                        <HomeContent
+                            id='home_startups_first'
+                            text='Explore Startups'
+                            background='linear-gradient(0deg, #D1CCCC, #2998F6)'
+                            buttonText='More Startups'
+                            setOpen={this.props.openLoginMenu}
+                            textStyle={{
+                                fontWeight: 600,
+                                fontSize: 30,
+                                color: '#FFFFFF',
+                            }}
+                        >
+                            {
+                                this.state.loading == false ?
+                                    <Carousel
+                                        {...this.state.settings}
+                                        onChange={(value) => this.changeSlider(value, 1, 3, 0)}
+                                        value={this.state.sliderIterations[0]}
+                                    >
+                                        {
+                                            this.state.startups.map((i, index) => (
+                                                <HomeStartup
+                                                    key={index}
+                                                    hasLink={true}
+                                                    fontSize={32}
+                                                    text={i.lowercaseName}
+                                                    desc={i.headline}
+                                                    image={`data:image/png;base64, ${i.logo}`}
+                                                    textStyle={{
+                                                        fontWeight: 600,
+                                                        fontSize: 22,
+                                                        color: '#FFFFFF',
+                                                    }}
+                                                />
+                                            ))
+                                        }
+                                    </Carousel>
+                                    :
+                                    <Loading
+                                        height={80}
+                                        width={80}
+                                        color='white'
+                                        type='bubbles'
+                                    />
+                            }
+                        </HomeContent>
+                        {/* 
                     <HomeContent
                         id='home_startups_second'
                         text='Highlights from Armenian Startup Ecosystem'
@@ -336,8 +333,10 @@ class Home extends Component {
                             />
                         </Carousel>
                     </HomeContent> */}
+                    </div>
                 </div>
-            </div>
+                <Footer/>
+            </>
         );
     }
 }

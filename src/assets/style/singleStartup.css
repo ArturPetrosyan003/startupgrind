@@ -105,6 +105,7 @@
 }
 
 .startup_info_row p {
+    text-align: right;
     font-family: var(--roboto);
     font-weight: normal;
     font-size: 14px;

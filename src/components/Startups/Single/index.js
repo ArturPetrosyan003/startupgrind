@@ -117,7 +117,7 @@ const SingleStartup = (props) => {
                                         }
 
                                         <div className='startup_info_container_left_bottom'>
-                                            <StartupInfoRow label='Published by' value={userData.name + ' ' + userData.surname} />
+                                            <StartupInfoRow label='Published by' value={data.founder} />
                                             <StartupInfoRow label='Followers' value='2321' />
 
                                             <div className='startup_info_buttons_container'>

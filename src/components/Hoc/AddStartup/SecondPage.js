@@ -12,14 +12,14 @@ const SecondPage = (props) => {
         '2015',
         '2014',
         '2013'
-    ]
+    ];
 
     const fundingStages = [
         'Seed fundingExists',
         'Series A',
         'Series B',
         'Series C'
-    ]
+    ];
 
     const [otherCheckboxFirst, setOtherCheckboxFirst] = useState(false);
     const [otherCheckboxSecond, setOtherCheckboxSecond] = useState(false);
@@ -385,7 +385,7 @@ const SecondPage = (props) => {
                     </div>
 
                     <div className='add_startup_radio_section'>
-                        <span className='add_startup_span'>Have you raised any fundingExists so far?*</span><br></br>
+                        <span className='add_startup_span'>Have you raised any funding so far?*</span><br></br>
 
                         <div className='add_startup_radio_container'>
                             <input
@@ -424,7 +424,7 @@ const SecondPage = (props) => {
                             opacity: secondaryFields.fundingExists == true ? 1 : 0.5
                         }}
                     >
-                        <span className='add_startup_span'>If yes, what stage of fundingExists have you received</span><br></br>
+                        <span className='add_startup_span'>If yes, what stage of funding have you received</span><br></br>
 
                         {
                             fundingStages.map((i, index) => (

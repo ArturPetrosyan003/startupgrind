@@ -2,16 +2,14 @@
 @import "./navbar.css";
 @import "./footer.css";
 @import "./account.css";
+@import "./startups.css";
 @import "./startupPopup.css";
 @import "./singleStartup.css";
-
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-*{
+* {
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -21,9 +19,11 @@ html, body {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
+
 button {
     cursor: pointer;
 }
+
 .text_404 {
     color: var(--main-blue);
     font-size: 80px;
@@ -33,16 +33,24 @@ button {
 .BrainhubCarousel__track {
     margin-left: -12.5%!important;
 }
+
 #home_startups_second .BrainhubCarousel__track, #home_startups_third .BrainhubCarousel__track {
     margin-left: 0!important;
 }
+
 .BrainhubCarousel__arrows {
     background: transparent!important;
 }
+
 .BrainhubCarousel__arrows span {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)), drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
+
 .BrainhubCarousel__dots .BrainhubCarousel__dot {
     background: transparent;
     margin-top: 20px;
+}
+
+.MuiInput-underline::before, .MuiInput-underline::after {
+    border-bottom: none!important;
 }

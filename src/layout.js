@@ -10,6 +10,8 @@ const Layout = (props) => {
     const location = useLocation();
     const slicedLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'));
 
+    console.log(slicedLocation);
+
     return (
         <>
             {
@@ -21,14 +23,15 @@ const Layout = (props) => {
                 : <Navbar/>
             }
                 {props.children}
-            {
+            {/* {
                 slicedLocation == '/account' || 
                 slicedLocation == '/account/startups' ||
                 slicedLocation == '/user' || 
+                slicedLocation == '/startups' || 
                 slicedLocation == '/single' ?
                 null
                 : <Footer/>
-            }
+            } */}
         </>
     );
 };

@@ -28,7 +28,7 @@ class Navbar extends Component {
         });
 
         window.addEventListener('scroll', () => {
-            if (document.location.pathname == '/' && document.getElementsByClassName('navbar') != undefined) {
+            if (document.getElementsByClassName('navbar') != undefined) {
                 if (window.scrollY > 0) {
                     this.setState({
                         scrolled: true

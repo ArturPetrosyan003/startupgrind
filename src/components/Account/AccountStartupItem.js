@@ -12,7 +12,7 @@ const AccountStartupItem = (props) => {
 
             <div className='account_startup_right'>
                 <h3>
-                    {props.data.startupName}
+                    {props.data.lowercaseName}
                     <span>
                         {props.data.isPublished == false ? '(Draft)' : ''}
                     </span>
@@ -45,7 +45,7 @@ const AccountStartupItem = (props) => {
 
                     <Link
                         to={{
-                            pathname: `/account/startups/${props.data.startupName.split(' ').join('-')}`,
+                            pathname: `/account/startups/${props.data.lowercaseName.split(' ').join('-')}`,
                             id: props.data._id
                         }}
                     >
