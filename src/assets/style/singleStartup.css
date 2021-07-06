@@ -143,6 +143,21 @@
     outline: none;
 }
 
+.startup_info_icon_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    padding-right: 10px;
+}
+
+.startup_info_icon_container img {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+}
+
 .startup_info_container_right {
     width: 68%;
     height: 100%;

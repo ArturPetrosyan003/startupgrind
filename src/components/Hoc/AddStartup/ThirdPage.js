@@ -196,7 +196,6 @@ const ThirdPage = (props) => {
                     <div className='add_startup_left'>
                         <div className='add_startup_radio_section'>
                             <span className='add_startup_span'>Industry*</span><br></br>
-
                             {
                                 industryCheckboxes.map((i, index) => (
                                     data.industry != undefined ?

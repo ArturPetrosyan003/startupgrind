@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Cover from '../../../assets/images/startupCover.png';
 import PitchDeck from '../../../assets/images/pitchDeck.png';
+
+import InstagramBlue from '../../../assets/icons/social/startups/instagram-blue.png';
+import InstagramDisabled from '../../../assets/icons/social/startups/instagram-disabled.png';
+import FacebookBlue from '../../../assets/icons/social/startups/facebook-blue.png';
+import FacebookDisabled from '../../../assets/icons/social/startups/facebook-disabled.png';
+import TwitterBlue from '../../../assets/icons/social/startups/twitter-blue.png';
+import TwitterDisabled from '../../../assets/icons/social/startups/twitter-disabled.png';
+import LinkedinBlue from '../../../assets/icons/social/startups/linkedin-blue.png';
+import LinkedinDisabled from '../../../assets/icons/social/startups/linkedin-disabled.png';
 
 import StartupInfoRow from '../../Hoc/StartupInfoRow';
 
@@ -110,7 +121,7 @@ const SingleStartup = (props) => {
                                                 <div className='startup_info_container_left_top'>
                                                     <button onClick={() => props.openStartupMenu()}>Edit</button>
                                                     <img src={`data:image/png;base64, ${data.logo}`} />
-                                                    <h2>{data.startupName}</h2>
+                                                    <h2>{data.lowercaseName}</h2>
                                                     <p>{data.headline}</p>
                                                 </div>
                                                 : null
@@ -165,6 +176,24 @@ const SingleStartup = (props) => {
                                             <StartupInfoRow label='fundingExists raised' value={data.fundingStage} />
                                             <StartupInfoRow label='fundingExists source' value={data.fundingSource} />
                                             <StartupInfoRow label='Employees' value={data.employeesNumber.min + '-' + data.employeesNumber.max} />
+
+                                            <div className='startup_info_icon_container'>
+                                                <Link to='/'>
+                                                    <img src={data.urls.instagram == '' ? InstagramDisabled : InstagramBlue} />
+                                                </Link>
+
+                                                <Link to='/'>
+                                                    <img src={data.urls.facebook == '' ? FacebookDisabled : FacebookBlue} />
+                                                </Link>
+
+                                                <Link to='/'>
+                                                    <img src={data.urls.twitter == '' ? TwitterDisabled : TwitterBlue} />
+                                                </Link>
+
+                                                <Link to='/'>
+                                                    <img src={data.urls.linkedin == '' ? LinkedinDisabled : LinkedinBlue} />
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </Slide>

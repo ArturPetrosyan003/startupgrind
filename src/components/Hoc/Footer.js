@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-const Footer = (props) => {
+const Footer = () => {
 
     const subscribe = async (event) => {
         event.preventDefault();
@@ -48,19 +48,19 @@ const Footer = (props) => {
 
                     <div className='footer_social_icons'>
                         <Link>
-                            <img src={require('../../assets/icons/facebook.png')} />
+                            <img src={require('../../assets/icons/social/facebook.png')} />
                         </Link>
 
                         <Link>
-                            <img src={require('../../assets/icons/twitter.png')} />
+                            <img src={require('../../assets/icons/social/twitter.png')} />
                         </Link>
 
                         <Link>
-                            <img src={require('../../assets/icons/linkedin.png')} />
+                            <img src={require('../../assets/icons/social/linkedin.png')} />
                         </Link>
 
                         <Link>
-                            <img src={require('../../assets/icons/instagram.png')} />
+                            <img src={require('../../assets/icons/social/instagram.png')} />
                         </Link>
                     </div>
                 </div>

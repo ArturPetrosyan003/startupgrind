@@ -5,8 +5,6 @@ import StartupInfoRow from '../Hoc/StartupInfoRow';
 import { Link } from 'react-router-dom';
 
 const StartupCard = (props) => {
-    console.log(props);
-
     return (
         <div className='card_container'>
             <div className='card_front'>
@@ -17,7 +15,7 @@ const StartupCard = (props) => {
 
             <div className='card_back'>
                 <StartupInfoRow
-                    label='industry'
+                    label='Industry'
                     value={
                         props.data.industry.map((i, index) => {
                             if (index < props.data.industry.length - 1) {

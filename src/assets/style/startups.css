@@ -56,6 +56,10 @@
     background: black;
 }
 
+.filters_container .filter select::-webkit-scrollbar {
+    display: none;
+}
+
 .startups_main {
     display: flex;
     flex-wrap: wrap;
