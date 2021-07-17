@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Loading from 'react-loading';
 
 import { connect } from 'react-redux';
@@ -49,12 +49,8 @@ const Register = (props) => {
                 await localStorage.setItem('token', fetchedData.data.auth.token);
                 await localStorage.setItem('_id', fetchedData.data.user._id);
 
-                props.handler()
-                setLoading(true);
-
-                return (
-                    history.push(`/account/${fetchedData.data.user._id}`)
-                );
+                props.handler();
+                history.push(`/account/${fetchedData.data.user._id}`);
             }
             else {
                 if (fetchedData.errors[0].field == 'email') {
@@ -99,13 +95,43 @@ const Register = (props) => {
                             <input required type='text' name='surname' placeholder='Your surname' minLength='3' /><br></br>
 
                             <span className='loginReg_span'>Email*</span><br></br>
-                            <input required type='email' name='email' placeholder='Your email' minLength='3' /><br></br>
+                            <input
+                                required
+                                type='email'
+                                name='email'
+                                placeholder='Your email'
+                                minLength='3'
+                                style={{
+                                    borderColor: errorText == 'Email already exists' ? 'red' : '#B1AFAF'
+                                }}
+                            />
+                            <br></br>
 
                             <span className='loginReg_span'>Password*</span><br></br>
-                            <input required type='password' name='password' placeholder='Create password' minLength='6' style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} /><br></br>
+                            <input
+                                required
+                                type='password'
+                                name='password'
+                                placeholder='Create password'
+                                minLength='6'
+                                style={{
+                                    borderColor: errorText == 'Please make sure the passwords match' ? 'red' : '#B1AFAF'
+                                }}
+                            />
+                            <br></br>
 
                             <span className='loginReg_span'>Repeat Password*</span><br></br>
-                            <input required type='password' name='password_repeat' placeholder='Create password' minLength='6' style={{ borderColor: errorText != '' ? 'red' : '#B1AFAF' }} /><br></br>
+                            <input
+                                required
+                                type='password'
+                                name='password_repeat'
+                                placeholder='Create password'
+                                minLength='6'
+                                style={{
+                                    borderColor: errorText == 'Please make sure the passwords match' ? 'red' : '#B1AFAF'
+                                }}
+                            />
+                            <br></br>
 
                             <p className='loginReg_error_text'>{errorText}</p>
 

@@ -25,7 +25,7 @@ const Account = (props) => {
 
     useEffect(() => {
         props.closeStartupMenu();
-        
+
         fetchUser();
         fetchStartups();
     }, []);
@@ -127,11 +127,11 @@ const Account = (props) => {
                                                 </div>
                                                 <h4>Chapter Director at Startup Grind</h4>
                                             </div>
-
-                                            <button className='account_edit_button'>
-                                                Edit Profile
-                                            </button>
                                         </div>
+
+                                        <button className='account_edit_button'>
+                                            Edit Profile
+                                        </button>
                                     </div>
                                 </Slide>
 
@@ -182,6 +182,9 @@ const Account = (props) => {
                                                             >
                                                                 Add Startup
                                                             </button>
+                                                            <p className='account_startups_container_empty_text'>
+                                                                Please activate your account via email to add your startup
+                                                            </p>
                                                         </>
                                                         :
                                                         startups.map((i, index) => (

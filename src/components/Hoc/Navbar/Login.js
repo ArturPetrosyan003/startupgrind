@@ -58,11 +58,7 @@ const Login = (props) => {
             }
 
             props.handler();
-            setLoading(true);
-
-            return (
-                history.push(`/account/${fetchedData.data.user._id}`)
-            );
+            history.push(`/account/${fetchedData.data.user._id}`);
         }
         else {
             if (fetchedData.errors[0].field == 'login_or_password') {
