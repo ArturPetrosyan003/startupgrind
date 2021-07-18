@@ -48,6 +48,7 @@ const Register = (props) => {
             if (!fetchedData.errors) {
                 await localStorage.setItem('token', fetchedData.data.auth.token);
                 await localStorage.setItem('_id', fetchedData.data.user._id);
+                await localStorage.setItem('account-popup', true);
 
                 props.handler();
                 history.push(`/account/${fetchedData.data.user._id}`);

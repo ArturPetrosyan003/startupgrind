@@ -54,3 +54,21 @@ button {
 .MuiInput-underline::before, .MuiInput-underline::after {
     border-bottom: none!important;
 }
+
+.popup_container {
+    width: 50%;
+    height: 50%;
+    background: var(--account-grey);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    z-index: 9;
+}

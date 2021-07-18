@@ -15,6 +15,7 @@ import AddStartup from '../Hoc/AddStartup/AddStartup';
 import AccountStartupItem from './AccountStartupItem';
 
 import Slide from 'react-reveal/Slide';
+import PopupBlank from '../Hoc/PopupBlank';
 
 const Account = (props) => {
 
@@ -22,12 +23,13 @@ const Account = (props) => {
     const [startups, setStartups] = useState([]);
     const [loading, setLoading] = useState(true);
     const [startupsLoading, setStartupsLoading] = useState(true);
+    const [showPopup, setShowPopup] = useState('');
 
     useEffect(() => {
         props.closeStartupMenu();
-
         fetchUser();
         fetchStartups();
+        setShowPopup(localStorage.getItem('account-popup'));
     }, []);
 
     const fetchUser = async () => {
@@ -75,7 +77,22 @@ const Account = (props) => {
     return (
         <>
             <Navbar />
-
+            {
+                showPopup == 'true' || localStorage.getItem('account-popup') == 'true' ?
+                    <PopupBlank label='Welcome to StarTribe'>
+                        <button
+                            className='add_startup_close_popup_button'
+                            style={{
+                                backgroundColor: '#1976D5',
+                                boxShadow: 'none'
+                            }}
+                            onClick={() => setShowPopup(localStorage.setItem('account-popup', false))}
+                        >
+                            Get started
+                        </button>
+                    </PopupBlank>
+                    : null
+            }
             {
                 props.startupMenuState.open == true ?
                     <AddStartup
