@@ -48,6 +48,7 @@ const Startups = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetchStartups();
     }, []);
 
@@ -91,7 +92,7 @@ const Startups = () => {
 
                             <div className="filters_container">
                                 <div class="filter">
-                                    <select>
+                                    <select onChange={(e) => console.log(e.target.value)}>
                                         <option selected disabled>Industry</option>
                                         {
                                             industries.map((i, index) => (

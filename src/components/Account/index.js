@@ -7,6 +7,7 @@ import ProfileImage from '../../assets/icons/profile.png';
 import Location from '../../assets/icons/location.png';
 import NonActivated from '../../assets/icons/nonActivated.png';
 import Add from '../../assets/icons/add.png';
+import PopupImage from '../../assets/images/popup.png';
 
 import { connect } from 'react-redux';
 import { openStartupMenu, closeStartupMenu } from '../redux/actions';
@@ -78,8 +79,16 @@ const Account = (props) => {
         <>
             <Navbar />
             {
-                showPopup == 'true' || localStorage.getItem('account-popup') == 'true' ?
-                    <PopupBlank label='Welcome to StarTribe'>
+                props.startupMenuState.open == true ?
+                    <AddStartup
+                        data={props.startupMenuState.data}
+                        fetchData={fetchStartups}
+                    />
+                    : null
+            }
+            {
+                showPopup == 'true' ?
+                    <PopupBlank img={PopupImage} label='Welcome to StarTribe'>
                         <button
                             className='add_startup_close_popup_button'
                             style={{
@@ -91,140 +100,132 @@ const Account = (props) => {
                             Get started
                         </button>
                     </PopupBlank>
-                    : null
-            }
-            {
-                props.startupMenuState.open == true ?
-                    <AddStartup
-                        data={props.startupMenuState.data}
-                        fetchData={fetchStartups}
-                    />
-                    : null
-            }
+                    :
 
-            <div className='account_content'>
-                {
-                    loading ?
-                        <Loading
-                            height={80}
-                            width={80}
-                            color='#2998F6'
-                            type='bubbles'
-                        />
-                        :
-                        <>
-                            <div className='account_content_left'>
-                                <Slide left duration={1000}>
-                                    <div className='account_info_container'>
-                                        <div className='account_info_container_left'>
-                                            <img
-                                                className='account_profile_image'
-                                                src={ProfileImage}
-                                            />
-                                            <div className='account_info_container_left_bottom'>
-                                                <img src={Location} />
-                                                <p>Gyumri, Armenia</p>
+                    <div className='account_content'>
+                        {
+                            loading ?
+                                <Loading
+                                    height={80}
+                                    width={80}
+                                    color='#2998F6'
+                                    type='bubbles'
+                                />
+                                :
+                                <>
+                                    <div className='account_content_left'>
+                                        <Slide left duration={1000}>
+                                            <div className='account_info_container'>
+                                                <div className='account_info_container_left'>
+                                                    <img
+                                                        className='account_profile_image'
+                                                        src={ProfileImage}
+                                                    />
+                                                    <div className='account_info_container_left_bottom'>
+                                                        <img src={Location} />
+                                                        <p>Gyumri, Armenia</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className='account_info_container_right'>
+                                                    <div className='account_info_container_right_left'>
+                                                        <div className='account_info_container_right_info'>
+                                                            <h2>
+                                                                {userInfo.name + ' ' + userInfo.surname}
+                                                            </h2>
+                                                            {
+                                                                !userInfo.isActivated ?
+                                                                    <div className='account_warning_container'>
+                                                                        <img src={NonActivated} />
+                                                                        <span className='account_tooltip'>Please activate your account via email</span>
+                                                                    </div>
+                                                                    : null
+                                                            }
+                                                        </div>
+                                                        <h4>Chapter Director at Startup Grind</h4>
+                                                    </div>
+                                                </div>
+
+                                                <button className='account_edit_button'>
+                                                    Edit Profile
+                                                </button>
                                             </div>
-                                        </div>
+                                        </Slide>
 
-                                        <div className='account_info_container_right'>
-                                            <div className='account_info_container_right_left'>
-                                                <div className='account_info_container_right_info'>
-                                                    <h2>
-                                                        {userInfo.name + ' ' + userInfo.surname}
-                                                    </h2>
+                                        <Slide left delay={100} duration={1000}>
+                                            <div className='account_startups_container'>
+                                                <div className='account_startups_container_top'>
+                                                    <h2>My startups</h2>
                                                     {
-                                                        !userInfo.isActivated ?
-                                                            <div className='account_warning_container'>
-                                                                <img src={NonActivated} />
-                                                                <span className='account_tooltip'>Please activate your account via email</span>
-                                                            </div>
+                                                        startups.length != 0 ?
+                                                            <button
+                                                                className='account_add_startup_button'
+                                                                onClick={() => props.openStartupMenu()}
+                                                            >
+                                                                <img src={Add} />
+                                                            </button>
                                                             : null
                                                     }
                                                 </div>
-                                                <h4>Chapter Director at Startup Grind</h4>
-                                            </div>
-                                        </div>
 
-                                        <button className='account_edit_button'>
-                                            Edit Profile
-                                        </button>
-                                    </div>
-                                </Slide>
-
-                                <Slide left delay={100} duration={1000}>
-                                    <div className='account_startups_container'>
-                                        <div className='account_startups_container_top'>
-                                            <h2>My startups</h2>
-                                            {
-                                                startups.length != 0 ?
-                                                    <button
-                                                        className='account_add_startup_button'
-                                                        onClick={() => props.openStartupMenu()}
-                                                    >
-                                                        <img src={Add} />
-                                                    </button>
-                                                    : null
-                                            }
-                                        </div>
-
-                                        <div
-                                            className='account_startups_container_bottom'
-                                            style={{
-                                                justifyContent: startups.length == 0 ? 'center' : 'flex-start',
-                                            }}
-                                        >
-                                            {
-                                                startupsLoading == true ?
-                                                    <Loading
-                                                        height={60}
-                                                        width={60}
-                                                        color='#2998F6'
-                                                        type='bubbles'
-                                                    />
-                                                    :
-                                                    startups.length == 0 ?
-                                                        <>
-                                                            <p className='account_startups_container_empty_text'>
-                                                                You don’t have any startup yet
-                                                            </p>
-                                                            <button
-                                                                className='account_startup_btn'
-                                                                disabled={userInfo.isActivated ? false : true}
-                                                                onClick={() => props.openStartupMenu()}
-                                                                style={{
-                                                                    backgroundColor: userInfo.isActivated ? '#1976D5' : '#7BA4CF',
-                                                                    cursor: userInfo.isActivated ? 'pointer' : 'default'
-                                                                }}
-                                                            >
-                                                                Add Startup
-                                                            </button>
-                                                            <p className='account_startups_container_empty_text'>
-                                                                Please activate your account via email to add your startup
-                                                            </p>
-                                                        </>
-                                                        :
-                                                        startups.map((i, index) => (
-                                                            <AccountStartupItem
-                                                                key={index}
-                                                                data={i}
-                                                                openStartupMenu={props.openStartupMenu}
+                                                <div
+                                                    className='account_startups_container_bottom'
+                                                    style={{
+                                                        justifyContent: startups.length == 0 ? 'center' : 'flex-start',
+                                                    }}
+                                                >
+                                                    {
+                                                        startupsLoading == true ?
+                                                            <Loading
+                                                                height={60}
+                                                                width={60}
+                                                                color='#2998F6'
+                                                                type='bubbles'
                                                             />
-                                                        ))
-                                            }
-                                        </div>
+                                                            :
+                                                            startups.length == 0 ?
+                                                                <>
+                                                                    <p className='account_startups_container_empty_text'>
+                                                                        You don’t have any startup yet
+                                                                    </p>
+                                                                    <button
+                                                                        className='account_startup_btn'
+                                                                        disabled={userInfo.isActivated ? false : true}
+                                                                        onClick={() => props.openStartupMenu()}
+                                                                        style={{
+                                                                            backgroundColor: userInfo.isActivated ? '#1976D5' : '#7BA4CF',
+                                                                            cursor: userInfo.isActivated ? 'pointer' : 'default'
+                                                                        }}
+                                                                    >
+                                                                        Add Startup
+                                                                    </button>
+                                                                    <p className='account_startups_container_empty_text'>
+                                                                        Please activate your account via email to add your startup
+                                                                    </p>
+                                                                </>
+                                                                :
+                                                                startups.map((i, index) => (
+                                                                    <AccountStartupItem
+                                                                        key={index}
+                                                                        data={i}
+                                                                        openStartupMenu={props.openStartupMenu}
+                                                                    />
+                                                                ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        </Slide>
                                     </div>
-                                </Slide>
-                            </div>
 
-                            <Slide right duration={1000} delay={100}>
-                                <div className='account_right_container'>
-                                    <h3>Here can be something :)</h3>
-                                </div>
-                            </Slide>
-                        </>
-                }
-            </div>
+                                    <Slide right duration={1000} delay={100}>
+                                        <div className='account_right_container'>
+                                            <h3>Here can be something :)</h3>
+                                        </div>
+                                    </Slide>
+                                </>
+                        }
+                    </div>
+            }
         </>
     );
 };
