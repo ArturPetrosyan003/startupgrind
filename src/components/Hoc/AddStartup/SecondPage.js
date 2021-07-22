@@ -424,7 +424,7 @@ const SecondPage = (props) => {
                             opacity: secondaryFields.fundingExists == true ? 1 : 0.5
                         }}
                     >
-                        <span className='add_startup_span'>If yes, what stage of funding have you received</span><br></br>
+                        <span className='add_startup_span'>If yes, what stage of funding have you received*</span><br></br>
 
                         {
                             fundingStages.map((i, index) => (
@@ -486,7 +486,7 @@ const SecondPage = (props) => {
                         }}
                     >
                         <div className='add_startup_inputs'>
-                            <span className='add_startup_span'>Please specify the source</span><br></br>
+                            <span className='add_startup_span'>Please specify the source*</span><br></br>
 
                             <input
                                 required

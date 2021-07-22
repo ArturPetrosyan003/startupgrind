@@ -15,12 +15,14 @@ import Account from './components/Account';
 import UserActivation from './components/Hoc/UserActivation';
 import PasswordReset from './components/Hoc/PasswordReset';
 import SingleStartup from './components/Startups/Single';
+import Contact from './components/Contact';
 
 function Routes() {
   return (
     <Layout>
       <Switch>
         <Route path='/' exact component={Home} />
+        <Route path='/contact' exact component={Contact} />
         <Route path='/startups' exact component={Startups} />
         <Route path='/single/:name' exact component={SingleStartup} />
         <Route path='/about' exact component={About} />

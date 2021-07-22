@@ -69,14 +69,15 @@ const SingleStartup = (props) => {
         });
 
         const fetchedData = await request.json();
+        console.log(fetchedData.data.logo);
 
         if (!fetchedData.errors) {
             setLoading(false);
             setData(fetchedData.data);
         }
         else {
-            console.log(fetchedData.errors);
             setLoading(false);
+            console.log(fetchedData.errors);
         }
     }
 
@@ -129,7 +130,7 @@ const SingleStartup = (props) => {
 
                                         <div className='startup_info_container_left_bottom'>
                                             <StartupInfoRow label='Published by' value={data.founder} />
-                                            <StartupInfoRow label='Followers' value='2321' />
+                                            <StartupInfoRow label='Followers' value={data.followersCount} />
 
                                             <div className='startup_info_buttons_container'>
                                                 <button

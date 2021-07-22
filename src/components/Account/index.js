@@ -199,7 +199,12 @@ const Account = (props) => {
                                                                     >
                                                                         Add Startup
                                                                     </button>
-                                                                    <p className='account_startups_container_empty_text'>
+                                                                    <p
+                                                                        className='account_startups_container_empty_text'
+                                                                        style={{
+                                                                            display: userInfo.isActivated ? 'none' : 'block'
+                                                                        }}
+                                                                    >
                                                                         Please activate your account via email to add your startup
                                                                     </p>
                                                                 </>

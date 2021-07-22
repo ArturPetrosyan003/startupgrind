@@ -1,0 +1,58 @@
+.contact_container {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(0deg, var(--gradient-blue), var(--gradient-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact_left {
+    color: white;
+}
+
+.contact_left h1 {
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.contact_left form input::placeholder, .contact_left form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);;
+}
+
+.contact_left form .input:not(textarea) {
+    height: 45px;
+}
+
+.contact_left form .input {
+    width: 600px;
+    color: white;
+    background: transparent;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid white;
+    margin-top: 10px;
+    outline: none;
+}
+
+.contact_left form textarea {
+    height: 120px;
+    resize: none;
+}
+
+.contact_send_button {
+    width: 150px;
+    height: 40px;
+    color: var(--main-blue);
+    font-size: 15px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 20px;
+    margin-top: 30px;
+    outline: none;
+}
+
+.contact_container img {
+    margin-left: 120px;
+    zoom: 0.9;
+}

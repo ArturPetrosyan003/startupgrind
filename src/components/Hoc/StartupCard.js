@@ -30,7 +30,7 @@ const StartupCard = (props) => {
                 <StartupInfoRow label='Year of launch' value={new Date(props.data.launchDate).getFullYear()} />
                 <StartupInfoRow label='Product type' value={props.data.buildType} />
                 <StartupInfoRow label='Funding raised' value={props.data.fundingExists ? 'Yes' : 'No'} />
-                <StartupInfoRow label='Number of followers' />
+                <StartupInfoRow label='Number of followers' value={props.data.followersCount} />
 
                 <Link to={`/account/startups/${props.data.lowercaseName}`} className='card_button'>
                     Show more
