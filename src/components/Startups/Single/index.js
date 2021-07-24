@@ -13,6 +13,8 @@ import TwitterBlue from '../../../assets/icons/social/startups/twitter-blue.png'
 import TwitterDisabled from '../../../assets/icons/social/startups/twitter-disabled.png';
 import LinkedinBlue from '../../../assets/icons/social/startups/linkedin-blue.png';
 import LinkedinDisabled from '../../../assets/icons/social/startups/linkedin-disabled.png';
+import WebBlue from '../../../assets/icons/social/startups/web-blue.png';
+import WebDisabled from '../../../assets/icons/social/startups/web-disabled.png';
 
 import StartupInfoRow from '../../Hoc/StartupInfoRow';
 
@@ -69,7 +71,7 @@ const SingleStartup = (props) => {
         });
 
         const fetchedData = await request.json();
-        console.log(fetchedData.data.logo);
+        console.log(fetchedData.data);
 
         if (!fetchedData.errors) {
             setLoading(false);
@@ -82,7 +84,17 @@ const SingleStartup = (props) => {
     }
 
     const followStartup = async () => {
-        setFollowing(!following);
+        if(!following){
+            const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/startups/${data._id}/follows`);
+            const fetchedData = await request.json();
+
+            console.log(fetchedData);
+
+            if(!fetchedData.errors){
+                setFollowing(!following);
+                console.log(fetchedData);
+            }
+        }
     }
 
     return (
@@ -117,16 +129,16 @@ const SingleStartup = (props) => {
                             <div className='startup_info_container'>
                                 <Slide bottom duration={1000}>
                                     <div className='startup_info_container_left'>
-                                        {
-                                            data.userId == userData._id ?
-                                                <div className='startup_info_container_left_top'>
+                                        <div className='startup_info_container_left_top'>
+                                            {
+                                                data.userId == userData._id ?
                                                     <button onClick={() => props.openStartupMenu()}>Edit</button>
-                                                    <img src={`data:image/png;base64, ${data.logo}`} />
-                                                    <h2>{data.lowercaseName}</h2>
-                                                    <p>{data.headline}</p>
-                                                </div>
-                                                : null
-                                        }
+                                                    : null
+                                            }
+                                            <img src={`data:image/png;base64, ${data.logo}`} />
+                                            <h2>{data.lowercaseName}</h2>
+                                            <p>{data.headline}</p>
+                                        </div>
 
                                         <div className='startup_info_container_left_bottom'>
                                             <StartupInfoRow label='Published by' value={data.founder} />
@@ -179,21 +191,25 @@ const SingleStartup = (props) => {
                                             <StartupInfoRow label='Employees' value={data.employeesNumber.min + '-' + data.employeesNumber.max} />
 
                                             <div className='startup_info_icon_container'>
-                                                <Link to='/'>
+                                                <a href={data.urls.instagram != '' ? `https://www.instagram.com/${data.urls.instagram.split('@')[1]}` : null} target='_blank'>
                                                     <img src={data.urls.instagram == '' ? InstagramDisabled : InstagramBlue} />
-                                                </Link>
+                                                </a>
 
-                                                <Link to='/'>
+                                                <a href={data.urls.facebook != '' ? data.urls.facebook : null} target='_blank'>
                                                     <img src={data.urls.facebook == '' ? FacebookDisabled : FacebookBlue} />
-                                                </Link>
+                                                </a>
 
-                                                <Link to='/'>
+                                                <a href='/' target='_blank'>
                                                     <img src={data.urls.twitter == '' ? TwitterDisabled : TwitterBlue} />
-                                                </Link>
+                                                </a>
 
-                                                <Link to='/'>
+                                                <a href={data.urls.linkedin != '' ? data.urls.linkedin : null} target='_blank'>
                                                     <img src={data.urls.linkedin == '' ? LinkedinDisabled : LinkedinBlue} />
-                                                </Link>
+                                                </a>
+
+                                                <a href={data.urls.website != '' ? data.urls.website : null} target='_blank'>
+                                                    <img src={data.urls.website == '' ? WebDisabled : WebBlue} />
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

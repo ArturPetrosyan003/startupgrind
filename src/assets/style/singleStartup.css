@@ -71,7 +71,7 @@
 
 .startup_info_container_left_top img {
     width: 150px;
-    height: 150px;
+    /* height: 150px; */
 }
 
 .startup_info_container_left_top h2 {
