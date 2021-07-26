@@ -20,7 +20,7 @@ import PopupBlank from '../Hoc/PopupBlank';
 
 const Account = (props) => {
 
-    const [userInfo, setUserInfo] = useState({});
+    const [userData, setUserData] = useState({});
     const [startups, setStartups] = useState([]);
     const [loading, setLoading] = useState(true);
     const [startupsLoading, setStartupsLoading] = useState(true);
@@ -44,7 +44,7 @@ const Account = (props) => {
         const fetchedData = await request.json();
 
         if (!fetchedData.errors) {
-            setUserInfo(fetchedData.data);
+            setUserData(fetchedData.data);
             setLoading(false);
         }
         else {
@@ -73,6 +73,19 @@ const Account = (props) => {
             console.log(fetchedData.errors);
             setStartupsLoading(false);
         }
+    }
+
+    const resendLink = async () => {
+        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/passwords', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        const fetchedData = await request.json();
+
+        console.log(fetchedData);
     }
 
     return (
@@ -131,10 +144,10 @@ const Account = (props) => {
                                                     <div className='account_info_container_right_left'>
                                                         <div className='account_info_container_right_info'>
                                                             <h2>
-                                                                {userInfo.name + ' ' + userInfo.surname}
+                                                                {userData.name + ' ' + userData.surname}
                                                             </h2>
                                                             {
-                                                                !userInfo.isActivated ?
+                                                                !userData.isActivated ?
                                                                     <div className='account_warning_container'>
                                                                         <img src={NonActivated} />
                                                                         <span className='account_tooltip'>Please activate your account via email</span>
@@ -183,18 +196,18 @@ const Account = (props) => {
                                                                 type='bubbles'
                                                             />
                                                             :
-                                                            startups.length == 0 ?
+                                                            startups.length != 0 ?
                                                                 <>
                                                                     <p className='account_startups_container_empty_text'>
                                                                         You don’t have any startup yet
                                                                     </p>
                                                                     <button
                                                                         className='account_startup_btn'
-                                                                        disabled={userInfo.isActivated ? false : true}
+                                                                        disabled={userData.isActivated ? false : true}
                                                                         onClick={() => props.openStartupMenu()}
                                                                         style={{
-                                                                            backgroundColor: userInfo.isActivated ? '#1976D5' : '#7BA4CF',
-                                                                            cursor: userInfo.isActivated ? 'pointer' : 'default'
+                                                                            backgroundColor: userData.isActivated ? '#1976D5' : '#7BA4CF',
+                                                                            cursor: userData.isActivated ? 'pointer' : 'default'
                                                                         }}
                                                                     >
                                                                         Add Startup
@@ -202,11 +215,20 @@ const Account = (props) => {
                                                                     <p
                                                                         className='account_startups_container_empty_text'
                                                                         style={{
-                                                                            display: userInfo.isActivated ? 'none' : 'block'
+                                                                            display: userData.isActivated ? 'none' : 'block'
                                                                         }}
                                                                     >
                                                                         Please activate your account via email to add your startup
                                                                     </p>
+                                                                    <button
+                                                                        className='resend_link'
+                                                                        onClick={() => resendLink()}
+                                                                        style={{
+                                                                            display: userData.isActivated ? 'none' : 'inline-block'
+                                                                        }}
+                                                                    >
+                                                                        Request a new activation link
+                                                                    </button>
                                                                 </>
                                                                 :
                                                                 startups.map((i, index) => (

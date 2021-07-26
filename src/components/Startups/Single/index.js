@@ -85,16 +85,39 @@ const SingleStartup = (props) => {
 
     const followStartup = async () => {
         if(!following){
-            const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/startups/${data._id}/follows`);
+            const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/startups/${data._id}/follows`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': localStorage.getItem('token')
+                }
+            });
             const fetchedData = await request.json();
-
-            console.log(fetchedData);
 
             if(!fetchedData.errors){
                 setFollowing(!following);
-                console.log(fetchedData);
+            }
+            else {
+                console.error(fetchedData.errors);
             }
         }
+        // else {
+        //     const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/startups/${data._id}/follows`, {
+        //         method: 'DELETE',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'token': localStorage.getItem('token')
+        //         }
+        //     });
+        //     const fetchedData = await request.json();
+
+        //     if(!fetchedData.errors){
+        //         setFollowing(!following);
+        //     }
+        //     else {
+        //         console.error(fetchedData.errors);
+        //     }
+        // }
     }
 
     return (
@@ -136,7 +159,7 @@ const SingleStartup = (props) => {
                                                     : null
                                             }
                                             <img src={`data:image/png;base64, ${data.logo}`} />
-                                            <h2>{data.lowercaseName}</h2>
+                                            <h2>{data.startupName}</h2>
                                             <p>{data.headline}</p>
                                         </div>
 

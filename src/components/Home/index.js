@@ -182,7 +182,7 @@ class Home extends Component {
                                                     key={index}
                                                     hasLink={true}
                                                     fontSize={32}
-                                                    text={i.lowercaseName}
+                                                    text={i.startupName}
                                                     desc={i.headline}
                                                     image={`data:image/png;base64, ${i.logo}`}
                                                     textStyle={{

@@ -12,7 +12,7 @@ const AccountStartupItem = (props) => {
 
             <div className='account_startup_right'>
                 <h3>
-                    {props.data.lowercaseName}
+                    {props.data.startupName}
                     <span>
                         {props.data.isPublished == false ? '(Draft)' : ''}
                     </span>

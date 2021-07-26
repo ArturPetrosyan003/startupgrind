@@ -9,7 +9,7 @@ const StartupCard = (props) => {
         <div className='card_container'>
             <div className='card_front'>
                 <img src={'data:image/png;base64,' + props.data.logo} />
-                <h2>{props.data.lowercaseName}</h2>
+                <h2>{props.data.startupName}</h2>
                 <p>{props.data.description}</p>
             </div>
 
