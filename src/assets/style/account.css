@@ -191,7 +191,7 @@
 
 .account_info_container_left_bottom {
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
 }
 
@@ -404,4 +404,41 @@
     font-size: 15px;
     text-decoration: underline;
     border: none;
+}
+
+/* Edit Popup */
+
+.edit_profile_left .edit_profile_inputs select {
+    width: 380px;
+    height: 55px;
+    zoom: 0.7;
+    background: #FFFFFF;
+    border: 1px solid #2D2C2C;
+    margin-top: 20px;
+    padding-left: 25px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    font-family: var(--roboto);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    outline: none;
+}
+
+.edit_profile_save_button {
+    width: 100px;
+    height: 40px;
+    zoom: 0.7;
+    background: var(--main-blue);
+    border-radius: 20px;
+    border: none;
+    font-family: var(--roboto);
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 93%;
+    left: 45%;
 }

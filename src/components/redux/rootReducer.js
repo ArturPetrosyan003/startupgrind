@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { OPEN_LOGIN_MENU, CLOSE_LOGIN_MENU, OPEN_REG_MENU, CLOSE_REG_MENU, OPEN_STARTUP_MENU, CLOSE_STARTUP_MENU, OPEN_STARTUP_POPUP, CLOSE_STARTUP_POPUP } from "./types";
+import { OPEN_LOGIN_MENU, CLOSE_LOGIN_MENU, OPEN_REG_MENU, CLOSE_REG_MENU, OPEN_STARTUP_MENU, CLOSE_STARTUP_MENU, OPEN_STARTUP_POPUP, CLOSE_STARTUP_POPUP, OPEN_PROFILE_POPUP, CLOSE_PROFILE_POPUP } from "./types";
 
 const initialState = {
     loginOpen: false,
@@ -8,7 +8,8 @@ const initialState = {
         data: {},
         open: false
     },
-    startupDialogOpen: false
+    startupDialogOpen: false,
+    profileEditPopup: false
 }
 
 export const loginMenuReducer = (state = initialState.loginOpen, action) => {
@@ -60,9 +61,21 @@ export const startupDialogReducer = (state = initialState.startupDialogOpen, act
     }
 }
 
+export const profileEditReducer = (state = initialState.profileEditPopup, action) => {
+    switch (action.type) {
+        case OPEN_PROFILE_POPUP:
+            return state = true;
+        case CLOSE_PROFILE_POPUP:
+            return state = false;
+        default:
+            return state;
+    }
+}
+
 export const rootReducer = combineReducers({
     login: loginMenuReducer,
     reg: regMenuReducer,
     startup: startupMenuReducer,
-    startupDialog: startupDialogReducer
+    startupDialog: startupDialogReducer,
+    profileEdit: profileEditReducer
 })

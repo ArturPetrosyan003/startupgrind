@@ -10,13 +10,14 @@ import Add from '../../assets/icons/add.png';
 import PopupImage from '../../assets/images/popup.png';
 
 import { connect } from 'react-redux';
-import { openStartupMenu, closeStartupMenu } from '../redux/actions';
+import { openStartupMenu, closeStartupMenu, openEditPopup } from '../redux/actions';
 
 import AddStartup from '../Hoc/AddStartup/AddStartup';
 import AccountStartupItem from './AccountStartupItem';
 
 import Slide from 'react-reveal/Slide';
 import PopupBlank from '../Hoc/PopupBlank';
+import EditProfile from '../Hoc/EditProfile';
 
 const Account = (props) => {
 
@@ -24,7 +25,7 @@ const Account = (props) => {
     const [startups, setStartups] = useState([]);
     const [loading, setLoading] = useState(true);
     const [startupsLoading, setStartupsLoading] = useState(true);
-    const [showPopup, setShowPopup] = useState('');
+    const [showPopup, setShowPopup] = useState(['', '']);
 
     useEffect(() => {
         props.closeStartupMenu();
@@ -91,6 +92,11 @@ const Account = (props) => {
     return (
         <>
             <Navbar />
+            {
+                props.editProfileState ?
+                    <EditProfile/>
+                    : null
+            }
             {
                 props.startupMenuState.open == true ?
                     <AddStartup
@@ -159,7 +165,10 @@ const Account = (props) => {
                                                     </div>
                                                 </div>
 
-                                                <button className='account_edit_button'>
+                                                <button
+                                                    className='account_edit_button'
+                                                    onClick={() => props.openEditPopup()}
+                                                >
                                                     Edit Profile
                                                 </button>
                                             </div>
@@ -196,7 +205,7 @@ const Account = (props) => {
                                                                 type='bubbles'
                                                             />
                                                             :
-                                                            startups.length != 0 ?
+                                                            startups.length == 0 ?
                                                                 <>
                                                                     <p className='account_startups_container_empty_text'>
                                                                         You don’t have any startup yet
@@ -260,12 +269,14 @@ const Account = (props) => {
 const mapStateToProps = state => {
     return {
         startupMenuState: state.startup,
+        editProfileState: state.profileEdit
     }
 }
 
 const mapDispatchToProps = {
     openStartupMenu,
-    closeStartupMenu
+    closeStartupMenu,
+    openEditPopup
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

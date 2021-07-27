@@ -6,7 +6,9 @@ import {
     OPEN_STARTUP_MENU,
     CLOSE_STARTUP_MENU,
     OPEN_STARTUP_POPUP,
-    CLOSE_STARTUP_POPUP
+    CLOSE_STARTUP_POPUP,
+    OPEN_PROFILE_POPUP,
+    CLOSE_PROFILE_POPUP
 } from "./types";
 
 export function openLoginMenu() {
@@ -50,5 +52,15 @@ export function openStartupPopup() {
 export function closeStartupPopup() {
     return {
         type: CLOSE_STARTUP_POPUP
+    }
+}
+export function openEditPopup() {
+    return {
+        type: OPEN_PROFILE_POPUP
+    }
+}
+export function closeEditPopup() {
+    return {
+        type: CLOSE_PROFILE_POPUP
     }
 }
