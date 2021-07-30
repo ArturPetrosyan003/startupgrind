@@ -129,6 +129,10 @@ const AddStartup = (props) => {
                                 data={data}
                                 popupScreen={popupScreen}
                                 fetchData={props.fetchData}
+                                functions={{
+                                    open: props.openStartupMenu,
+                                    close: props.closeStartupPopup
+                                }}
                             />
                             :
                             <div className='add_startup_container'>

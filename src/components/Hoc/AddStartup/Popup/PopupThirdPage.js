@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { closeStartupMenu, closeStartupPopup } from '../../../redux/actions';
+import { closeStartupMenu, closeStartupPopup, closeEditPopup } from '../../../redux/actions';
 
 import Rocket from '../../../../assets/icons/rocket.png';
 
@@ -17,6 +17,7 @@ const PopupThirdPage = (props) => {
                     props.fetchData();
                     props.closeStartupPopup();
                     props.closeStartupMenu();
+                    props.closeEditPopup();
                 }}
                 style={{
                     width: 130,
@@ -31,7 +32,8 @@ const PopupThirdPage = (props) => {
 
 const mapDispatchToProps = {
     closeStartupMenu,
-    closeStartupPopup
+    closeStartupPopup,
+    closeEditPopup
 }
 
 export default connect(null, mapDispatchToProps)(PopupThirdPage);

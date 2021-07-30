@@ -94,7 +94,10 @@ const Account = (props) => {
             <Navbar />
             {
                 props.editProfileState ?
-                    <EditProfile/>
+                    <EditProfile
+                        data={userData}
+                        fetchData={fetchUser}
+                    />
                     : null
             }
             {
@@ -138,11 +141,11 @@ const Account = (props) => {
                                                 <div className='account_info_container_left'>
                                                     <img
                                                         className='account_profile_image'
-                                                        src={ProfileImage}
+                                                        src={`data:image/png;base64, ${userData.avatar}`}
                                                     />
                                                     <div className='account_info_container_left_bottom'>
                                                         <img src={Location} />
-                                                        <p>Gyumri, Armenia</p>
+                                                        <p>{userData.city + ', ' + userData.country}</p>
                                                     </div>
                                                 </div>
 
@@ -161,7 +164,7 @@ const Account = (props) => {
                                                                     : null
                                                             }
                                                         </div>
-                                                        <h4>Chapter Director at Startup Grind</h4>
+                                                        <h4>{userData.headline}</h4>
                                                     </div>
                                                 </div>
 

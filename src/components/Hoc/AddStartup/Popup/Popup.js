@@ -10,7 +10,7 @@ const ClosePopup = (props) => {
 
     const changePopupScreen = () => {
         if (popupScreen == 0) {
-            return <PopupFirstPage data={props.data} setPopupScreen={setPopupScreen} />
+            return <PopupFirstPage data={props.data} setPopupScreen={setPopupScreen} functions={props.functions}/>
         }
         else if (popupScreen == 1) {
             return <PopupSecondPage fetchData={props.fetchData} />

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import { connect } from 'react-redux';
-import { closeStartupMenu, closeStartupPopup, openStartupMenu } from '../../../redux/actions';
+import { closeStartupMenu, closeStartupPopup, openStartupMenu, closeEditPopup } from '../../../redux/actions';
 
 const PopupFirstPage = (props) => {
 
     const [data, setData] = useState({});
 
     useEffect(() => {
-        if (props.data.logo != null) {
+        if (props.data && props.data.logo != null) {
             setData({
                 ...props.data,
                 logo: props.data.logo.split(',')[1],
@@ -34,6 +34,7 @@ const PopupFirstPage = (props) => {
                     onClick={() => {
                         props.closeStartupPopup();
                         props.closeStartupMenu();
+                        props.closeEditPopup();
                     }}
                 >
                     Close
@@ -46,8 +47,8 @@ const PopupFirstPage = (props) => {
                         marginLeft: 50
                     }}
                     onClick={() => {
-                        props.openStartupMenu(data);
-                        props.closeStartupPopup();
+                        props.functions.open(data);
+                        props.functions.close();
                     }}
                 >
                     Back to editing
@@ -60,7 +61,8 @@ const PopupFirstPage = (props) => {
 const mapDispatchToProps = {
     closeStartupMenu,
     closeStartupPopup,
-    openStartupMenu
+    openStartupMenu,
+    closeEditPopup
 }
 
 export default connect(null, mapDispatchToProps)(PopupFirstPage);
