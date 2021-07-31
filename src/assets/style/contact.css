@@ -44,11 +44,15 @@
     width: 150px;
     height: 40px;
     color: var(--main-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 15px;
     text-transform: uppercase;
     border: none;
     border-radius: 20px;
     margin-top: 30px;
+    cursor: pointer;
     outline: none;
 }
 

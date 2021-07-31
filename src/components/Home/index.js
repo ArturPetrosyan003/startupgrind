@@ -160,7 +160,7 @@ class Home extends Component {
                         <HomeContent
                             id='home_startups_first'
                             text='Explore Startups'
-                            background='linear-gradient(0deg, #D1CCCC, #2998F6)'
+                            background='#2998F6'
                             buttonText='More Startups'
                             setOpen={this.props.openLoginMenu}
                             textStyle={{
@@ -187,8 +187,7 @@ class Home extends Component {
                                                     image={`data:image/png;base64, ${i.logo}`}
                                                     textStyle={{
                                                         fontWeight: 600,
-                                                        fontSize: 22,
-                                                        color: '#FFFFFF',
+                                                        fontSize: 18,
                                                     }}
                                                 />
                                             ))

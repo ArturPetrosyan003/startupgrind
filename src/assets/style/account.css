@@ -430,8 +430,11 @@
     height: 40px;
     zoom: 0.7;
     background: var(--main-blue);
-    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
+    border-radius: 20px;
     font-family: var(--roboto);
     font-weight: 500;
     font-size: 20px;

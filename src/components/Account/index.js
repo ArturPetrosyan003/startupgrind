@@ -141,11 +141,11 @@ const Account = (props) => {
                                                 <div className='account_info_container_left'>
                                                     <img
                                                         className='account_profile_image'
-                                                        src={`data:image/png;base64, ${userData.avatar}`}
+                                                        src={userData.avatar ? `data:image/png;base64, ${userData.avatar}` : ProfileImage}
                                                     />
                                                     <div className='account_info_container_left_bottom'>
                                                         <img src={Location} />
-                                                        <p>{userData.city + ', ' + userData.country}</p>
+                                                        <p>{userData.city ? userData.city + ', ' + userData.country : 'Your location'}</p>
                                                     </div>
                                                 </div>
 
@@ -164,7 +164,7 @@ const Account = (props) => {
                                                                     : null
                                                             }
                                                         </div>
-                                                        <h4>{userData.headline}</h4>
+                                                        <h4>{userData.headline || 'Your headline'}</h4>
                                                     </div>
                                                 </div>
 

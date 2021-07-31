@@ -77,13 +77,13 @@
     width: 218px;
     height: 52px;
     zoom: 0.8;
-    background: var(--main-blue);
+    color: var(--gradient-purple);
+    background: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     font-weight: 600;
     font-size: 18px;
     text-align: center;
-    color: #FFFFFF;
     border: none;
     margin-top: 36px;
     margin-bottom: 35px;
@@ -92,11 +92,13 @@
 }
 .home_startup_container {
     width: 260px;
-    /* margin-left: 70px; */
+    height: 300px;
+    background: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    border-radius: 20px;
 }
 #home_startups_third .home_startup_container {
     margin-left: 0px;
@@ -113,22 +115,23 @@
 }
 .home_startup_description {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 15px;
     color: var(--gradient-purple);
     text-align: center;
     text-decoration: none;
+    margin-top: 20px;
 }
 .home_startup_button {
     width: 168px;
     height: 40px;
-    zoom: 0.8;
-    background: #FFFFFF;
-    border-radius: 35px;
+    color: white;
+    background: var(--main-blue);
     border: none;
-    align-self: center;
-    color: var(--gradient-purple);
+    border-radius: 35px;
+    align-self: flex-end;
     font-weight: 600;
     font-size: 18px;
+    zoom: 0.8;
 }
 .home_content_startup_container {
     padding-left: 35px;

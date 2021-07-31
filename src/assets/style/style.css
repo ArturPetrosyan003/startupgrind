@@ -26,6 +26,12 @@ button {
     cursor: pointer;
 }
 
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
 .text_404 {
     color: var(--main-blue);
     font-size: 80px;

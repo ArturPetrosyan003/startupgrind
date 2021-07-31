@@ -11,7 +11,7 @@ const HomeContent = (props) => {
             id={props.id}
             className='home_content_container'
             style={{
-                backgroundImage: props.background
+                background: props.background
             }}
         >
             <h1

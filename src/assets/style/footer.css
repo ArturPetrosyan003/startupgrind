@@ -1,7 +1,7 @@
 .footer{
     width: 100%;
     height: auto;
-    background: linear-gradient(0deg, #000000, #D1CCCC);
+    background: linear-gradient(0deg, var(--gradient-purple), var(--gradient-blue));
     padding-top: 44px;
     padding-bottom: 20px;
     box-sizing: border-box;
