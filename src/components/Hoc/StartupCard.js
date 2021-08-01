@@ -32,7 +32,7 @@ const StartupCard = (props) => {
                 <StartupInfoRow label='Funding raised' value={props.data.fundingExists ? 'Yes' : 'No'} />
                 <StartupInfoRow label='Number of followers' value={props.data.followersCount} />
 
-                <Link to={`/account/startups/${props.data.lowercaseName}`} className='card_button'>
+                <Link to={`/single/${props.data.lowercaseName}`} className='card_button'>
                     Show more
                 </Link>
             </div>

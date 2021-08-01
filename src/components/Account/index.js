@@ -18,19 +18,22 @@ import AccountStartupItem from './AccountStartupItem';
 import Slide from 'react-reveal/Slide';
 import PopupBlank from '../Hoc/PopupBlank';
 import EditProfile from '../Hoc/EditProfile';
+import { Link } from 'react-router-dom';
 
 const Account = (props) => {
 
     const [userData, setUserData] = useState({});
     const [startups, setStartups] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [startupsLoading, setStartupsLoading] = useState(true);
-    const [showPopup, setShowPopup] = useState(['', '']);
+    const [startupsLoading, setStartupsLoading] = useState([true, true]);
+    const [showPopup, setShowPopup] = useState(['', ''])
+    const [randomStartups, setRandomStartups] = useState([]);
 
     useEffect(() => {
         props.closeStartupMenu();
         fetchUser();
         fetchStartups();
+        fetchRandomStartups();
         setShowPopup(localStorage.getItem('account-popup'));
     }, []);
 
@@ -55,7 +58,7 @@ const Account = (props) => {
     }
 
     const fetchStartups = async () => {
-        setStartupsLoading(true);
+        setStartupsLoading([true,]);
 
         const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/startups/mine', {
             headers: {
@@ -68,11 +71,11 @@ const Account = (props) => {
 
         if (!fetchedData.errors) {
             setStartups(fetchedData.data);
-            setStartupsLoading(false);
+            setStartupsLoading([false,]);
         }
         else {
             console.log(fetchedData.errors);
-            setStartupsLoading(false);
+            setStartupsLoading([false,]);
         }
     }
 
@@ -87,6 +90,23 @@ const Account = (props) => {
         const fetchedData = await request.json();
 
         console.log(fetchedData);
+    }
+
+    const fetchRandomStartups = async () => {
+        setStartupsLoading([, true]);
+
+        const request = await fetch('https://tranquil-thicket-27487.herokuapp.com/v1/startups?limit=4');
+        const fetchedData = await request.json();
+
+        if (!fetchedData.errors) {
+            setRandomStartups(fetchedData.data);
+            setStartupsLoading([, false]);
+            console.log(fetchedData);
+        }
+        else {
+            console.error(fetchedData.errors);
+            setStartupsLoading([, false]);
+        }
     }
 
     return (
@@ -200,7 +220,7 @@ const Account = (props) => {
                                                     }}
                                                 >
                                                     {
-                                                        startupsLoading == true ?
+                                                        startupsLoading[0] == true ?
                                                             <Loading
                                                                 height={60}
                                                                 width={60}
@@ -258,7 +278,31 @@ const Account = (props) => {
 
                                     <Slide right duration={1000} delay={100}>
                                         <div className='account_right_container'>
-                                            <h3>Here can be something :)</h3>
+                                            <h3>Startups</h3>
+                                            {
+                                                startupsLoading[1] == true ?
+                                                    <Loading
+                                                        height={60}
+                                                        width={60}
+                                                        color='#2998F6'
+                                                        type='bubbles'
+                                                    />
+                                                    :
+                                                    randomStartups.map((i, index) => (
+                                                        <div key={index} className='random_startup_card'>
+                                                            <div className='random_startup_content'>
+                                                                <img src={`data:image/png;base64, ${i.logo}`} />
+                                                                <div>
+                                                                    <h3>{i.startupName}</h3>
+                                                                    <p>{i.description}</p>
+                                                                </div>
+                                                            </div>
+                                                            <Link to={`/single/${i.lowercaseName}`}>
+                                                                <button>Show more</button>
+                                                            </Link>
+                                                        </div>
+                                                    ))
+                                            }
                                         </div>
                                     </Slide>
                                 </>
