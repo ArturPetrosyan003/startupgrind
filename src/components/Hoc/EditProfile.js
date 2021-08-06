@@ -91,6 +91,8 @@ const EditProfile = (props) => {
                             data={data}
                             popupScreen={popupScreen}
                             fetchData={props.fetchData}
+                            label='Your profile is successfully updated'
+                            redirect={`/account/${userId}`}
                             functions={{
                                 open: props.openEditPopup,
                                 close: props.closeStartupPopup

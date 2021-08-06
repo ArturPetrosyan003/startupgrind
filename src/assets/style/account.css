@@ -322,6 +322,7 @@
     align-items: flex-start;
     justify-content: center;
     margin-left: 15px;
+    overflow-wrap: anywhere;
 }
 
 .account_startup_right h3, .account_startup_right p {

@@ -34,7 +34,7 @@
 }
 
 .navbar_link:hover {
-    color: var(--main-blue);
+    color: var(--main-yellow);
 }
 
 .navbar_button {
@@ -42,9 +42,9 @@
     outline: none;
     width: 120px;
     height: 30px;
+    color: var(--gradient-purple);
     background: #FFFFFF;
     border-radius: 50px;
-    color: var(--gradient-purple);
     font-size: 20px;
     padding: 5px 20px 5px 20px;
     box-sizing: content-box;
@@ -52,8 +52,8 @@
 }
 
 .navbar_button:hover {
-    background: var(--main-blue);
-    color: white;
+    color: var(--gradient-purple);
+    background: var(--main-yellow);
 }
 
 .navbar_button:nth-child(1) {

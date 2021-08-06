@@ -90,7 +90,7 @@ const FirstPage = (props) => {
                             />
                             <br></br>
 
-                            <span className='add_startup_span'>Email*</span><br></br>
+                            <span className='add_startup_span'>Startup Email*</span><br></br>
                             <span className='add_startup_span_sm'>Your email address will be visible on your public profile</span><br></br>
                             <input
                                 required

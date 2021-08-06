@@ -50,6 +50,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .startup_info_container_left_top button {
@@ -165,8 +166,13 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    align-self: center;
+    align-self: flex-start;
+    margin-top: 150px;
     margin-left: 15px;
+}
+
+.startup_info_container_right_top {
+    overflow-wrap: anywhere;
 }
 
 .startup_info_container_right_top h3 {

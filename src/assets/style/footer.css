@@ -1,4 +1,4 @@
-.footer{
+.footer {
     width: 100%;
     height: auto;
     background: linear-gradient(0deg, var(--gradient-purple), var(--gradient-blue));
@@ -9,42 +9,50 @@
     padding-left: 100px;
     padding-right: 80px;
 }
+
 .footer_content {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
 .footer_left img {
     width: 150px;
     height: 150px;
     margin-bottom: 20px;
 }
+
 .footer h3 {
     font-weight: 600;
     font-size: 22px;
-    color: black;
+    color: var(--main-yellow);
     font-weight: bold;
 }
+
 .footer_contact_h3 {
     margin-top: 80px;
 }
+
 .footer_left p {
     font-weight: 100;
     width: 400px;
     font-size: 20px;
     color: #FFFFFF;
 }
+
 .footer_contact_wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
 }
+
 .footer_contact_wrapper img {
     width: 25px;
     height: 25px;
     margin-bottom: 0;
 }
+
 .footer_contact_wrapper p {
     margin: 0;
     font-weight: 500;
@@ -52,25 +60,30 @@
     color: #FFFFFF;
     margin-left: 20px;
 }
+
 .footer_social_icons {
     display: flex;
     margin-top: 120px;
 }
+
 .footer_social_icons img {
     width: 40px;
     height: 40px;
     margin-right: 20px;
 }
+
 .footer_right {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
+
 .footer_center {
     display: flex;
     flex-direction: column;
 }
-.footer_center a{
+
+.footer_center a {
     font-weight: 100;
     font-size: 20px;
     color: #FFFFFF;
@@ -78,17 +91,19 @@
     margin-bottom: 20px;
     /* text-transform: uppercase; */
 }
+
 .footer_right h3 {
     font-weight: 100;
     font-size: 22px;
-    color: black;
+    color: var(--main-yellow);
     margin-left: 34px;
     font-weight: bold;
 }
+
 .footer_right input {
     width: 320px;
     height: 50px;
-    background: #D9D5D5;
+    background: white;
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25);
     border-radius: 50px;
     border: none;
@@ -99,10 +114,11 @@
     padding-right: 34px;
     box-sizing: border-box;
 }
+
 .footer_right button {
     width: 140px;
     height: 40px;
-    background: #D9D5D5;
+    background: white;
     border-radius: 40px;
     border: none;
     outline: none;
@@ -113,22 +129,26 @@
     padding-left: 10px;
     box-sizing: content-box;
 }
+
 .footer hr {
     margin-top: 30px;
     background: white;
 }
+
 .footer_bottom_info h3 {
     text-align: center;
     color: white;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
     margin-right: 40px;
 }
+
 .footer_bottom_info {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .footer_goTop {
     background: transparent;
     position: relative;

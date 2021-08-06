@@ -30,7 +30,7 @@ const HomeContent = (props) => {
                     className='home_content_button'
                     onClick={() => token ? null : props.setOpen(true)}
                     style={{
-                        fontSize: 17
+                        fontSize: 20
                     }}
                 >
                     {props.buttonText}

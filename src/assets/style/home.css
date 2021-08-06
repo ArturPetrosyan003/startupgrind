@@ -8,11 +8,13 @@
     box-sizing: border-box;
     z-index: 5;
 }
+
 .home_wrapper {
     width: 100%;
     height: calc(100vh);
     background: linear-gradient(0deg, var(--gradient-blue), var(--gradient-purple));
 }
+
 .home_center_container {
     width: 100%;
     height: 100%;
@@ -21,6 +23,7 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .home_center_text {
     color: white;
     font-weight: normal;
@@ -31,9 +34,11 @@
     margin: 0;
     width: 769px;
 }
+
 .home_cover_image {
     zoom: 0.85;
 }
+
 .home_button {
     width: 343px;
     height: 54px;
@@ -47,12 +52,19 @@
     border: none;
     padding: 12px 40px 12px 40px;
 }
-.home_button:nth-child(1){
+
+.home_button:nth-child(1) {
     margin-top: 45px;
 }
+
+.home_button:hover {
+    background: var(--main-yellow);
+}
+
 .home_content {
     width: 100%;
 }
+
 .home_content_container {
     width: 100%;
     padding-top: 55px;
@@ -61,11 +73,13 @@
     flex-direction: column;
     align-items: center;
 }
+
 .home_content_topText {
     font-weight: normal;
     color: #190c70;
     text-align: center;
 }
+
 .home_content_startup_container {
     display: flex;
     width: 100%;
@@ -73,6 +87,7 @@
     justify-content: center;
     margin-top: 35px;
 }
+
 .home_content_button {
     width: 218px;
     height: 52px;
@@ -82,14 +97,13 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     font-weight: 600;
-    font-size: 18px;
     text-align: center;
     border: none;
     margin-top: 36px;
     margin-bottom: 35px;
     outline: none;
-    /* text-transform: uppercase; */
 }
+
 .home_startup_container {
     width: 260px;
     height: 300px;
@@ -99,13 +113,17 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    overflow-wrap: anywhere;
 }
+
 #home_startups_third .home_startup_container {
     margin-left: 0px;
 }
+
 .home_startup_logo {
-   zoom: 0.06;
+    zoom: 0.06;
 }
+
 .home_startup_name {
     font-weight: normal;
     color: #190c70;
@@ -113,6 +131,7 @@
     margin-bottom: -15px;
     margin-top: 21px;
 }
+
 .home_startup_description {
     font-weight: 600;
     font-size: 15px;
@@ -121,6 +140,7 @@
     text-decoration: none;
     margin-top: 20px;
 }
+
 .home_startup_button {
     width: 168px;
     height: 40px;
@@ -133,19 +153,23 @@
     font-size: 18px;
     zoom: 0.8;
 }
+
 .home_content_startup_container {
     padding-left: 35px;
     padding-right: 35px;
     box-sizing: border-box;
 }
+
 #home_startups_second .home_content_startup_container {
     padding-right: 0;
     padding-left: 0;
 }
+
 #home_startups_second {
     padding-left: 35px;
     padding-right: 35px;
 }
+
 #home_startups_second .home_startup_container {
     margin-left: 0;
 }

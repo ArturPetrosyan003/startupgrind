@@ -16,6 +16,7 @@ import UserActivation from './components/Hoc/UserActivation';
 import PasswordReset from './components/Hoc/PasswordReset';
 import SingleStartup from './components/Startups/Single';
 import Contact from './components/Contact';
+import Blog from './components/Blog';
 
 function Routes() {
   return (
@@ -23,6 +24,7 @@ function Routes() {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/contact' exact component={Contact} />
+        <Route path='/blog' exact component={Blog} />
         <Route path='/startups' exact component={Startups} />
         <Route path='/single/:name' exact component={SingleStartup} />
         <Route path='/about' exact component={About} />

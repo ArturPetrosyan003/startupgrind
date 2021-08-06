@@ -67,24 +67,20 @@ const Footer = () => {
 
                 <div className='footer_center'>
                     <h3>INFORMATION</h3>
-                    <Link>
+                    <Link to='/about'>
                         About
                     </Link>
 
-                    <Link>
+                    <Link to='/startups'>
                         Startups
                     </Link>
 
-                    <Link>
+                    <Link to='/blog'>
                         Blog
                     </Link>
 
-                    <Link>
+                    <Link to='/contact'>
                         Contact Us
-                    </Link>
-
-                    <Link>
-                        Support
                     </Link>
                 </div>
 

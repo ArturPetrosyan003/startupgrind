@@ -16,7 +16,7 @@ const ClosePopup = (props) => {
             return <PopupSecondPage fetchData={props.fetchData} />
         }
         else if (popupScreen == 2) {
-            return <PopupThirdPage fetchData={props.fetchData} />
+            return <PopupThirdPage redirect={props.redirect} label={props.label} fetchData={props.fetchData} />
         }
     }
 
