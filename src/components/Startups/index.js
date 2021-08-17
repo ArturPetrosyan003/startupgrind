@@ -68,7 +68,11 @@ const Startups = () => {
 
     return (
         <div
-            className='startups_container'>
+            className='startups_container'
+            // style={{
+            //     height: loading ? '100vh' : 'auto'
+            // }}
+        >
             {
                 loading ?
                     <Loading
@@ -91,7 +95,7 @@ const Startups = () => {
                             </div>
 
                             <div className="filters_container">
-                                <div class="filter">
+                                <div className="filter">
                                     <select onChange={(e) => console.log(e.target.value)}>
                                         <option selected disabled>Industry</option>
                                         {
@@ -102,7 +106,7 @@ const Startups = () => {
                                     </select>
                                 </div>
 
-                                <div class="filter">
+                                <div className="filter">
                                     <select>
                                         <option selected disabled>Year of launch</option>
                                         {
@@ -113,7 +117,7 @@ const Startups = () => {
                                     </select>
                                 </div>
 
-                                <div class="filter">
+                                <div className="filter">
                                     <select>
                                         <option selected disabled>Product type</option>
                                         <option>Service</option>
@@ -125,7 +129,7 @@ const Startups = () => {
                                     </select>
                                 </div>
 
-                                <div class="filter">
+                                <div className="filter">
                                     <select>
                                         <option selected disabled>Funding raised</option>
                                         <option>Yes</option>

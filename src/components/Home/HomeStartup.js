@@ -9,7 +9,13 @@ const HomeStartup = (props) => {
             <div className='home_startup_container'>
                 <img className='home_startup_logo' src={props.image} />
                 <h3 className='home_startup_name' style={props.textStyle}>{props.text}</h3>
-                <p className='home_startup_description'>{props.desc}</p>
+                <p className='home_startup_description'>
+                    {
+                        props.desc.length >= 50 ?
+                            props.desc.slice(0, 50).split(' ').slice(0, -1).join(' ') + '...'
+                            : props.desc
+                    }
+                </p>
                 {
                     props.hasLink ?
                         <Link to={`/single/${props.text.split(' ').join('-')}`}>

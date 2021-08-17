@@ -1,5 +1,6 @@
 .blog_container {
     width: 100%;
+    height: 100vh;
     overflow: auto;
     background: linear-gradient(0deg, var(--gradient-blue), var(--gradient-purple));
     display: flex;
@@ -7,8 +8,8 @@
     align-items: center;
     justify-content: center;
     padding-top: 120px;
+    box-sizing: border-box;
 }
-
 
 .blog_main {
     width: 100%;
@@ -54,12 +55,15 @@
     zoom: 0.7;
 }
 
+.blog_card a {
+    align-self: center;
+}
+
 .blog_card button {
     width: 188px;
     height: 41px;
     color: white;
     background: #1976D5;
-    align-self: center;
     font-size: 18px;
     border: none;
     border-radius: 20px;

@@ -10,7 +10,13 @@ const StartupCard = (props) => {
             <div className='card_front'>
                 <img src={'data:image/png;base64,' + props.data.logo} />
                 <h2>{props.data.startupName}</h2>
-                <p>{props.data.description}</p>
+                <p>
+                    {
+                        props.data.description.length >= 150 ?
+                            props.data.description.slice(0, 150).split(' ').slice(0, -1).join(' ') + '...'
+                            : props.data.description
+                    }
+                </p>
             </div>
 
             <div className='card_back'>
