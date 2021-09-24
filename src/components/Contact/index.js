@@ -54,7 +54,8 @@ const Contact = () => {
                         <button
                             className='contact_send_button'
                             style={{
-                                cursor: loading ? 'default' : 'pointer'
+                                cursor: loading ? 'default' : 'pointer',
+                                opacity: loading ? 0.8 : 1
                             }}
                         >
                             {

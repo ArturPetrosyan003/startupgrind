@@ -84,7 +84,7 @@ const SingleStartup = (props) => {
     }
 
     const followStartup = async () => {
-        if(!following){
+        if (!following) {
             const request = await fetch(`https://tranquil-thicket-27487.herokuapp.com/v1/startups/${data._id}/follows`, {
                 method: 'POST',
                 headers: {
@@ -94,7 +94,7 @@ const SingleStartup = (props) => {
             });
             const fetchedData = await request.json();
 
-            if(!fetchedData.errors){
+            if (!fetchedData.errors) {
                 setFollowing(!following);
             }
             else {
@@ -207,11 +207,26 @@ const SingleStartup = (props) => {
                                             <StartupInfoRow label='Country' value={data.country} />
                                             <StartupInfoRow label='City' value={data.city} />
                                             <StartupInfoRow label='Product type' value={data.buildType} />
-                                            <StartupInfoRow label='Launched' value={new Date(data.launchDate).getFullYear()} />
+                                            <StartupInfoRow
+                                                label='Launched'
+                                                value={
+                                                    new Date(data.launchDate).getFullYear() != 1970 ?
+                                                        new Date(data.launchDate).getFullYear()
+                                                        : null
+                                                }
+                                            />
                                             <StartupInfoRow label='Incorporation type' value={data.legalStatus} />
                                             <StartupInfoRow label='fundingExists raised' value={data.fundingStage} />
                                             <StartupInfoRow label='fundingExists source' value={data.fundingSource} />
-                                            <StartupInfoRow label='Employees' value={data.employeesNumber.min + '-' + data.employeesNumber.max} />
+                                            <StartupInfoRow
+                                                label='Employees'
+                                                value={
+                                                    data.employeesNumber.max != null ?
+                                                        data.employeesNumber.min + '-' + data.employeesNumber.max
+                                                        :
+                                                        data.employeesNumber.min + '-' + 'more'
+                                                }
+                                            />
 
                                             <div className='startup_info_icon_container'>
                                                 <a href={data.urls.instagram != '' ? `https://www.instagram.com/${data.urls.instagram.split('@')[1]}` : null} target='_blank'>

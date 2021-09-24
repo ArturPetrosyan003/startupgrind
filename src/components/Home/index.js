@@ -173,7 +173,7 @@ class Home extends Component {
                                 this.state.loading == false ?
                                     <Carousel
                                         {...this.state.settings}
-                                        onChange={(value) => this.changeSlider(value, 1, 3, 0)}
+                                        onChange={(value) => this.changeSlider(value, 1, this.state.startups.length - 3, 0)}
                                         value={this.state.sliderIterations[0]}
                                     >
                                         {
@@ -185,10 +185,6 @@ class Home extends Component {
                                                     text={i.startupName}
                                                     desc={i.headline}
                                                     image={`data:image/png;base64, ${i.logo}`}
-                                                    textStyle={{
-                                                        fontWeight: 600,
-                                                        fontSize: 18,
-                                                    }}
                                                 />
                                             ))
                                         }
@@ -202,139 +198,9 @@ class Home extends Component {
                                     />
                             }
                         </HomeContent>
-                        {/* 
-                    <HomeContent
-                        id='home_startups_second'
-                        text='Highlights from Armenian Startup Ecosystem'
-                        background='linear-gradient(0deg, #D1CCCC, #D1CCCC)'
-                        buttonText='More Highlights'
-                        setOpen={this.props.openLoginMenu}
-                        textStyle={{
-                            fontWeight: 600,
-                            fontSize: 30,
-                            color: '#364A89',
-                        }}
-                    >
-                        <Carousel
-                            {...this.state.settings}
-                            value={this.state.sliderIterations[1]}
-                            onChange={(value) => this.changeSlider(value, 1, 2, 1)}
-                            slidesPerPage={this.state.settings.slidesPerPage == 4 ? 3 : 1}
-                        >
-                            <HomeStartup
-                                hasLink={true}
-                                text='Highlights Name'
-                                desc='Lorem ipsum'
-                                image={highlightImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                text='Highlights Name'
-                                desc='Lorem ipsum'
-                                image={highlightImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                text='Highlights Name'
-                                desc='Lorem ipsum'
-                                image={highlightImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                text='Highlights Name'
-                                desc='Lorem ipsum'
-                                image={highlightImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                        </Carousel>
-                    </HomeContent>
-
-                    <HomeContent
-                        id='home_startups_third'
-                        text='Opportunities for startups'
-                        background='linear-gradient(0deg, #D1CCCC, #D1CCCC)'
-                        setOpen={this.props.openLoginMenu}
-                        buttonText='More Opportunities'
-                        textStyle={{
-                            fontWeight: 600,
-                            fontSize: 30,
-                            color: '#364A89',
-                        }}
-                    >
-                        <Carousel
-                            {...this.state.settings}
-                            value={this.state.sliderIterations[2]}
-                            onChange={(value) => this.changeSlider(value, 1, 2, 2)}
-                            slidesPerPage={this.state.settings.slidesPerPage == 4 ? 3 : 1}
-                        >
-                            <HomeStartup
-                                hasLink={true}
-                                text='Startup Grind Pitch Battle'
-                                desc='Lorem ipsum'
-                                image={opportunitiesImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                text='Startup Grind Pitch Battle'
-                                desc='Lorem ipsum'
-                                image={opportunitiesImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                text='Startup Grind Pitch Battle'
-                                desc='Lorem ipsum'
-                                image={opportunitiesImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                            <HomeStartup
-                                hasLink={true}
-                                text='Startup Grind Pitch Battle'
-                                desc='Lorem ipsum'
-                                image={opportunitiesImage}
-                                textStyle={{
-                                    fontWeight: 600,
-                                    fontSize: 22,
-                                    color: '#364A89',
-                                }}
-                            />
-                        </Carousel>
-                    </HomeContent> */}
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </>
         );
     }

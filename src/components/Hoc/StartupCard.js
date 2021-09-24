@@ -33,7 +33,14 @@ const StartupCard = (props) => {
                         })
                     }
                 />
-                <StartupInfoRow label='Year of launch' value={new Date(props.data.launchDate).getFullYear()} />
+                <StartupInfoRow
+                    label='Year of launch'
+                    value={
+                        new Date(props.data.launchDate).getFullYear() != 1970 ?
+                            new Date(props.data.launchDate).getFullYear()
+                            : null
+                    }
+                />
                 <StartupInfoRow label='Product type' value={props.data.buildType} />
                 <StartupInfoRow label='Funding raised' value={props.data.fundingExists ? 'Yes' : 'No'} />
                 <StartupInfoRow label='Number of followers' value={props.data.followersCount} />

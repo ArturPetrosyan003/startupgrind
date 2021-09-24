@@ -49,6 +49,7 @@ const ThirdPage = (props) => {
     const [isUrlsEmpty, setIsUrlsEmpty] = useState(true);
     const [fetchUrl, setFetchUrl] = useState('');
     const [loadings, setLoadings] = useState([false, false]);
+    const [errorText, setErrorText] = useState('');
 
     useEffect(() => {
         setData(props.data);
@@ -151,6 +152,7 @@ const ThirdPage = (props) => {
         }
         else {
             console.log(fetchedData.errors);
+            setErrorText(fetchedData.errors[0].message);
             setLoadings([false, false]);
         }
     }
@@ -269,6 +271,7 @@ const ThirdPage = (props) => {
                                     : null
                             }
                         </div>
+                        <p>{errorText}</p>
                     </div>
                 </fieldset>
 

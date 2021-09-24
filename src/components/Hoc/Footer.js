@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+
+    const [errorText, setErrorText] = useState('Subscribe');
+    const form = useRef(null);
 
     const subscribe = async (event) => {
         event.preventDefault();
@@ -24,6 +27,23 @@ const Footer = () => {
         });
 
         const fetchedData = await request.json();
+
+        if (!fetchedData.errors) {
+            setErrorText('Subscribed!');
+
+            setTimeout(() => {
+                form.current.reset();
+                setErrorText('Subscribe');
+            }, 2000);
+        }
+        else {
+            setErrorText('Something went wrong');
+
+            setTimeout(() => {
+                form.current.reset();
+                setErrorText('Subscribe');
+            }, 2000);
+        }
     }
 
     return (
@@ -87,10 +107,10 @@ const Footer = () => {
                 <div className='footer_right'>
                     <h3>Subscribe for Updates</h3>
 
-                    <form onSubmit={subscribe}>
+                    <form ref={form} onSubmit={subscribe}>
                         <input required type='email' name='email' placeholder='Enter your Email' />
                         <br></br>
-                        <button>Subscribe</button>
+                        <button>{errorText}</button>
                     </form>
                 </div>
             </div>

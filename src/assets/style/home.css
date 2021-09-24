@@ -111,11 +111,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 20px;
     overflow-wrap: anywhere;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 25px 20px;
 }
 
 #home_startups_third .home_startup_container {
@@ -132,6 +132,9 @@
     text-align: center;
     margin-bottom: -15px;
     margin-top: 21px;
+    font-size: 18px;
+    font-weight: 600;
+    overflow: hidden; /*remove*/
 }
 
 .home_startup_description {

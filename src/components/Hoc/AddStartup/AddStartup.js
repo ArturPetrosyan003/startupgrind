@@ -130,7 +130,10 @@ const AddStartup = (props) => {
                                 popupScreen={popupScreen}
                                 fetchData={props.fetchData}
                                 label='Your startup is successfully saved and published'
-                                redirect={props.data ? `/account/startups/${props.data.lowercaseName}` : null}
+                                redirect={
+                                    props.data ? `/account/startups/${props.data.lowercaseName}` :
+                                        `/account/startups/${data.startupName.toLowerCase().split(' ').join('-')}`
+                                }
                                 functions={{
                                     open: props.openStartupMenu,
                                     close: props.closeStartupPopup

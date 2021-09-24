@@ -41,6 +41,7 @@
     justify-content: center;
     padding: 50px 35px;
     box-sizing: border-box;
+    overflow-wrap: anywhere;
 }
 
 .startup_info_container_left_top {

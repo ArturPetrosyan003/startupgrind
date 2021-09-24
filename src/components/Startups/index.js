@@ -7,6 +7,8 @@ import StartupCard from '../Hoc/StartupCard';
 
 import Loading from 'react-loading';
 
+let startupsCopy = [];
+
 const Startups = () => {
 
     const industries = [
@@ -59,6 +61,7 @@ const Startups = () => {
         if (!fetchedData.errors) {
             setLoading(false);
             setStartups(fetchedData.data);
+            startupsCopy = fetchedData.data;
         }
         else {
             setLoading(false);
@@ -66,12 +69,32 @@ const Startups = () => {
         }
     }
 
+    const applyFilter = (field, value) => {
+        setStartups(startupsCopy);
+
+        if (field == 'startupName') {
+            setStartups((prev) => prev.filter((i) => i[field].toLowerCase().includes(value)));
+        }
+        else if (field == 'industry') {
+            setStartups((prev) => prev.filter((i) => i[field].includes(value)));
+        }
+        else if (field == 'launchDate') {
+            setStartups((prev) => prev.filter((i) => new Date(i[field]).getFullYear() == value));
+        }
+        else if (field == 'buildType') {
+            setStartups((prev) => prev.filter((i) => i[field] == value));
+        }
+        else if (field == 'fundingExists') {
+            setStartups((prev) => prev.filter((i) => i[field].toString() == value));
+        }
+    }
+
     return (
         <div
             className='startups_container'
-            // style={{
-            //     height: loading ? '100vh' : 'auto'
-            // }}
+        // style={{
+        //     height: loading ? '100vh' : 'auto'
+        // }}
         >
             {
                 loading ?
@@ -91,12 +114,13 @@ const Startups = () => {
                                         <Search fontSize='large' style={{ color: 'white' }} />
                                     }
                                     placeholder='Search'
+                                    onChange={(e) => applyFilter('startupName', e.target.value)}
                                 />
                             </div>
 
                             <div className="filters_container">
                                 <div className="filter">
-                                    <select onChange={(e) => console.log(e.target.value)}>
+                                    <select onChange={(e) => applyFilter('industry', e.target.value)}>
                                         <option selected disabled>Industry</option>
                                         {
                                             industries.map((i, index) => (
@@ -107,7 +131,7 @@ const Startups = () => {
                                 </div>
 
                                 <div className="filter">
-                                    <select>
+                                    <select onChange={(e) => applyFilter('launchDate', e.target.value)}>
                                         <option selected disabled>Year of launch</option>
                                         {
                                             launchYears.map((i, index) => (
@@ -118,7 +142,7 @@ const Startups = () => {
                                 </div>
 
                                 <div className="filter">
-                                    <select>
+                                    <select onChange={(e) => applyFilter('buildType', e.target.value)}>
                                         <option selected disabled>Product type</option>
                                         <option>Service</option>
                                         <option>Product</option>
@@ -130,10 +154,10 @@ const Startups = () => {
                                 </div>
 
                                 <div className="filter">
-                                    <select>
+                                    <select onChange={(e) => applyFilter('fundingExists', e.target.value)}>
                                         <option selected disabled>Funding raised</option>
-                                        <option>Yes</option>
-                                        <option>No</option>
+                                        <option value={true}>Yes</option>
+                                        <option value={false}>No</option>
                                     </select>
                                 </div>
                             </div>

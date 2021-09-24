@@ -132,7 +132,7 @@
 .card_back p {
     font-size: 20px!important;
     text-align: right;
-    max-width: 230px;
+    max-width: 230px!important;
 }
 
 .card_back hr {
